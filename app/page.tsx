@@ -452,32 +452,105 @@ export default function PortfolioPage() {
                     </span>
                   </div>
 
-                  {/* Company Logo & Role */}
-                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center shadow-sm">
-                      <img src="/kz-logo.png" alt="KENZE Logo" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-extrabold text-[#001C44]">KENZE</h3>
-                      <div className="text-base font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
-                    </div>
+                  {/* Company Role (Không logo) */}
+                  <div className="mb-6">
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">KENZE</h3>
+                    <div className="text-lg font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
                   </div>
 
-                  {/* Description List */}
-                  <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Triển khai và tối ưu Facebook Ads cho sản phẩm nội thất xuất dư / tồn kho, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.
-                    </li>
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Lên kế hoạch chiến dịch theo nhóm sản phẩm và chương trình xả kho, test creative và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
-                    </li>
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Phối hợp với bộ phận kho và Sales cập nhật tồn kho, giá bán; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
-                    </li>
-                  </ul>
+                  {/* === CÁC THƯƠNG HIỆU PHỤ TRÁCH === */}
+                  <div className="mt-6">
+                    {/* KENZE */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-[#00529c] overflow-hidden shadow-sm flex-shrink-0">
+                          <img src="/logo-kenze.png" alt="KENZE Logo" className="h-full w-full object-cover" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg">KENZE</span>
+                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Triển khai và tối ưu Facebook Ads cho sản phẩm nội thất xuất dư / tồn kho, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Lên kế hoạch chiến dịch theo nhóm sản phẩm và chương trình xả kho, test creative và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Phối hợp với bộ phận kho và Sales cập nhật tồn kho, giá bán; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
+                        </li>
+                      </ul>
+                    </div>
+
+                    <hr className="border-slate-200 my-6" />
+
+                    {/* YAMADO */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1">
+                          <img src="/logo-yamado.png" alt="Yamado Logo" className="h-full w-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg uppercase">YAMADO</span>
+                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Triển khai và tối ưu Facebook Ads cho Yamado Viet Nam Store, tập trung tạo khách hàng tiềm năng và doanh thu bán hàng qua tin nhắn / điện thoại.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Lên kế hoạch chiến dịch theo nhóm sản phẩm, test creative và audience, tối ưu CPL, CTR, ROAS theo KPI; phối hợp Sales xử lý đơn và báo cáo hiệu quả định kỳ.
+                        </li>
+                      </ul>
+                    </div>
+
+                    <hr className="border-slate-200 my-6" />
+
+                    {/* LAZYBAG */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1">
+                          <img src="/logo-lazybag.png" alt="Lazybag Logo" className="h-full w-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg">Lazybag</span>
+                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Triển khai và tối ưu Facebook Ads cho sản phẩm ghế lười Lazybag, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Lên kế hoạch chiến dịch theo mẫu sản phẩm và chương trình ưu đãi, test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
+                        </li>
+                      </ul>
+                    </div>
+
+                    <hr className="border-slate-200 my-6" />
+
+                    {/* KENSONIC */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1">
+                          <img src="/logo-kensonic.png" alt="Kensonic Logo" className="h-full w-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg uppercase">KENSONIC</span>
+                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
               ) : (
                 /* ============ TRẠNG THÁI ĐÓNG ============ */
@@ -486,7 +559,7 @@ export default function PortfolioPage() {
                   className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
                 >
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md">
-                    <img src="/kz-logo.png" alt="KENZE Logo" className="w-full h-full object-cover" />
+                    <img src="/logo-kenze.png" alt="KENZE Logo" className="w-full h-full object-cover" />
                   </div>
                   <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
                     Nhấn để xem chi tiết <ChevronDown size={16} />
@@ -495,6 +568,187 @@ export default function PortfolioPage() {
               )}
             </div>
 
+            {/* ITEM 3: Miss Áo Dài */}
+            <div className="relative mb-12 group">
+              {/* Circle number */}
+              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">3</div>
+
+              {openExp === 3 ? (
+                /* ============ TRẠNG THÁI MỞ ============ */
+                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
+                  {/* Nút thu gọn */}
+                  <button 
+                    onClick={() => setOpenExp(null)}
+                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
+                    title="Thu gọn"
+                  >
+                    <ChevronUp size={20} />
+                  </button>
+
+                  {/* Header: Tags & Date */}
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
+                      Dịch vụ chụp ảnh • Áo dài • Gói trải nghiệm 2 in 1
+                    </span>
+                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                      x/x — x/x
+                    </span>
+                  </div>
+
+                  {/* Company & Role */}
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">Miss Áo Dài</h3>
+                  <div className="text-lg font-bold text-[#0C5776] mb-5">Chuyên viên Marketing Ads</div>
+
+                  {/* === CÁC THƯƠNG HIỆU PHỤ TRÁCH === */}
+                  <div className="mt-6">
+                    {/* Miss Áo Dài */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
+                          <img src="/mad-logo.png" alt="Miss Áo Dài" className="h-full w-full object-cover" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg">Miss Áo Dài</span>
+                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Triển khai và tối ưu Facebook Ads cho dịch vụ chụp ảnh áo dài và các gói trải nghiệm, tập trung tạo khách hàng tiềm năng và đặt lịch chụp qua tin nhắn.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Lên kế hoạch chiến dịch theo concept và mùa vụ (Liên Hoa, Xe Hoa, mùa sen, lễ Tết), test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và lượt đặt lịch.
+                        </li>
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Phối hợp với ekip chụp và Sales tư vấn gói dịch vụ, lịch chụp; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
+                        </li>
+                      </ul>
+                    </div>
+
+                    <hr className="border-slate-200 my-6" />
+
+                    {/* Mentor Club */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
+                          <img src="/mt-logo.png" alt="Mentor Club" className="h-full w-full object-cover" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg">Mentor Club</span>
+                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
+                        </li>
+                      </ul>
+                    </div>
+
+                    <hr className="border-slate-200 my-6" />
+
+                    {/* Miss Personal Makeup */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
+                          <img src="/mp-logo.png" alt="Miss Personal Makeup" className="h-full w-full object-cover" />
+                        </div>
+                        <span className="font-bold text-[#001C44] text-lg">Miss Personal Makeup</span>
+                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                      </div>
+                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                        <li className="relative pl-5">
+                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* ============ TRẠNG THÁI ĐÓNG ============ */
+                <div 
+                  onClick={() => setOpenExp(3)}
+                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
+                >
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md border border-slate-100">
+                    <img src="/mad-logo.png" alt="Miss Áo Dài Logo" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                    Nhấn để xem chi tiết <ChevronDown size={16} />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ITEM 4: Phan Trần */}
+            <div className="relative mb-12 group">
+              {/* Circle number */}
+              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">4</div>
+
+              {openExp === 4 ? (
+                /* ============ TRẠNG THÁI MỞ ============ */
+                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
+                  {/* Nút thu gọn */}
+                  <button 
+                    onClick={() => setOpenExp(null)}
+                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
+                    title="Thu gọn"
+                  >
+                    <ChevronUp size={20} />
+                  </button>
+                  {/* Header: Tags & Date */}
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
+                      In vải • In ấn & gia công trên vải
+                    </span>
+                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                      x/x — x/x
+                    </span>
+                  </div>
+
+                  {/* Company Logo & Role */}
+                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                    <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden flex-shrink-0 bg-white flex items-center justify-center shadow-sm p-1">
+                      <img src="/pt-logo.png" alt="Phan Trần Logo" className="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-extrabold text-[#001C44]">PHAN TRAN</h3>
+                      <div className="text-base font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                    </div>
+                  </div>
+
+                  {/* Description List */}
+                  <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                    <li className="relative pl-5">
+                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                      Triển khai và tối ưu Facebook Ads cho dịch vụ in vải, tập trung tạo khách hàng tiềm năng là chủ xưởng may, shop thời trang và nhận đơn đặt in qua tin nhắn.
+                    </li>
+                    <li className="relative pl-5">
+                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                      Lên kế hoạch chiến dịch theo nhóm dịch vụ in và mùa vụ thời trang, test creative hình ảnh / video mẫu in thực tế và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
+                    </li>
+                    <li className="relative pl-5">
+                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
+                      Phối hợp với bộ phận sản xuất và Sales để báo giá, chốt đơn; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                /* ============ TRẠNG THÁI ĐÓNG ============ */
+                <div 
+                  onClick={() => setOpenExp(4)}
+                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
+                >
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md border border-slate-100 bg-white p-2">
+                    <img src="/pt-logo.png" alt="Phan Trần Logo" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                    Nhấn để xem chi tiết <ChevronDown size={16} />
+                  </div>
+                </div>
+              )}
+            </div>
 
           </div>
         </div>
