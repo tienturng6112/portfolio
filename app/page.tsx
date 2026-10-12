@@ -313,501 +313,371 @@ export default function PortfolioPage() {
             <h2 className="text-3xl font-extrabold text-[#001C44]">Kinh nghiệm làm việc</h2>
           </div>
 
-          <div className="relative pl-10 md:pl-14">
-            {/* Đường dọc Timeline */}
-            <div className="absolute left-[15px] md:left-[23px] top-8 bottom-0 w-[2px] bg-[#BCFEFE]"></div>
-
-            {/* ITEM 1: DN Group */}
-            <div className="relative mb-12 group">
-              {/* Circle number */}
-              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">1</div>
-
-              {openExp === 1 ? (
-                /* ============ TRẠNG THÁI MỞ (HIỆN CHI TIẾT) ============ */
-                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
-                  {/* Nút thu gọn */}
-                  <button 
-                    onClick={() => setOpenExp(null)}
-                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
-                    title="Thu gọn"
-                  >
-                    <ChevronUp size={20} />
-                  </button>
-
-                  {/* Header: Tags & Date */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
-                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
-                      Thẩm mỹ • Chuỗi thương hiệu • Quy mô &gt;1.200 nhân sự
-                    </span>
-                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
-                      05/2025 — x/x
-                    </span>
-                  </div>
-
-                  {/* Company & Role */}
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">Tập đoàn Điểm Nhấn (DN Group)</h3>
-                  <div className="text-lg font-bold text-[#0C5776] mb-5">Chuyên viên Marketing Ads</div>
-
-                  {/* === CÁC THƯƠNG HIỆU PHỤ TRÁCH === */}
-                  <div className="mt-6">
-                    {/* Seoul Center */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-auto px-3 min-w-[110px] border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden py-1.5 shadow-sm">
-                          <img src="/logo-sc.png" alt="Seoul Center" className="h-full object-contain" />
-                        </div>
-                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Triển khai và tối ưu Facebook Ads trong lĩnh vực thẩm mỹ / làm đẹp, tập trung tạo khách hàng tiềm năng và đặt lịch.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Lên kế hoạch chiến dịch theo phễu, test creative và audience, tối ưu CPL, CTR, ROAS theo KPI được giao.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Phối hợp với Content, Design và Sales / chi nhánh, theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, GA4, Google Sheets.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* DN HOME */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-auto px-3 min-w-[110px] border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden py-1.5 shadow-sm">
-                          <img src="/logo-dnhome.png" alt="DN Home" className="h-full object-contain" />
-                        </div>
-                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* SEOUL ACADEMY */}
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-auto px-3 min-w-[110px] border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden py-1.5 shadow-sm">
-                          <img src="/logo-sacademy.png" alt="Seoul Academy" className="h-full object-contain" />
-                        </div>
-                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
-                        </li>
-                      </ul>
-                    </div>
+          {/* Grid Layout cho các thẻ Đóng */}
+          {!openExp ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+              {/* ITEM 1: DN Group (Card Đóng) */}
+              <div 
+                onClick={() => setOpenExp(1)}
+                className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
+              >
+                {/* Số thứ tự và Thời gian */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-sm">1</div>
+                  <div className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    05/2025 — x/x
                   </div>
                 </div>
-              ) : (
-                /* ============ TRẠNG THÁI ĐÓNG (HIỆN LOGO HÌNH 1) ============ */
-                <div 
-                  onClick={() => setOpenExp(1)}
-                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
-                >
-                  <img src="/dn-logo.png" alt="DN Group Logo" className="w-full h-full flex-1 object-contain mb-2 group-hover/card:scale-105 transition-transform duration-300" />
-                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                    Nhấn để xem chi tiết <ChevronDown size={16} />
+                {/* Nội dung căn giữa */}
+                <div className="flex-1 flex flex-col items-center justify-center text-center mt-2">
+                  <img src="/dn-logo.png" alt="DN Group Logo" className="h-24 md:h-28 object-contain mb-8 group-hover/card:scale-105 transition-transform duration-300" />
+                  <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-2">Tập đoàn Điểm Nhấn (DN Group)</h3>
+                  <div className="text-sm font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                </div>
+              </div>
+
+              {/* ITEM 2: KENZE (Card Đóng) */}
+              <div 
+                onClick={() => setOpenExp(2)}
+                className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
+              >
+                {/* Số thứ tự và Thời gian */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-sm">2</div>
+                  <div className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    x/x — x/x
                   </div>
                 </div>
-              )}
-            </div>
-
-          
-            {/* ITEM 2: KENZE */}
-            <div className="relative mb-12 group">
-              {/* Circle number */}
-              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">2</div>
-
-              {openExp === 2 ? (
-                /* ============ TRẠNG THÁI MỞ ============ */
-                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
-                  {/* Nút thu gọn */}
-                  <button 
-                    onClick={() => setOpenExp(null)}
-                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
-                    title="Thu gọn"
-                  >
-                    <ChevronUp size={20} />
-                  </button>
-                  {/* Header: Tags & Date */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
-                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
-                      Nội thất xuất dư • Tồn kho • Rời công • Trưng bày
-                    </span>
-                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
-                      x/x — x/x
-                    </span>
+                {/* Nội dung căn giữa */}
+                <div className="flex-1 flex flex-col items-center justify-center text-center mt-2">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-8 group-hover/card:scale-105 transition-transform duration-300 shadow-sm border border-slate-100">
+                    <img src="/kz-logo.png" alt="KENZE Logo" className="w-full h-full object-cover" />
                   </div>
+                  <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-2 uppercase">KENZE</h3>
+                  <div className="text-sm font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                </div>
+              </div>
 
-                  {/* Company Role (Không logo) */}
-                  <div className="mb-6">
-                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">KENZE</h3>
-                    <div className="text-lg font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
-                  </div>
-
-                  {/* === CÁC THƯƠNG HIỆU PHỤ TRÁCH === */}
-                  <div className="mt-6">
-                    {/* KENZE */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-[#00529c] overflow-hidden shadow-sm flex-shrink-0">
-                          <img src="/logo-kenze.png" alt="KENZE Logo" className="h-full w-full object-cover" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg">KENZE</span>
-                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Triển khai và tối ưu Facebook Ads cho sản phẩm nội thất xuất dư / tồn kho, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Lên kế hoạch chiến dịch theo nhóm sản phẩm và chương trình xả kho, test creative và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Phối hợp với bộ phận kho và Sales cập nhật tồn kho, giá bán; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* YAMADO */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1">
-                          <img src="/logo-yamado.png" alt="Yamado Logo" className="h-full w-full object-contain" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg uppercase">YAMADO</span>
-                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Triển khai và tối ưu Facebook Ads cho Yamado Viet Nam Store, tập trung tạo khách hàng tiềm năng và doanh thu bán hàng qua tin nhắn / điện thoại.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Lên kế hoạch chiến dịch theo nhóm sản phẩm, test creative và audience, tối ưu CPL, CTR, ROAS theo KPI; phối hợp Sales xử lý đơn và báo cáo hiệu quả định kỳ.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* LAZYBAG */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1">
-                          <img src="/logo-lazybag.png" alt="Lazybag Logo" className="h-full w-full object-contain" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg">Lazybag</span>
-                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Triển khai và tối ưu Facebook Ads cho sản phẩm ghế lười Lazybag, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Lên kế hoạch chiến dịch theo mẫu sản phẩm và chương trình ưu đãi, test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* KENSONIC */}
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1">
-                          <img src="/logo-kensonic.png" alt="Kensonic Logo" className="h-full w-full object-contain" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg uppercase">KENSONIC</span>
-                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
-                        </li>
-                      </ul>
-                    </div>
-
+              {/* ITEM 3: Miss Áo Dài (Card Đóng) */}
+              <div 
+                onClick={() => setOpenExp(3)}
+                className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
+              >
+                {/* Số thứ tự và Thời gian */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-sm">3</div>
+                  <div className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    x/x — x/x
                   </div>
                 </div>
-              ) : (
-                /* ============ TRẠNG THÁI ĐÓNG ============ */
-                <div 
-                  onClick={() => setOpenExp(2)}
-                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
-                >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md">
-                    <img src="/logo-kenze.png" alt="KENZE Logo" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                    Nhấn để xem chi tiết <ChevronDown size={16} />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* ITEM 3: Miss Áo Dài */}
-            <div className="relative mb-12 group">
-              {/* Circle number */}
-              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">3</div>
-
-              {openExp === 3 ? (
-                /* ============ TRẠNG THÁI MỞ ============ */
-                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
-                  {/* Nút thu gọn */}
-                  <button 
-                    onClick={() => setOpenExp(null)}
-                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
-                    title="Thu gọn"
-                  >
-                    <ChevronUp size={20} />
-                  </button>
-
-                  {/* Header: Tags & Date */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
-                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
-                      Dịch vụ chụp ảnh • Áo dài • Gói trải nghiệm 2 in 1
-                    </span>
-                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
-                      x/x — x/x
-                    </span>
-                  </div>
-
-                  {/* Company & Role */}
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">Miss Áo Dài</h3>
-                  <div className="text-lg font-bold text-[#0C5776] mb-5">Chuyên viên Marketing Ads</div>
-
-                  {/* === CÁC THƯƠNG HIỆU PHỤ TRÁCH === */}
-                  <div className="mt-6">
-                    {/* Miss Áo Dài */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
-                          <img src="/mad-logo.png" alt="Miss Áo Dài" className="h-full w-full object-cover" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg">Miss Áo Dài</span>
-                        <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Triển khai và tối ưu Facebook Ads cho dịch vụ chụp ảnh áo dài và các gói trải nghiệm, tập trung tạo khách hàng tiềm năng và đặt lịch chụp qua tin nhắn.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Lên kế hoạch chiến dịch theo concept và mùa vụ (Liên Hoa, Xe Hoa, mùa sen, lễ Tết), test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và lượt đặt lịch.
-                        </li>
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Phối hợp với ekip chụp và Sales tư vấn gói dịch vụ, lịch chụp; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* Mentor Club */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
-                          <img src="/mt-logo.png" alt="Mentor Club" className="h-full w-full object-cover" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg">Mentor Club</span>
-                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
-                        </li>
-                      </ul>
-                    </div>
-
-                    <hr className="border-slate-200 my-6" />
-
-                    {/* Miss Personal Makeup */}
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0">
-                          <img src="/mp-logo.png" alt="Miss Personal Makeup" className="h-full w-full object-cover" />
-                        </div>
-                        <span className="font-bold text-[#001C44] text-lg">Miss Personal Makeup</span>
-                        <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
-                      </div>
-                      <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                        <li className="relative pl-5">
-                          <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                          Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                /* ============ TRẠNG THÁI ĐÓNG ============ */
-                <div 
-                  onClick={() => setOpenExp(3)}
-                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
-                >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md border border-slate-100">
+                {/* Nội dung căn giữa */}
+                <div className="flex-1 flex flex-col items-center justify-center text-center mt-2">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-8 group-hover/card:scale-105 transition-transform duration-300 shadow-sm border border-slate-100">
                     <img src="/mad-logo.png" alt="Miss Áo Dài Logo" className="w-full h-full object-cover" />
                   </div>
-                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                    Nhấn để xem chi tiết <ChevronDown size={16} />
+                  <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-2">Miss Áo Dài</h3>
+                  <div className="text-sm font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                </div>
+              </div>
+
+              {/* ITEM 4: Phan Trần (Card Đóng) */}
+              <div 
+                onClick={() => setOpenExp(4)}
+                className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
+              >
+                {/* Số thứ tự và Thời gian */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-sm">4</div>
+                  <div className="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    x/x — x/x
                   </div>
                 </div>
-              )}
-            </div>
-
-            {/* ITEM 4: Phan Trần */}
-            <div className="relative mb-12 group">
-              {/* Circle number */}
-              <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">4</div>
-
-              {openExp === 4 ? (
-                /* ============ TRẠNG THÁI MỞ ============ */
-                <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative animate-in fade-in zoom-in-95 duration-300">
-                  {/* Nút thu gọn */}
-                  <button 
-                    onClick={() => setOpenExp(null)}
-                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors"
-                    title="Thu gọn"
-                  >
-                    <ChevronUp size={20} />
-                  </button>
-                  {/* Header: Tags & Date */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
-                    <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">
-                      In vải • In ấn & gia công trên vải
-                    </span>
-                    <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
-                      x/x — x/x
-                    </span>
-                  </div>
-
-                  {/* Company Logo & Role */}
-                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                    <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden flex-shrink-0 bg-white flex items-center justify-center shadow-sm p-1">
-                      <img src="/pt-logo.png" alt="Phan Trần Logo" className="w-full h-full object-contain" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-extrabold text-[#001C44]">PHAN TRAN</h3>
-                      <div className="text-base font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
-                    </div>
-                  </div>
-
-                  {/* Description List */}
-                  <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Triển khai và tối ưu Facebook Ads cho dịch vụ in vải, tập trung tạo khách hàng tiềm năng là chủ xưởng may, shop thời trang và nhận đơn đặt in qua tin nhắn.
-                    </li>
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Lên kế hoạch chiến dịch theo nhóm dịch vụ in và mùa vụ thời trang, test creative hình ảnh / video mẫu in thực tế và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.
-                    </li>
-                    <li className="relative pl-5">
-                      <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>
-                      Phối hợp với bộ phận sản xuất và Sales để báo giá, chốt đơn; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                /* ============ TRẠNG THÁI ĐÓNG ============ */
-                <div 
-                  onClick={() => setOpenExp(4)}
-                  className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-[#2D99AE] hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-center p-8 h-48 md:h-56 relative group/card"
-                >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 group-hover/card:scale-105 transition-transform duration-300 shadow-md border border-slate-100 bg-white p-2">
+                {/* Nội dung căn giữa */}
+                <div className="flex-1 flex flex-col items-center justify-center text-center mt-2">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-8 group-hover/card:scale-105 transition-transform duration-300 shadow-sm border border-slate-100 bg-white p-2 md:p-3">
                     <img src="/pt-logo.png" alt="Phan Trần Logo" className="w-full h-full object-contain" />
                   </div>
-                  <div className="text-[#0C5776] text-xs font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                    Nhấn để xem chi tiết <ChevronDown size={16} />
+                  <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-2 uppercase">PHAN TRAN</h3>
+                  <div className="text-sm font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Hiển thị Card Mở khi click vào một công ty */
+            <div className="relative pl-10 md:pl-14">
+              {/* Đường dọc Timeline */}
+              <div className="absolute left-[15px] md:left-[23px] top-8 bottom-0 w-[2px] bg-[#BCFEFE]"></div>
+
+              {/* Mở ITEM 1: DN Group */}
+              {openExp === 1 && (
+                <div className="relative mb-12 animate-in fade-in zoom-in-95 duration-300">
+                  <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">1</div>
+                  <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
+                    <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                      <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">Thẩm mỹ • Chuỗi thương hiệu • Quy mô &gt;1.200 nhân sự</span>
+                      <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">05/2025 — x/x</span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">Tập đoàn Điểm Nhấn (DN Group)</h3>
+                    <div className="text-lg font-bold text-[#0C5776] mb-5">Chuyên viên Marketing Ads</div>
+                    <div className="mt-6">
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1"><img src="/sc-logo.png" alt="Seoul Center" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Seoul Center</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads trong lĩnh vực thẩm mỹ / làm đẹp, tập trung tạo khách hàng tiềm năng và đặt lịch.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo phễu, test creative và audience, tối ưu CPL, CTR, ROAS theo KPI được giao.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Phối hợp với Content, Design và Sales / chi nhánh, theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, GA4, Google Sheets.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1"><img src="/scc-logo.png" alt="Seoul Center Clinic" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Seoul Center Clinic</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho phòng khám Seoul Center Clinic, tập trung tạo khách hàng tiềm năng và đặt lịch tư vấn / thăm khám qua tin nhắn.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo dịch vụ và chương trình ưu đãi, test creative và audience, tối ưu CPL, CTR theo KPI; phối hợp đội ngũ tư vấn và báo cáo hiệu quả định kỳ.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1"><img src="/sd-logo.png" alt="DN Home" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">DN Home</span>
+                          <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1"><img src="/sa-logo.png" alt="Sacademy" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Sacademy</span>
+                          <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* Mở ITEM 2: KENZE */}
+              {openExp === 2 && (
+                <div className="relative mb-12 animate-in fade-in zoom-in-95 duration-300">
+                  <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">2</div>
+                  <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
+                    <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                      <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">Nội thất xuất dư • Tồn kho • Rời công • Trưng bày</span>
+                      <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">x/x — x/x</span>
+                    </div>
+                    <div className="mb-6">
+                      <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">KENZE</h3>
+                      <div className="text-lg font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                    </div>
+                    <div className="mt-6">
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center overflow-hidden shadow-sm flex-shrink-0"><img src="/kz-logo.png" alt="KENZE Logo" className="h-full w-full object-cover" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">KENZE</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho sản phẩm nội thất xuất dư / tồn kho, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo nhóm sản phẩm và chương trình xả kho, test creative và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Phối hợp với bộ phận kho và Sales cập nhật tồn kho, giá bán; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 p-1"><img src="/ymd-logo.png" alt="Yamado Logo" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg uppercase">YAMADO</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho Yamado Viet Nam Store, tập trung tạo khách hàng tiềm năng và doanh thu bán hàng qua tin nhắn / điện thoại.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo nhóm sản phẩm, test creative và audience, tối ưu CPL, CTR, ROAS theo KPI; phối hợp Sales xử lý đơn và báo cáo hiệu quả định kỳ.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1"><img src="/lzb-logo.png" alt="Lazybag Logo" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Lazybag</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho sản phẩm ghế lười Lazybag, tập trung tạo khách hàng tiềm năng và hỗ trợ chốt đơn qua tin nhắn.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo mẫu sản phẩm và chương trình ưu đãi, test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-auto min-w-[80px] px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0 py-1"><img src="/ks-logo.png" alt="Kensonic Logo" className="h-full w-full object-contain" /></div>
+                          <span className="font-bold text-[#001C44] text-lg uppercase">KENSONIC</span>
+                          <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Mở ITEM 3: Miss Áo Dài */}
+              {openExp === 3 && (
+                <div className="relative mb-12 animate-in fade-in zoom-in-95 duration-300">
+                  <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">3</div>
+                  <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
+                    <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                      <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">Dịch vụ chụp ảnh • Áo dài • Gói trải nghiệm 2 in 1</span>
+                      <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">x/x — x/x</span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#001C44] mb-1">Miss Áo Dài</h3>
+                    <div className="text-lg font-bold text-[#0C5776] mb-5">Chuyên viên Marketing Ads</div>
+                    <div className="mt-6">
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0"><img src="/mad-logo.png" alt="Miss Áo Dài" className="h-full w-full object-cover" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Miss Áo Dài</span>
+                          <span className="bg-[#0C5776] text-white px-3 py-1 rounded-full text-xs font-bold">Chính</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho dịch vụ chụp ảnh áo dài và các gói trải nghiệm, tập trung tạo khách hàng tiềm năng và đặt lịch chụp qua tin nhắn.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo concept và mùa vụ (Liên Hoa, Xe Hoa, mùa sen, lễ Tết), test creative hình ảnh / video và audience, tối ưu chi phí trên mỗi tin nhắn và lượt đặt lịch.</li>
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Phối hợp với ekip chụp và Sales tư vấn gói dịch vụ, lịch chụp; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0"><img src="/mt-logo.png" alt="Mentor Club" className="h-full w-full object-cover" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Mentor Club</span>
+                          <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
+                        </ul>
+                      </div>
+                      <hr className="border-slate-200 my-6" />
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-sm flex-shrink-0"><img src="/mp-logo.png" alt="Miss Personal Makeup" className="h-full w-full object-cover" /></div>
+                          <span className="font-bold text-[#001C44] text-lg">Miss Personal Makeup</span>
+                          <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
+                        </div>
+                        <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                          <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Mở ITEM 4: Phan Trần */}
+              {openExp === 4 && (
+                <div className="relative mb-12 animate-in fade-in zoom-in-95 duration-300">
+                  <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-[#0C5776] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-slate-50 z-10">4</div>
+                  <div className="bg-white border border-[#2D99AE] p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
+                    <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-[#0C5776] bg-slate-50 hover:bg-slate-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
+                      <span className="inline-flex items-center bg-[#BCFEFE]/40 text-[#0C5776] px-3.5 py-1 rounded-full text-[11px] md:text-xs font-bold tracking-wide">In vải • In ấn & gia công trên vải</span>
+                      <span className="inline-flex items-center bg-[#0C5776] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">x/x — x/x</span>
+                    </div>
+                    <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                      <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden flex-shrink-0 bg-white flex items-center justify-center shadow-sm p-1"><img src="/pt-logo.png" alt="Phan Trần Logo" className="w-full h-full object-contain" /></div>
+                      <div>
+                        <h3 className="text-2xl font-extrabold text-[#001C44]">PHAN TRAN</h3>
+                        <div className="text-base font-bold text-[#0C5776]">Chuyên viên Marketing Ads</div>
+                      </div>
+                    </div>
+                    <ul className="space-y-3 text-slate-600 text-sm md:text-base leading-relaxed">
+                      <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Triển khai và tối ưu Facebook Ads cho dịch vụ in vải, tập trung tạo khách hàng tiềm năng là chủ xưởng may, shop thời trang và nhận đơn đặt in qua tin nhắn.</li>
+                      <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Lên kế hoạch chiến dịch theo nhóm dịch vụ in và mùa vụ thời trang, test creative hình ảnh / video mẫu in thực tế và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.</li>
+                      <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#0C5776]"></div>Phối hợp với bộ phận sản xuất và Sales để báo giá, chốt đơn; theo dõi Pixel & CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.</li>
+                    </ul>
                   </div>
                 </div>
               )}
             </div>
-
-          </div>
+          )}
         </div>
       </section>
 
       {/* ================= FEATURED PROJECTS ================= */}
       <section id="projects" className="py-20 px-6 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
-            <div className="p-2 rounded bg-[#0C5776] text-white">
-              <Briefcase size={20} />
+            <div className="p-2.5 rounded-lg bg-[#0C5776] text-white shadow-md">
+              <Briefcase size={24} strokeWidth={2.5} />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#001C44]">Dự án tiêu biểu</h2>
+            <h2 className="text-3xl font-extrabold text-[#001C44]">Dự án tiêu biểu</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Project 1 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm group">
               <div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="px-3 py-1 rounded-full bg-[#0C5776]/10 text-[#0C5776] text-xs font-bold border border-[#0C5776]/20">
+                <div className="flex justify-between items-start mb-6">
+                  <span className="px-3 py-1.5 rounded-full bg-[#0C5776]/10 text-[#0C5776] text-xs font-bold border border-[#0C5776]/20">
                     Hệ thống Quản trị
                   </span>
-                  <div className="flex gap-2 text-slate-400">
-                    <ExternalLink size={18} className="hover:text-[#0C5776] cursor-pointer transition-colors" />
+                  <div className="flex gap-2 text-slate-400 group-hover:text-[#2D99AE] transition-colors">
+                    <ExternalLink size={20} className="cursor-pointer" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#001C44] mb-2">Seoul Center Access Command</h3>
-                <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-6">
+                <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-3 group-hover:text-[#0C5776] transition-colors">Seoul Center Access Command</h3>
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
                   Hệ thống web nội bộ quản lý KPI toàn hệ thống, theo dõi Action Plan chi nhánh với trí tuệ nhân tạo (AI Box) và cơ sở tri thức đồng bộ.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">Next.js</span>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">Tailwind CSS</span>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">Lucide Icons</span>
+              <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-100">
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Next.js</span>
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Tailwind CSS</span>
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Lucide Icons</span>
               </div>
             </div>
 
             {/* Project 2 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm group">
               <div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="px-3 py-1 rounded-full bg-[#2D99AE]/10 text-[#2D99AE] text-xs font-bold border border-[#2D99AE]/20">
+                <div className="flex justify-between items-start mb-6">
+                  <span className="px-3 py-1.5 rounded-full bg-[#2D99AE]/10 text-[#2D99AE] text-xs font-bold border border-[#2D99AE]/20">
                     Nền tảng Cá nhân
                   </span>
-                  <div className="flex gap-2 text-slate-400">
-                    <ExternalLink size={18} className="hover:text-[#0C5776] cursor-pointer transition-colors" />
+                  <div className="flex gap-2 text-slate-400 group-hover:text-[#2D99AE] transition-colors">
+                    <ExternalLink size={20} className="cursor-pointer" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#001C44] mb-2">Professional Developer Portfolio</h3>
-                <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-6">
+                <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-3 group-hover:text-[#0C5776] transition-colors">Professional Developer Portfolio</h3>
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
                   Trang web portfolio cá nhân tối ưu hiệu năng, giới thiệu các kỹ năng chuyên môn, dự án đã làm với phong cách thiết kế hiện đại.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">Next.js</span>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">TypeScript</span>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">Tailwind</span>
+              <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-100">
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Next.js</span>
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">TypeScript</span>
+                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Tailwind</span>
               </div>
             </div>
           </div>
