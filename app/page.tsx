@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Code2, Briefcase, User, Mail, 
-  ExternalLink, Sparkles, Terminal, ArrowRight, Layers, ChevronDown, ChevronUp 
+  ExternalLink, Sparkles, Terminal, ArrowRight, Layers, ChevronDown, ChevronUp, Image as ImageIcon, BarChart2, TrendingUp 
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import CountUp from 'react-countup';
 
 export default function PortfolioPage() {
   // === SPLASH SCREEN STATES ===
@@ -13,6 +15,8 @@ export default function PortfolioPage() {
   const [typedText, setTypedText] = useState('');
   const fullText = "PORTFOLIO";
   const [openExp, setOpenExp] = useState<number | null>(null);
+  const [openGallery, setOpenGallery] = useState(false);
+  const [openKPI, setOpenKPI] = useState(false);
 
   useEffect(() => {
     // 1. Hiệu ứng gõ chữ (Typing effect)
@@ -634,52 +638,218 @@ export default function PortfolioPage() {
             <h2 className="text-3xl font-extrabold text-[#001C44]">Dự án tiêu biểu</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Project 1 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm group">
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="px-3 py-1.5 rounded-full bg-[#0C5776]/10 text-[#0C5776] text-xs font-bold border border-[#0C5776]/20">
-                    Hệ thống Quản trị
-                  </span>
-                  <div className="flex gap-2 text-slate-400 group-hover:text-[#2D99AE] transition-colors">
-                    <ExternalLink size={20} className="cursor-pointer" />
+          <div className="space-y-12">
+            {/* Project: Tập đoàn Điểm Nhấn (DN Group) */}
+            <div className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+              
+              {/* Card Header */}
+              <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-white">
+                <div className="flex items-center gap-3">
+                  <div className="h-6 w-auto flex-shrink-0">
+                    <img src="/dn-logo.png" alt="DN Group" className="h-full object-contain" />
+                  </div>
+                  <h3 className="text-[17px] font-extrabold text-[#001C44]">Tập đoàn Điểm Nhấn</h3>
+                </div>
+                <div className="text-xs font-bold text-slate-400 tracking-wider uppercase">Khối Dự Án</div>
+              </div>
+
+              {/* Cover Image */}
+              <div className="w-full h-48 md:h-80 bg-slate-100 overflow-hidden relative">
+                <img src="/VLTX/vltx-cv.jpg" alt="Vẽ Lại Thanh Xuân Cover" className="w-full h-full object-cover" />
+              </div>
+
+              {/* Project Content */}
+              <div className="p-6 md:p-8">
+                <div className="inline-block px-3 py-1 rounded-full bg-[#BCFEFE]/30 text-[#0C5776] text-[11px] font-bold mb-4 border border-[#BCFEFE]/50">
+                  Seoul Center • Chiến dịch truyền thông
+                </div>
+                
+                <h4 className="text-2xl font-extrabold text-[#001C44] mb-2">Vẽ Lại Thanh Xuân</h4>
+                <p className="text-slate-600 text-sm md:text-base mb-6">
+                  Tham gia đề xuất và nhận nhiệm vụ truyền thông qua MXH.
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  <span className="text-xs text-slate-500 font-medium px-3 py-1 bg-slate-50 border border-slate-200 rounded-md">Cà Mau — 26/09/2026</span>
+                  <span className="text-xs text-slate-500 font-medium px-3 py-1 bg-slate-50 border border-slate-200 rounded-md">+10 chi nhánh khác</span>
+                  <span className="text-xs text-slate-500 font-medium px-3 py-1 bg-slate-50 border border-slate-200 rounded-md">Truyền thông MXH</span>
+                </div>
+
+                {/* Nút Toggle Bộ hình ảnh chiến dịch */}
+                <div 
+                  className="mb-4 flex items-center justify-between cursor-pointer group/gallery bg-slate-50 hover:bg-slate-100 p-3.5 rounded-xl border border-slate-200 transition-all shadow-sm"
+                  onClick={() => setOpenGallery(!openGallery)}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="bg-[#0C5776] text-white p-1.5 rounded-lg shadow-sm">
+                      <ImageIcon size={18} />
+                    </div>
+                    <h5 className="font-extrabold text-[#001C44] text-sm uppercase tracking-wide">Bộ hình ảnh chiến dịch</h5>
+                    <span className="bg-white text-slate-500 px-2 py-0.5 rounded text-xs font-bold border border-slate-200 shadow-sm">8 ảnh</span>
+                  </div>
+                  <div className="text-slate-400 group-hover/gallery:text-[#0C5776] transition-colors bg-white p-1.5 rounded-full shadow-sm border border-slate-100">
+                    {openGallery ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                   </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-3 group-hover:text-[#0C5776] transition-colors">Seoul Center Access Command</h3>
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
-                  Hệ thống web nội bộ quản lý KPI toàn hệ thống, theo dõi Action Plan chi nhánh với trí tuệ nhân tạo (AI Box) và cơ sở tri thức đồng bộ.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-100">
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Next.js</span>
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Tailwind CSS</span>
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Lucide Icons</span>
+
+                {/* Masonry-style Grid cho hình ảnh chiến dịch (Đóng/Mở với Framer Motion) */}
+                <AnimatePresence initial={false}>
+                  {openGallery && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+                      animate={{ height: "auto", opacity: 1, marginBottom: 24 }}
+                      exit={{ height: 0, opacity: 0, marginBottom: 0 }}
+                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                  
+                  {/* Cột trái (Chiếm 7 phần trên Desktop) */}
+                  <div className="md:col-span-7 flex flex-col gap-4">
+                    {/* Hàng trên cùng: Hình banner ngang lớn */}
+                    <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                      <img src="/VLTX/vltx-cv.jpg" alt="Campaign Image 1" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    
+                    {/* Hàng dưới chia 2 cột */}
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Hình dọc cao (Bên trái) */}
+                      <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                        <img src="/VLTX/vltx-stendee1.jpg" alt="Campaign Image 2" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                      </div>
+                      
+                      {/* Hình chia 2 nhỏ (Bên phải) */}
+                      <div className="flex flex-col gap-4">
+                        {/* Hình chữ nhật ngang nhỏ */}
+                        <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                          <img src="/VLTX/vltx-bn.jpg" alt="Campaign Image 3" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        {/* Hình vuông/chữ nhật lớn hơn ở dưới */}
+                        <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                          <img src="/VLTX/MB.PNG" alt="Campaign Image 4" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cột phải (Chiếm 5 phần trên Desktop) */}
+                  <div className="md:col-span-5 flex flex-col gap-4">
+                    {/* Hình dọc lớn */}
+                    <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                      <img src="/VLTX/vltx-stendee.png" alt="Campaign Image 5" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                  </div>
+                  
+                  {/* Hàng dưới cùng: 3 hình bằng nhau */}
+                  <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                     <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                        <img src="/VLTX/vltx-bttt.png" alt="Campaign Image 6" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                     </div>
+                     <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                        <img src="/VLTX/vltx-mt.png" alt="Campaign Image 7" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                     </div>
+                     <div className="rounded-xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 relative group">
+                        <img src="/VLTX/vltx-mt1.png" alt="Campaign Image 8" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                     </div>
+                  </div>
+
+                  </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Nút Toggle KPI Thực Đạt */}
+                <div 
+                  className="mb-2 flex items-center justify-between cursor-pointer group/kpi bg-slate-50 hover:bg-slate-100 p-3.5 rounded-xl border border-slate-200 transition-all shadow-sm"
+                  onClick={() => setOpenKPI(!openKPI)}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="bg-[#0C5776] text-white p-1.5 rounded-lg shadow-sm">
+                      <BarChart2 size={18} />
+                    </div>
+                    <h5 className="font-extrabold text-[#001C44] text-sm uppercase tracking-wide">KPI Thực Đạt</h5>
+                    <span className="bg-white text-slate-500 px-2 py-0.5 rounded text-xs font-bold border border-slate-200 shadow-sm">Số liệu chiến dịch</span>
+                  </div>
+                  <div className="text-slate-400 group-hover/kpi:text-[#0C5776] transition-colors bg-white p-1.5 rounded-full shadow-sm border border-slate-100">
+                    {openKPI ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  </div>
+                </div>
+
+                {/* Khối KPI (Đóng/Mở với Framer Motion) */}
+                <AnimatePresence initial={false}>
+                  {openKPI && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    
+                    {/* KPI 1 */}
+                    <div className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow-sm hover:border-emerald-400 hover:shadow-emerald-50 transition-all flex flex-col justify-center group/item relative overflow-hidden">
+                      <div className="absolute -bottom-3 -right-3 opacity-[0.03] group-hover/item:opacity-10 transition-opacity duration-500 group-hover/item:-translate-y-2 group-hover/item:scale-110">
+                        <TrendingUp size={80} className="text-emerald-500" />
+                      </div>
+                      <div className="flex items-center justify-center gap-1 mb-2 relative z-10">
+                        <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 drop-shadow-sm">
+                          <CountUp end={900} duration={2.5} enableScrollSpy scrollSpyOnce />+
+                        </div>
+                      </div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider relative z-10">Data khách mới</div>
+                    </div>
+
+                    {/* KPI 2 */}
+                    <div className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow-sm hover:border-emerald-400 hover:shadow-emerald-50 transition-all flex flex-col justify-center group/item relative overflow-hidden">
+                      <div className="absolute -bottom-3 -right-3 opacity-[0.03] group-hover/item:opacity-10 transition-opacity duration-500 group-hover/item:-translate-y-2 group-hover/item:scale-110">
+                        <TrendingUp size={80} className="text-emerald-500" />
+                      </div>
+                      <div className="flex items-center justify-center gap-1 mb-2 relative z-10">
+                        <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 drop-shadow-sm">
+                          <CountUp end={48} duration={2.5} enableScrollSpy scrollSpyOnce />%
+                        </div>
+                      </div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider relative z-10">Lịch khách mới</div>
+                    </div>
+
+                    {/* KPI 3 */}
+                    <div className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow-sm hover:border-emerald-400 hover:shadow-emerald-50 transition-all flex flex-col justify-center group/item relative overflow-hidden">
+                      <div className="absolute -bottom-3 -right-3 opacity-[0.03] group-hover/item:opacity-10 transition-opacity duration-500 group-hover/item:-translate-y-2 group-hover/item:scale-110">
+                        <TrendingUp size={80} className="text-emerald-500" />
+                      </div>
+                      <div className="flex items-center justify-center gap-1 mb-2 relative z-10">
+                        <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 drop-shadow-sm">
+                          <CountUp end={78} duration={2.5} enableScrollSpy scrollSpyOnce />%
+                        </div>
+                      </div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider relative z-10">Khách mới</div>
+                    </div>
+
+                    {/* KPI 4 */}
+                    <div className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow-sm hover:border-emerald-400 hover:shadow-emerald-50 transition-all flex flex-col justify-center group/item relative overflow-hidden">
+                      <div className="absolute -bottom-3 -right-3 opacity-[0.03] group-hover/item:opacity-10 transition-opacity duration-500 group-hover/item:-translate-y-2 group-hover/item:scale-110">
+                        <TrendingUp size={80} className="text-emerald-500" />
+                      </div>
+                      <div className="flex items-center justify-center gap-1 mb-2 relative z-10">
+                        <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 drop-shadow-sm">
+                          <CountUp end={2.6} decimals={1} duration={2.5} enableScrollSpy scrollSpyOnce />x
+                        </div>
+                      </div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider relative z-10">ROAS</div>
+                    </div>
+
+                  </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
               </div>
             </div>
 
-            {/* Project 2 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:border-[#2D99AE] transition-all shadow-sm group">
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="px-3 py-1.5 rounded-full bg-[#2D99AE]/10 text-[#2D99AE] text-xs font-bold border border-[#2D99AE]/20">
-                    Nền tảng Cá nhân
-                  </span>
-                  <div className="flex gap-2 text-slate-400 group-hover:text-[#2D99AE] transition-colors">
-                    <ExternalLink size={20} className="cursor-pointer" />
-                  </div>
-                </div>
-                <h3 className="text-xl md:text-2xl font-extrabold text-[#001C44] mb-3 group-hover:text-[#0C5776] transition-colors">Professional Developer Portfolio</h3>
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
-                  Trang web portfolio cá nhân tối ưu hiệu năng, giới thiệu các kỹ năng chuyên môn, dự án đã làm với phong cách thiết kế hiện đại.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-100">
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Next.js</span>
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">TypeScript</span>
-                <span className="text-[11px] bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">Tailwind</span>
-              </div>
-            </div>
+            {/* Có thể thêm các khối dự án khác ở đây bằng cách copy/paste cấu trúc của thẻ div ở trên */}
+
           </div>
         </div>
       </section>
