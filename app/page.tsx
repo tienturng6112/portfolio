@@ -2,11 +2,65 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Briefcase, User, Mail, Sparkles, ArrowRight, ArrowUpRight,
-  ChevronDown, ChevronUp, Image as ImageIcon, BarChart2, TrendingUp,
+  ChevronDown, ChevronUp, Image as ImageIcon, BarChart2, TrendingUp, TrendingDown,
   MapPin, Monitor, Target, Video, ShoppingBag, Cpu, PieChart, Filter, Layers, FileSpreadsheet
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CountUp from 'react-countup';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+
+function MagnifierImage({
+  src,
+  alt,
+  zoom = 2.6,
+  lensSize = 180,
+}: {
+  src: string;
+  alt: string;
+  zoom?: number;
+  lensSize?: number;
+}) {
+  const [showLens, setShowLens] = useState(false);
+  const [pos, setPos] = useState({ x: 0, y: 0, w: 0, h: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setPos({ x, y, w: rect.width, h: rect.height });
+  };
+
+  return (
+    <div
+      className="relative w-full overflow-hidden rounded-lg cursor-crosshair select-none"
+      onMouseEnter={() => setShowLens(true)}
+      onMouseLeave={() => setShowLens(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-auto object-contain rounded-lg block"
+      />
+
+      {showLens && pos.w > 0 && (
+        <div
+          className="pointer-events-none absolute rounded-full border-2 border-lime-400 shadow-2xl ring-4 ring-zinc-900/10 z-30 bg-white bg-no-repeat"
+          style={{
+            width: `${lensSize}px`,
+            height: `${lensSize}px`,
+            left: `${pos.x - lensSize / 2}px`,
+            top: `${pos.y - lensSize / 2}px`,
+            backgroundImage: `url("${src}")`,
+            backgroundSize: `${pos.w * zoom}px ${pos.h * zoom}px`,
+            backgroundPositionX: `${-pos.x * zoom + lensSize / 2}px`,
+            backgroundPositionY: `${-pos.y * zoom + lensSize / 2}px`,
+          }}
+        />
+      )}
+    </div>
+  );
+}
 
 export default function PortfolioPage() {
   // === SPLASH SCREEN STATES ===
@@ -17,11 +71,116 @@ export default function PortfolioPage() {
 
   // === INTERACTIVE STATES ===
   const [openExp, setOpenExp] = useState<number | null>(null);
+  const [openExpKPI, setOpenExpKPI] = useState(false);
+  const [expMonthIdx, setExpMonthIdx] = useState(0); // Mặc định ở Tháng 8/2026
+  const expMonths = [
+    { 
+      month: "Tháng 5/2026", 
+      img: "/t5-report-m.png", 
+      revenue: "101,8%", 
+      revenueVal: 101.8,
+      totalData: "110,9%", 
+      totalDataVal: 110.9,
+      avgData: "109,1%", 
+      khachMoiVal: 109.1,
+      avgNewCust: "98,6%", 
+      tbKhachVal: 98.6
+    },
+    { 
+      month: "Tháng 4/2026", 
+      img: "/t4-report-m.png", 
+      revenue: "86,4%", 
+      revenueVal: 86.4,
+      totalData: "100%", 
+      totalDataVal: 100.0,
+      avgData: "100%", 
+      khachMoiVal: 100.0,
+      avgNewCust: "145,8%", 
+      tbKhachVal: 145.8
+    },
+    { 
+      month: "Tháng 7/2026", 
+      img: "/t7-report-m.png", 
+      revenue: "92,2%", 
+      revenueVal: 92.2,
+      totalData: "130,9%", 
+      totalDataVal: 130.9,
+      avgData: "100%", 
+      khachMoiVal: 100.0,
+      avgNewCust: "92,6%", 
+      tbKhachVal: 92.6
+    },
+  ];
+  const [expConvIdx, setExpConvIdx] = useState(0);
+
+  // Slide 1: Nguồn-kênh và nguồn Data mới (Cột chồng: Xanh lá + Xanh dương)
+  const convChartSlide1 = [
+    { name: "FACEBOOK ADS", khachMoi: 250, dataMoi: 1380 },
+    { name: "CHI NHÁNH", khachMoi: 110, dataMoi: 540 },
+    { name: "GOOGLE", khachMoi: 60, dataMoi: 370 },
+    { name: "TIKTOK", khachMoi: 15, dataMoi: 85 },
+    { name: "TỔNG ĐÀI", khachMoi: 30, dataMoi: 145 },
+    { name: "OFFLINE", khachMoi: 10, dataMoi: 55 },
+    { name: "NV KINH DOANH", khachMoi: 25, dataMoi: 195 },
+    { name: "WEB", khachMoi: 20, dataMoi: 125 },
+    { name: "ZALO", khachMoi: 8, dataMoi: 42 },
+    { name: "CỘNG TÁC VIÊN", khachMoi: 22, dataMoi: 98 },
+    { name: "PARTNERSHIP", khachMoi: 5, dataMoi: 18 },
+    { name: "CALLBOT", khachMoi: 2, dataMoi: 8 },
+  ];
+
+  // Slide 2: Chi phí - Doanh thu - ROAS theo kênh (Cột đôi: Cam + Xanh dương, đơn vị: Triệu đồng)
+  const convChartSlide2 = [
+    { name: "FACEBOOK ADS", chiPhi: 620, doanhThu: 2280 },
+    { name: "CHI NHÁNH", chiPhi: 0, doanhThu: 1100 },
+    { name: "GOOGLE", chiPhi: 240, doanhThu: 560 },
+    { name: "CỘNG TÁC VIÊN", chiPhi: 0, doanhThu: 350 },
+    { name: "WEB", chiPhi: 0, doanhThu: 200 },
+    { name: "TỔNG ĐÀI", chiPhi: 0, doanhThu: 140 },
+    { name: "TIKTOK", chiPhi: 240, doanhThu: 100 },
+    { name: "NV KINH DOANH", chiPhi: 0, doanhThu: 80 },
+    { name: "CHƯA XÁC ĐỊNH", chiPhi: 0, doanhThu: 65 },
+    { name: "OFFLINE", chiPhi: 0, doanhThu: 55 },
+    { name: "ZALO", chiPhi: 0, doanhThu: 35 },
+    { name: "PARTNERSHIP", chiPhi: 0, doanhThu: 15 },
+  ];
+
+  // Slide 3: Khách mới & Chi phí/khách mới theo kênh (Cột đơn: Xanh lá)
+  const convChartSlide3 = [
+    { name: "FACEBOOK ADS", khachMoi: 220 },
+    { name: "CHI NHÁNH", khachMoi: 96 },
+    { name: "GOOGLE", khachMoi: 48 },
+    { name: "TỔNG ĐÀI", khachMoi: 28 },
+    { name: "TIKTOK", khachMoi: 25 },
+    { name: "CỘNG TÁC VIÊN", khachMoi: 20 },
+    { name: "NV KINH DOANH", khachMoi: 17 },
+    { name: "WEB", khachMoi: 10 },
+    { name: "OFFLINE", khachMoi: 5 },
+    { name: "ZALO", khachMoi: 3 },
+    { name: "CHƯA XÁC ĐỊNH", khachMoi: 1 },
+    { name: "PARTNERSHIP", khachMoi: 1 },
+  ];
+
+  const expConversions = [
+    {
+      title: "Nguồn-kênh và nguồn Data mới",
+      subtitle: "SL Data mới theo Nguồn - Kênh (top 12 nguồn-kênh theo SL Data mới)",
+    },
+    {
+      title: "Chi phí - Doanh thu - ROAS theo kênh (ROAS = DT KM ÷ chi phí)",
+      subtitle: "top 12 nguồn-kênh theo doanh thu",
+    },
+    {
+      title: "Khách mới & Chi phí/khách mới theo kênh (CP/khách = chi phí ÷ khách mới)",
+      subtitle: "top 12 nguồn-kênh theo số khách mới",
+    },
+  ];
+
   const [openGallery, setOpenGallery] = useState(false);
   const [openKPI, setOpenKPI] = useState(false);
   const [openGallery2, setOpenGallery2] = useState(false);
   const [openKPI2, setOpenKPI2] = useState(false);
-  const [openGallery3, setOpenGallery3] = useState(true);
+  const [openGallery3, setOpenGallery3] = useState(false);
   const [openKPI3, setOpenKPI3] = useState(false);
   const [openGallery4, setOpenGallery4] = useState(false);
   const [openKPI4, setOpenKPI4] = useState(false);
@@ -496,12 +655,12 @@ export default function PortfolioPage() {
                 
                 {/* ITEM 1: DN Group */}
                 <div 
-                  onClick={() => setOpenExp(1)}
+                  onClick={() => { setOpenExp(1); setOpenExpKPI(false); }}
                   className="bg-white border border-slate-200 rounded-2xl hover:border-lime-500 hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
                 >
                   <div className="flex justify-between items-start mb-6">
                     <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-xs">1</div>
-                    <div className="text-slate-400 text-xs font-medium">05/2025 — x/x</div>
+                    <div className="text-slate-400 text-xs font-medium">Xem thêm</div>
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <img src="/dn-logo.png" alt="DN Group Logo" className="h-16 md:h-20 object-contain mb-5 group-hover/card:scale-105 transition-transform duration-300" />
@@ -512,12 +671,12 @@ export default function PortfolioPage() {
 
                 {/* ITEM 2: KENZE */}
                 <div 
-                  onClick={() => setOpenExp(2)}
+                  onClick={() => { setOpenExp(2); setOpenExpKPI(false); }}
                   className="bg-white border border-slate-200 rounded-2xl hover:border-lime-500 hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
                 >
                   <div className="flex justify-between items-start mb-6">
                     <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-xs">2</div>
-                    <div className="text-slate-400 text-xs font-medium">x/x — x/x</div>
+                    <div className="text-slate-400 text-xs font-medium">Xem thêm</div>
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100">
@@ -530,12 +689,12 @@ export default function PortfolioPage() {
 
                 {/* ITEM 3: Miss Áo Dài */}
                 <div 
-                  onClick={() => setOpenExp(3)}
+                  onClick={() => { setOpenExp(3); setOpenExpKPI(false); }}
                   className="bg-white border border-slate-200 rounded-2xl hover:border-lime-500 hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
                 >
                   <div className="flex justify-between items-start mb-6">
                     <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-xs">3</div>
-                    <div className="text-slate-400 text-xs font-medium">x/x — x/x</div>
+                    <div className="text-slate-400 text-xs font-medium">Xem thêm</div>
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100">
@@ -548,12 +707,12 @@ export default function PortfolioPage() {
 
                 {/* ITEM 4: Phan Trần */}
                 <div 
-                  onClick={() => setOpenExp(4)}
+                  onClick={() => { setOpenExp(4); setOpenExpKPI(false); }}
                   className="bg-white border border-slate-200 rounded-2xl hover:border-lime-500 hover:shadow-md transition-all cursor-pointer flex flex-col p-6 group/card relative"
                 >
                   <div className="flex justify-between items-start mb-6">
                     <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-xs">4</div>
-                    <div className="text-slate-400 text-xs font-medium">x/x — x/x</div>
+                    <div className="text-slate-400 text-xs font-medium">Xem thêm</div>
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100 bg-white p-1.5">
@@ -575,10 +734,10 @@ export default function PortfolioPage() {
                   <div className="relative mb-6 animate-in fade-in zoom-in-95 duration-300">
                     <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-zinc-900 text-lime-400 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white z-10">1</div>
                     <div className="bg-white border border-lime-500 p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
-                      <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                      <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">Thẩm mỹ • Chuỗi thương hiệu • Quy mô &gt;1.200 nhân sự</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">05/2025 — x/x</span>
+                        
                       </div>
                       <h3 className="text-2xl font-extrabold text-zinc-900 mb-1">Tập đoàn Điểm Nhấn (DN Group)</h3>
                       <div className="text-base font-bold text-lime-600 mb-5">Chuyên viên Marketing Ads</div>
@@ -629,10 +788,11 @@ export default function PortfolioPage() {
                             <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
                           </ul>
                         </div>
+                        {/* Thương hiệu phụ Shark Dental (Chỉ thêm vào cuối openExp === 1) */}
                         <hr className="border-slate-200 my-6" />
-                         <div>
+                        <div>
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/shark-dental.png" alt="Sacademy" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 text-xs font-extrabold text-blue-700">SD</div>
                             <span className="font-bold text-zinc-900 text-lg">Shark Dental</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -640,6 +800,395 @@ export default function PortfolioPage() {
                             <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
                           </ul>
                         </div>
+
+                        {/* Nút XEM SỐ LIỆU THỰC TẾ */}
+                        <hr className="border-slate-200 my-6" />
+                        <button
+                          type="button"
+                          onClick={() => setOpenExpKPI(!openExpKPI)}
+                          className="w-full bg-lime-400 hover:bg-lime-500 text-zinc-950 rounded-xl px-5 py-3.5 flex items-center justify-between transition-all shadow-xs cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <BarChart2 size={18} strokeWidth={2.5} />
+                            <span className="text-xs font-black uppercase tracking-widest">XEM SỐ LIỆU THỰC TẾ</span>
+                          </div>
+                          {openExpKPI ? <ChevronUp size={18} strokeWidth={2.5} /> : <ChevronDown size={18} strokeWidth={2.5} />}
+                        </button>
+
+                        {/* Khối Số liệu thực tế (Facebook Ads + Chuyển đổi nổi bật) */}
+                        <AnimatePresence initial={false}>
+                          {openExpKPI && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                              animate={{ height: "auto", opacity: 1, marginTop: 20 }}
+                              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                              transition={{ duration: 0.4, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-1">
+                                
+                                {/* ================= PHẦN 1: SỐ LIỆU FACEBOOK ADS ================= */}
+                                <div className="inline-flex items-center gap-3 mb-5">
+                                  <div className="w-9 h-9 rounded-full bg-lime-400 text-zinc-950 flex items-center justify-center shrink-0 shadow-2xs">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                      <path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V6.65c0-1.05.29-1.73 1.76-1.73Z" />
+                                    </svg>
+                                  </div>
+                                  <div>
+                                    <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                      SỐ LIỆU FACEBOOK ADS
+                                    </div>
+                                    <div className="h-1 w-full bg-lime-400 rounded-full mt-1"></div>
+                                  </div>
+                                </div>
+
+                                {/* Bố cục Full-width cho Ảnh báo cáo nằm ngang */}
+                                <div className="bg-lime-50/70 border border-lime-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
+                                  
+                                  {/* Header Tháng nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-lime-700 mb-1">
+                                        THÁNG NỔI BẬT
+                                      </div>
+                                      <AnimatePresence mode="wait">
+                                        <motion.div
+                                          key={expMonthIdx}
+                                          initial={{ opacity: 0, y: 4 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          exit={{ opacity: 0, y: -4 }}
+                                          transition={{ duration: 0.2 }}
+                                          className="text-2xl sm:text-3xl font-black text-zinc-900 leading-none mb-2"
+                                        >
+                                          {expMonths[expMonthIdx].month}
+                                        </motion.div>
+                                      </AnimatePresence>
+
+                                      <div className="flex items-center gap-1.5">
+                                        {expMonths.map((_, idx) => (
+                                          <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setExpMonthIdx(idx)}
+                                            className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                              expMonthIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                            }`}
+                                          />
+                                        ))}
+                                      </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev - 1 + expMonths.length) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev + 1) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung Ảnh báo cáo nằm ngang có Kính lúp phóng to hình tròn */}
+                                  <div className="w-full bg-white border border-slate-200/80 rounded-xl p-2 overflow-hidden shadow-2xs">
+                                    <AnimatePresence mode="wait">
+                                      <motion.div
+                                        key={expMonthIdx}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.98 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        className="w-full"
+                                      >
+                                        <MagnifierImage
+                                          src={expMonths[expMonthIdx].img}
+                                          alt={`Báo cáo ${expMonths[expMonthIdx].month}`}
+                                          zoom={2.6}
+                                          lensSize={180}
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
+                                  </div>
+
+                                  {/* Grid 4 ô thẻ chỉ số (đã lược bỏ badge chữ vượt/ổn định) */}
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    
+                                    {/* Ô 1: Doanh thu */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        DOANH THU
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].revenueVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].revenue}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 2: Tổng Data */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TỔNG DATA
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].totalDataVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].totalData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 3: Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].khachMoiVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 4: TB Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TB KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].tbKhachVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgNewCust}
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                                {/* Đường kẻ ngăn cách 2 phần */}
+                                <hr className="border-slate-200/80 my-7" />
+
+                                {/* ================= PHẦN 2: SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT ================= */}
+                                <div>
+                                  {/* Header Số liệu chuyển đổi nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4 mb-5">
+                                    <div className="inline-flex items-start gap-3">
+                                      <div className="w-9 h-9 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center shrink-0 shadow-2xs mt-0.5">
+                                        <svg className="w-4 h-4 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      </div>
+                                      <div>
+                                        <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                          SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT
+                                        </div>
+                                        <div className="h-1 w-full bg-lime-400 rounded-full mt-1 mb-2"></div>
+                                        {/* 3 chấm tròn chỉ vị trí slide chuyển đổi */}
+                                        <div className="flex items-center gap-1.5">
+                                          {expConversions.map((_, idx) => (
+                                            <button
+                                              key={idx}
+                                              type="button"
+                                              onClick={() => setExpConvIdx(idx)}
+                                              className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                                expConvIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                              }`}
+                                            />
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* 2 Nút mũi tên Trái / Phải */}
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev - 1 + expConversions.length) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev + 1) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung lớn: Biểu đồ động 3 Slide với Recharts (Tối ưu mượt 60fps, không trễ) */}
+                                  <div className="w-full bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+                                    <div className="w-full bg-white rounded-xl p-4 sm:p-5 border border-slate-100 shadow-2xs">
+                                      
+                                      {/* Tiêu đề từng biểu đồ */}
+                                      <div className="text-left mb-4">
+                                        <div className="text-xs sm:text-sm font-extrabold text-zinc-900 transition-all duration-150">
+                                          {expConversions[expConvIdx].title}
+                                        </div>
+                                        <div className="text-[11px] text-slate-400 font-medium mt-0.5 transition-all duration-150">
+                                          {expConversions[expConvIdx].subtitle}
+                                        </div>
+                                      </div>
+
+                                      {/* Vùng vẽ Recharts giữ cố định ResponsiveContainer để không tốn thời gian đo lại DOM */}
+                                      <div className="w-full h-64 sm:h-72">
+                                        <ResponsiveContainer width="100%" height="100%" debounce={1}>
+                                          {expConvIdx === 0 ? (
+                                            /* SLIDE 1: Biểu đồ cột chồng Nguồn-kênh & Data mới */
+                                            <BarChart key="chart-slide-0" data={convChartSlide1} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 1800]}
+                                                ticks={[0, 450, 900, 1350, 1800]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                stackId="a"
+                                                fill="#16a34a"
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="dataMoi"
+                                                name="Data mới"
+                                                stackId="a"
+                                                fill="#2563eb"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : expConvIdx === 1 ? (
+                                            /* SLIDE 2: Biểu đồ cột đôi Chi phí - Doanh thu */
+                                            <BarChart key="chart-slide-1" data={convChartSlide2} margin={{ top: 10, right: 10, left: -5, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 2400]}
+                                                ticks={[0, 600, 1200, 1800, 2400]}
+                                                tickFormatter={(val) => (val === 0 ? "0 đ" : val >= 1200 ? `${(val / 1000).toFixed(1).replace(".", ",")} tỷ` : `${val} tr`)}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} triệu`, ""]}
+                                              />
+                                              <Bar
+                                                dataKey="chiPhi"
+                                                name="Chi phí"
+                                                fill="#f97316"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="doanhThu"
+                                                name="Doanh thu"
+                                                fill="#2563eb"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : (
+                                            /* SLIDE 3: Biểu đồ cột đơn Khách mới theo kênh */
+                                            <BarChart key="chart-slide-2" data={convChartSlide3} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 220]}
+                                                ticks={[0, 55, 110, 165, 220]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} khách`, "Khách mới"]}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                fill="#10b981"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          )}
+                                        </ResponsiveContainer>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     </div>
                   </div>
@@ -650,14 +1199,14 @@ export default function PortfolioPage() {
                   <div className="relative mb-6 animate-in fade-in zoom-in-95 duration-300">
                     <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-zinc-900 text-lime-400 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white z-10">2</div>
                     <div className="bg-white border border-lime-500 p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
-                      <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                      <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">Nội thất xuất dư • Tồn kho • Rời công • Trưng bày</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">x/x — x/x</span>
+                        
                       </div>
                       <div className="mb-6">
                         <h3 className="text-2xl font-extrabold text-zinc-900 mb-1">KENZE</h3>
-                        <div className="text-base font-bold text-lime-600">Nhân viên quản lý kho - Vận hành sàn TMĐT</div>
+                        <div className="text-base font-bold text-lime-600">Nhân viên kho - Vận hành sàn TMĐT</div>
                       </div>
                       <div className="mt-6">
                         <div className="mb-6">
@@ -707,6 +1256,395 @@ export default function PortfolioPage() {
                             <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
                           </ul>
                         </div>
+
+                        {/* Nút XEM SỐ LIỆU THỰC TẾ */}
+                        <hr className="border-slate-200 my-6" />
+                        <button
+                          type="button"
+                          onClick={() => setOpenExpKPI(!openExpKPI)}
+                          className="w-full bg-lime-400 hover:bg-lime-500 text-zinc-950 rounded-xl px-5 py-3.5 flex items-center justify-between transition-all shadow-xs cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <BarChart2 size={18} strokeWidth={2.5} />
+                            <span className="text-xs font-black uppercase tracking-widest">XEM SỐ LIỆU THỰC TẾ</span>
+                          </div>
+                          {openExpKPI ? <ChevronUp size={18} strokeWidth={2.5} /> : <ChevronDown size={18} strokeWidth={2.5} />}
+                        </button>
+
+                        {/* Khối Số liệu thực tế (Facebook Ads + Chuyển đổi nổi bật) */}
+                        <AnimatePresence initial={false}>
+                          {openExpKPI && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                              animate={{ height: "auto", opacity: 1, marginTop: 20 }}
+                              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                              transition={{ duration: 0.4, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-1">
+                                
+                                {/* ================= PHẦN 1: SỐ LIỆU FACEBOOK ADS ================= */}
+                                <div className="inline-flex items-center gap-3 mb-5">
+                                  <div className="w-9 h-9 rounded-full bg-lime-400 text-zinc-950 flex items-center justify-center shrink-0 shadow-2xs">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                      <path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V6.65c0-1.05.29-1.73 1.76-1.73Z" />
+                                    </svg>
+                                  </div>
+                                  <div>
+                                    <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                      SỐ LIỆU FACEBOOK ADS
+                                    </div>
+                                    <div className="h-1 w-full bg-lime-400 rounded-full mt-1"></div>
+                                  </div>
+                                </div>
+
+                                {/* Bố cục Full-width cho Ảnh báo cáo nằm ngang */}
+                                <div className="bg-lime-50/70 border border-lime-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
+                                  
+                                  {/* Header Tháng nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-lime-700 mb-1">
+                                        THÁNG NỔI BẬT
+                                      </div>
+                                      <AnimatePresence mode="wait">
+                                        <motion.div
+                                          key={expMonthIdx}
+                                          initial={{ opacity: 0, y: 4 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          exit={{ opacity: 0, y: -4 }}
+                                          transition={{ duration: 0.2 }}
+                                          className="text-2xl sm:text-3xl font-black text-zinc-900 leading-none mb-2"
+                                        >
+                                          {expMonths[expMonthIdx].month}
+                                        </motion.div>
+                                      </AnimatePresence>
+
+                                      <div className="flex items-center gap-1.5">
+                                        {expMonths.map((_, idx) => (
+                                          <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setExpMonthIdx(idx)}
+                                            className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                              expMonthIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                            }`}
+                                          />
+                                        ))}
+                                      </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev - 1 + expMonths.length) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev + 1) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung Ảnh báo cáo nằm ngang có Kính lúp phóng to hình tròn */}
+                                  <div className="w-full bg-white border border-slate-200/80 rounded-xl p-2 overflow-hidden shadow-2xs">
+                                    <AnimatePresence mode="wait">
+                                      <motion.div
+                                        key={expMonthIdx}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.98 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        className="w-full"
+                                      >
+                                        <MagnifierImage
+                                          src={expMonths[expMonthIdx].img}
+                                          alt={`Báo cáo ${expMonths[expMonthIdx].month}`}
+                                          zoom={2.6}
+                                          lensSize={180}
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
+                                  </div>
+
+                                  {/* Grid 4 ô thẻ chỉ số (đã lược bỏ badge chữ vượt/ổn định) */}
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    
+                                    {/* Ô 1: Doanh thu */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        DOANH THU
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].revenueVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].revenue}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 2: Tổng Data */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TỔNG DATA
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].totalDataVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].totalData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 3: Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].khachMoiVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 4: TB Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TB KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].tbKhachVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgNewCust}
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                                {/* Đường kẻ ngăn cách 2 phần */}
+                                <hr className="border-slate-200/80 my-7" />
+
+                                {/* ================= PHẦN 2: SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT ================= */}
+                                <div>
+                                  {/* Header Số liệu chuyển đổi nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4 mb-5">
+                                    <div className="inline-flex items-start gap-3">
+                                      <div className="w-9 h-9 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center shrink-0 shadow-2xs mt-0.5">
+                                        <svg className="w-4 h-4 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      </div>
+                                      <div>
+                                        <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                          SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT
+                                        </div>
+                                        <div className="h-1 w-full bg-lime-400 rounded-full mt-1 mb-2"></div>
+                                        {/* 3 chấm tròn chỉ vị trí slide chuyển đổi */}
+                                        <div className="flex items-center gap-1.5">
+                                          {expConversions.map((_, idx) => (
+                                            <button
+                                              key={idx}
+                                              type="button"
+                                              onClick={() => setExpConvIdx(idx)}
+                                              className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                                expConvIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                              }`}
+                                            />
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* 2 Nút mũi tên Trái / Phải */}
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev - 1 + expConversions.length) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev + 1) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung lớn: Biểu đồ động 3 Slide với Recharts (Tối ưu mượt 60fps, không trễ) */}
+                                  <div className="w-full bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+                                    <div className="w-full bg-white rounded-xl p-4 sm:p-5 border border-slate-100 shadow-2xs">
+                                      
+                                      {/* Tiêu đề từng biểu đồ */}
+                                      <div className="text-left mb-4">
+                                        <div className="text-xs sm:text-sm font-extrabold text-zinc-900 transition-all duration-150">
+                                          {expConversions[expConvIdx].title}
+                                        </div>
+                                        <div className="text-[11px] text-slate-400 font-medium mt-0.5 transition-all duration-150">
+                                          {expConversions[expConvIdx].subtitle}
+                                        </div>
+                                      </div>
+
+                                      {/* Vùng vẽ Recharts giữ cố định ResponsiveContainer để không tốn thời gian đo lại DOM */}
+                                      <div className="w-full h-64 sm:h-72">
+                                        <ResponsiveContainer width="100%" height="100%" debounce={1}>
+                                          {expConvIdx === 0 ? (
+                                            /* SLIDE 1: Biểu đồ cột chồng Nguồn-kênh & Data mới */
+                                            <BarChart key="chart-slide-0" data={convChartSlide1} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 1800]}
+                                                ticks={[0, 450, 900, 1350, 1800]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                stackId="a"
+                                                fill="#16a34a"
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="dataMoi"
+                                                name="Data mới"
+                                                stackId="a"
+                                                fill="#2563eb"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : expConvIdx === 1 ? (
+                                            /* SLIDE 2: Biểu đồ cột đôi Chi phí - Doanh thu */
+                                            <BarChart key="chart-slide-1" data={convChartSlide2} margin={{ top: 10, right: 10, left: -5, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 2400]}
+                                                ticks={[0, 600, 1200, 1800, 2400]}
+                                                tickFormatter={(val) => (val === 0 ? "0 đ" : val >= 1200 ? `${(val / 1000).toFixed(1).replace(".", ",")} tỷ` : `${val} tr`)}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} triệu`, ""]}
+                                              />
+                                              <Bar
+                                                dataKey="chiPhi"
+                                                name="Chi phí"
+                                                fill="#f97316"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="doanhThu"
+                                                name="Doanh thu"
+                                                fill="#2563eb"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : (
+                                            /* SLIDE 3: Biểu đồ cột đơn Khách mới theo kênh */
+                                            <BarChart key="chart-slide-2" data={convChartSlide3} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 220]}
+                                                ticks={[0, 55, 110, 165, 220]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} khách`, "Khách mới"]}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                fill="#10b981"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          )}
+                                        </ResponsiveContainer>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     </div>
                   </div>
@@ -717,10 +1655,10 @@ export default function PortfolioPage() {
                   <div className="relative mb-6 animate-in fade-in zoom-in-95 duration-300">
                     <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-zinc-900 text-lime-400 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white z-10">3</div>
                     <div className="bg-white border border-lime-500 p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
-                      <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                      <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">Dịch vụ chụp ảnh • Áo dài • Gói trải nghiệm 2 in 1</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">x/x — x/x</span>
+                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">Xem thêm</span>
                       </div>
                       <h3 className="text-2xl font-extrabold text-zinc-900 mb-1">Miss Áo Dài</h3>
                       <div className="text-base font-bold text-lime-600 mb-5">Chuyên viên Marketing Ads</div>
@@ -759,6 +1697,395 @@ export default function PortfolioPage() {
                             <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Hỗ trợ phụ các chiến dịch quảng cáo khi có nhu cầu, đảm bảo hình ảnh và thông điệp nhất quán theo thương hiệu.</li>
                           </ul>
                         </div>
+
+                        {/* Nút XEM SỐ LIỆU THỰC TẾ */}
+                        <hr className="border-slate-200 my-6" />
+                        <button
+                          type="button"
+                          onClick={() => setOpenExpKPI(!openExpKPI)}
+                          className="w-full bg-lime-400 hover:bg-lime-500 text-zinc-950 rounded-xl px-5 py-3.5 flex items-center justify-between transition-all shadow-xs cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <BarChart2 size={18} strokeWidth={2.5} />
+                            <span className="text-xs font-black uppercase tracking-widest">XEM SỐ LIỆU THỰC TẾ</span>
+                          </div>
+                          {openExpKPI ? <ChevronUp size={18} strokeWidth={2.5} /> : <ChevronDown size={18} strokeWidth={2.5} />}
+                        </button>
+
+                        {/* Khối Số liệu thực tế (Facebook Ads + Chuyển đổi nổi bật) */}
+                        <AnimatePresence initial={false}>
+                          {openExpKPI && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                              animate={{ height: "auto", opacity: 1, marginTop: 20 }}
+                              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                              transition={{ duration: 0.4, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-1">
+                                
+                                {/* ================= PHẦN 1: SỐ LIỆU FACEBOOK ADS ================= */}
+                                <div className="inline-flex items-center gap-3 mb-5">
+                                  <div className="w-9 h-9 rounded-full bg-lime-400 text-zinc-950 flex items-center justify-center shrink-0 shadow-2xs">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                      <path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V6.65c0-1.05.29-1.73 1.76-1.73Z" />
+                                    </svg>
+                                  </div>
+                                  <div>
+                                    <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                      SỐ LIỆU FACEBOOK ADS
+                                    </div>
+                                    <div className="h-1 w-full bg-lime-400 rounded-full mt-1"></div>
+                                  </div>
+                                </div>
+
+                                {/* Bố cục Full-width cho Ảnh báo cáo nằm ngang */}
+                                <div className="bg-lime-50/70 border border-lime-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
+                                  
+                                  {/* Header Tháng nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-lime-700 mb-1">
+                                        THÁNG NỔI BẬT
+                                      </div>
+                                      <AnimatePresence mode="wait">
+                                        <motion.div
+                                          key={expMonthIdx}
+                                          initial={{ opacity: 0, y: 4 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          exit={{ opacity: 0, y: -4 }}
+                                          transition={{ duration: 0.2 }}
+                                          className="text-2xl sm:text-3xl font-black text-zinc-900 leading-none mb-2"
+                                        >
+                                          {expMonths[expMonthIdx].month}
+                                        </motion.div>
+                                      </AnimatePresence>
+
+                                      <div className="flex items-center gap-1.5">
+                                        {expMonths.map((_, idx) => (
+                                          <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setExpMonthIdx(idx)}
+                                            className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                              expMonthIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                            }`}
+                                          />
+                                        ))}
+                                      </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev - 1 + expMonths.length) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpMonthIdx((prev) => (prev + 1) % expMonths.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung Ảnh báo cáo nằm ngang có Kính lúp phóng to hình tròn */}
+                                  <div className="w-full bg-white border border-slate-200/80 rounded-xl p-2 overflow-hidden shadow-2xs">
+                                    <AnimatePresence mode="wait">
+                                      <motion.div
+                                        key={expMonthIdx}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.98 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        className="w-full"
+                                      >
+                                        <MagnifierImage
+                                          src={expMonths[expMonthIdx].img}
+                                          alt={`Báo cáo ${expMonths[expMonthIdx].month}`}
+                                          zoom={2.6}
+                                          lensSize={180}
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
+                                  </div>
+
+                                  {/* Grid 4 ô thẻ chỉ số (đã lược bỏ badge chữ vượt/ổn định) */}
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    
+                                    {/* Ô 1: Doanh thu */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        DOANH THU
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].revenueVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].revenue}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 2: Tổng Data */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TỔNG DATA
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].totalDataVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].totalData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 3: Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].khachMoiVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgData}
+                                      </div>
+                                    </div>
+
+                                    {/* Ô 4: TB Khách mới */}
+                                    <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                        TB KHÁCH MỚI
+                                      </div>
+                                      <div className={`text-xl sm:text-2xl font-black ${
+                                        (expMonths[expMonthIdx].tbKhachVal ?? 0) > 100 
+                                          ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                          : "text-emerald-600"
+                                      }`}>
+                                        {expMonths[expMonthIdx].avgNewCust}
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                                {/* Đường kẻ ngăn cách 2 phần */}
+                                <hr className="border-slate-200/80 my-7" />
+
+                                {/* ================= PHẦN 2: SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT ================= */}
+                                <div>
+                                  {/* Header Số liệu chuyển đổi nổi bật + Nút điều hướng */}
+                                  <div className="flex items-start justify-between gap-4 mb-5">
+                                    <div className="inline-flex items-start gap-3">
+                                      <div className="w-9 h-9 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center shrink-0 shadow-2xs mt-0.5">
+                                        <svg className="w-4 h-4 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      </div>
+                                      <div>
+                                        <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                          SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT
+                                        </div>
+                                        <div className="h-1 w-full bg-lime-400 rounded-full mt-1 mb-2"></div>
+                                        {/* 3 chấm tròn chỉ vị trí slide chuyển đổi */}
+                                        <div className="flex items-center gap-1.5">
+                                          {expConversions.map((_, idx) => (
+                                            <button
+                                              key={idx}
+                                              type="button"
+                                              onClick={() => setExpConvIdx(idx)}
+                                              className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                                expConvIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                              }`}
+                                            />
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* 2 Nút mũi tên Trái / Phải */}
+                                    <div className="flex items-center gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev - 1 + expConversions.length) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setExpConvIdx((prev) => (prev + 1) % expConversions.length)}
+                                        className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                      >
+                                        <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Khung lớn: Biểu đồ động 3 Slide với Recharts (Tối ưu mượt 60fps, không trễ) */}
+                                  <div className="w-full bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+                                    <div className="w-full bg-white rounded-xl p-4 sm:p-5 border border-slate-100 shadow-2xs">
+                                      
+                                      {/* Tiêu đề từng biểu đồ */}
+                                      <div className="text-left mb-4">
+                                        <div className="text-xs sm:text-sm font-extrabold text-zinc-900 transition-all duration-150">
+                                          {expConversions[expConvIdx].title}
+                                        </div>
+                                        <div className="text-[11px] text-slate-400 font-medium mt-0.5 transition-all duration-150">
+                                          {expConversions[expConvIdx].subtitle}
+                                        </div>
+                                      </div>
+
+                                      {/* Vùng vẽ Recharts giữ cố định ResponsiveContainer để không tốn thời gian đo lại DOM */}
+                                      <div className="w-full h-64 sm:h-72">
+                                        <ResponsiveContainer width="100%" height="100%" debounce={1}>
+                                          {expConvIdx === 0 ? (
+                                            /* SLIDE 1: Biểu đồ cột chồng Nguồn-kênh & Data mới */
+                                            <BarChart key="chart-slide-0" data={convChartSlide1} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 1800]}
+                                                ticks={[0, 450, 900, 1350, 1800]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                stackId="a"
+                                                fill="#16a34a"
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="dataMoi"
+                                                name="Data mới"
+                                                stackId="a"
+                                                fill="#2563eb"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : expConvIdx === 1 ? (
+                                            /* SLIDE 2: Biểu đồ cột đôi Chi phí - Doanh thu */
+                                            <BarChart key="chart-slide-1" data={convChartSlide2} margin={{ top: 10, right: 10, left: -5, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 2400]}
+                                                ticks={[0, 600, 1200, 1800, 2400]}
+                                                tickFormatter={(val) => (val === 0 ? "0 đ" : val >= 1200 ? `${(val / 1000).toFixed(1).replace(".", ",")} tỷ` : `${val} tr`)}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} triệu`, ""]}
+                                              />
+                                              <Bar
+                                                dataKey="chiPhi"
+                                                name="Chi phí"
+                                                fill="#f97316"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                              <Bar
+                                                dataKey="doanhThu"
+                                                name="Doanh thu"
+                                                fill="#2563eb"
+                                                radius={[3, 3, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          ) : (
+                                            /* SLIDE 3: Biểu đồ cột đơn Khách mới theo kênh */
+                                            <BarChart key="chart-slide-2" data={convChartSlide3} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                              <XAxis
+                                                dataKey="name"
+                                                tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                                interval={0}
+                                                angle={-28}
+                                                textAnchor="end"
+                                              />
+                                              <YAxis
+                                                tick={{ fontSize: 10, fill: "#64748b" }}
+                                                domain={[0, 220]}
+                                                ticks={[0, 55, 110, 165, 220]}
+                                              />
+                                              <Tooltip
+                                                cursor={{ fill: "#f8fafc" }}
+                                                contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                                labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                                formatter={(value: any) => [`${value} khách`, "Khách mới"]}
+                                              />
+                                              <Bar
+                                                dataKey="khachMoi"
+                                                name="Khách mới"
+                                                fill="#10b981"
+                                                radius={[4, 4, 0, 0]}
+                                                isAnimationActive={true}
+                                                animationBegin={0}
+                                                animationDuration={450}
+                                                animationEasing="ease-out"
+                                              />
+                                            </BarChart>
+                                          )}
+                                        </ResponsiveContainer>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     </div>
                   </div>
@@ -769,10 +2096,10 @@ export default function PortfolioPage() {
                   <div className="relative mb-6 animate-in fade-in zoom-in-95 duration-300">
                     <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full bg-zinc-900 text-lime-400 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white z-10">4</div>
                     <div className="bg-white border border-lime-500 p-6 md:p-8 rounded-2xl shadow-md transition-all relative">
-                      <button onClick={() => setOpenExp(null)} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
+                      <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">In vải • In ấn &amp; gia công trên vải</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">x/x — x/x</span>
+                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">Xem thêm</span>
                       </div>
                       <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                         <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden shrink-0 bg-white flex items-center justify-center shadow-xs p-1"><img src="/logo-phantran.png" alt="Phan Trần Logo" className="w-full h-full object-contain" /></div>
@@ -786,6 +2113,395 @@ export default function PortfolioPage() {
                         <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Lên kế hoạch chiến dịch theo nhóm dịch vụ in và mùa vụ thời trang, test creative hình ảnh / video mẫu in thực tế và audience, tối ưu chi phí trên mỗi tin nhắn và khách hàng tiềm năng.</li>
                         <li className="relative pl-5"><div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-lime-500"></div>Phối hợp với bộ phận sản xuất và Sales để báo giá, chốt đơn; theo dõi Pixel &amp; CAPI và báo cáo hiệu quả định kỳ bằng Ads Manager, Google Sheets.</li>
                       </ul>
+
+                      {/* Nút XEM SỐ LIỆU THỰC TẾ */}
+                      <hr className="border-slate-200 my-6" />
+                      <button
+                        type="button"
+                        onClick={() => setOpenExpKPI(!openExpKPI)}
+                        className="w-full bg-lime-400 hover:bg-lime-500 text-zinc-950 rounded-xl px-5 py-3.5 flex items-center justify-between transition-all shadow-xs cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <BarChart2 size={18} strokeWidth={2.5} />
+                          <span className="text-xs font-black uppercase tracking-widest">XEM SỐ LIỆU THỰC TẾ</span>
+                        </div>
+                        {openExpKPI ? <ChevronUp size={18} strokeWidth={2.5} /> : <ChevronDown size={18} strokeWidth={2.5} />}
+                      </button>
+
+                      {/* Khối Số liệu thực tế (Facebook Ads + Chuyển đổi nổi bật) */}
+                      <AnimatePresence initial={false}>
+                        {openExpKPI && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: "auto", opacity: 1, marginTop: 20 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pt-1">
+                              
+                              {/* ================= PHẦN 1: SỐ LIỆU FACEBOOK ADS ================= */}
+                              <div className="inline-flex items-center gap-3 mb-5">
+                                <div className="w-9 h-9 rounded-full bg-lime-400 text-zinc-950 flex items-center justify-center shrink-0 shadow-2xs">
+                                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V6.65c0-1.05.29-1.73 1.76-1.73Z" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                    SỐ LIỆU FACEBOOK ADS
+                                  </div>
+                                  <div className="h-1 w-full bg-lime-400 rounded-full mt-1"></div>
+                                </div>
+                              </div>
+
+                              {/* Bố cục Full-width cho Ảnh báo cáo nằm ngang */}
+                              <div className="bg-lime-50/70 border border-lime-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
+                                
+                                {/* Header Tháng nổi bật + Nút điều hướng */}
+                                <div className="flex items-start justify-between gap-4">
+                                  <div>
+                                    <div className="text-[10px] font-extrabold uppercase tracking-widest text-lime-700 mb-1">
+                                      THÁNG NỔI BẬT
+                                    </div>
+                                    <AnimatePresence mode="wait">
+                                      <motion.div
+                                        key={expMonthIdx}
+                                        initial={{ opacity: 0, y: 4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="text-2xl sm:text-3xl font-black text-zinc-900 leading-none mb-2"
+                                      >
+                                        {expMonths[expMonthIdx].month}
+                                      </motion.div>
+                                    </AnimatePresence>
+
+                                    <div className="flex items-center gap-1.5">
+                                      {expMonths.map((_, idx) => (
+                                        <button
+                                          key={idx}
+                                          type="button"
+                                          onClick={() => setExpMonthIdx(idx)}
+                                          className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                            expMonthIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                          }`}
+                                        />
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center gap-2">
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpMonthIdx((prev) => (prev - 1 + expMonths.length) % expMonths.length)}
+                                      className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                    >
+                                      <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                      </svg>
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpMonthIdx((prev) => (prev + 1) % expMonths.length)}
+                                      className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                    >
+                                      <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                </div>
+
+                                {/* Khung Ảnh báo cáo nằm ngang có Kính lúp phóng to hình tròn */}
+                                <div className="w-full bg-white border border-slate-200/80 rounded-xl p-2 overflow-hidden shadow-2xs">
+                                  <AnimatePresence mode="wait">
+                                    <motion.div
+                                      key={expMonthIdx}
+                                      initial={{ opacity: 0, scale: 0.98 }}
+                                      animate={{ opacity: 1, scale: 1 }}
+                                      exit={{ opacity: 0, scale: 0.98 }}
+                                      transition={{ duration: 0.25, ease: "easeOut" }}
+                                      className="w-full"
+                                    >
+                                      <MagnifierImage
+                                        src={expMonths[expMonthIdx].img}
+                                        alt={`Báo cáo ${expMonths[expMonthIdx].month}`}
+                                        zoom={2.6}
+                                        lensSize={180}
+                                      />
+                                    </motion.div>
+                                  </AnimatePresence>
+                                </div>
+
+                                {/* Grid 4 ô thẻ chỉ số (đã lược bỏ badge chữ vượt/ổn định) */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                  
+                                  {/* Ô 1: Doanh thu */}
+                                  <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                    <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                      DOANH THU
+                                    </div>
+                                    <div className={`text-xl sm:text-2xl font-black ${
+                                      (expMonths[expMonthIdx].revenueVal ?? 0) > 100 
+                                        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                        : "text-emerald-600"
+                                    }`}>
+                                      {expMonths[expMonthIdx].revenue}
+                                    </div>
+                                  </div>
+
+                                  {/* Ô 2: Tổng Data */}
+                                  <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                    <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                      TỔNG DATA
+                                    </div>
+                                    <div className={`text-xl sm:text-2xl font-black ${
+                                      (expMonths[expMonthIdx].totalDataVal ?? 0) > 100 
+                                        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                        : "text-emerald-600"
+                                    }`}>
+                                      {expMonths[expMonthIdx].totalData}
+                                    </div>
+                                  </div>
+
+                                  {/* Ô 3: Khách mới */}
+                                  <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                    <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                      KHÁCH MỚI
+                                    </div>
+                                    <div className={`text-xl sm:text-2xl font-black ${
+                                      (expMonths[expMonthIdx].khachMoiVal ?? 0) > 100 
+                                        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                        : "text-emerald-600"
+                                    }`}>
+                                      {expMonths[expMonthIdx].avgData}
+                                    </div>
+                                  </div>
+
+                                  {/* Ô 4: TB Khách mới */}
+                                  <div className="bg-white rounded-xl p-3.5 shadow-2xs border border-white">
+                                    <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1.5">
+                                      TB KHÁCH MỚI
+                                    </div>
+                                    <div className={`text-xl sm:text-2xl font-black ${
+                                      (expMonths[expMonthIdx].tbKhachVal ?? 0) > 100 
+                                        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]" 
+                                        : "text-emerald-600"
+                                    }`}>
+                                      {expMonths[expMonthIdx].avgNewCust}
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+                              {/* Đường kẻ ngăn cách 2 phần */}
+                              <hr className="border-slate-200/80 my-7" />
+
+                              {/* ================= PHẦN 2: SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT ================= */}
+                              <div>
+                                {/* Header Số liệu chuyển đổi nổi bật + Nút điều hướng */}
+                                <div className="flex items-start justify-between gap-4 mb-5">
+                                  <div className="inline-flex items-start gap-3">
+                                    <div className="w-9 h-9 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center shrink-0 shadow-2xs mt-0.5">
+                                      <svg className="w-4 h-4 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="text-sm sm:text-base font-black uppercase tracking-wider text-zinc-900">
+                                        SỐ LIỆU CHUYỂN ĐỔI NỔI BẬT
+                                      </div>
+                                      <div className="h-1 w-full bg-lime-400 rounded-full mt-1 mb-2"></div>
+                                      {/* 3 chấm tròn chỉ vị trí slide chuyển đổi */}
+                                      <div className="flex items-center gap-1.5">
+                                        {expConversions.map((_, idx) => (
+                                          <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => setExpConvIdx(idx)}
+                                            className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                                              expConvIdx === idx ? "bg-zinc-900" : "bg-zinc-300"
+                                            }`}
+                                          />
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* 2 Nút mũi tên Trái / Phải */}
+                                  <div className="flex items-center gap-2">
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpConvIdx((prev) => (prev - 1 + expConversions.length) % expConversions.length)}
+                                      className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                    >
+                                      <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                      </svg>
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpConvIdx((prev) => (prev + 1) % expConversions.length)}
+                                      className="w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-lime-500 flex items-center justify-center text-zinc-800 transition-colors shadow-2xs cursor-pointer"
+                                    >
+                                      <svg className="w-3.5 h-3.5 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                </div>
+
+                                {/* Khung lớn: Biểu đồ động 3 Slide với Recharts (Tối ưu mượt 60fps, không trễ) */}
+                                <div className="w-full bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+                                  <div className="w-full bg-white rounded-xl p-4 sm:p-5 border border-slate-100 shadow-2xs">
+                                    
+                                    {/* Tiêu đề từng biểu đồ */}
+                                    <div className="text-left mb-4">
+                                      <div className="text-xs sm:text-sm font-extrabold text-zinc-900 transition-all duration-150">
+                                        {expConversions[expConvIdx].title}
+                                      </div>
+                                      <div className="text-[11px] text-slate-400 font-medium mt-0.5 transition-all duration-150">
+                                        {expConversions[expConvIdx].subtitle}
+                                      </div>
+                                    </div>
+
+                                    {/* Vùng vẽ Recharts giữ cố định ResponsiveContainer để không tốn thời gian đo lại DOM */}
+                                    <div className="w-full h-64 sm:h-72">
+                                      <ResponsiveContainer width="100%" height="100%" debounce={1}>
+                                        {expConvIdx === 0 ? (
+                                          /* SLIDE 1: Biểu đồ cột chồng Nguồn-kênh & Data mới */
+                                          <BarChart key="chart-slide-0" data={convChartSlide1} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                            <XAxis
+                                              dataKey="name"
+                                              tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                              interval={0}
+                                              angle={-28}
+                                              textAnchor="end"
+                                            />
+                                            <YAxis
+                                              tick={{ fontSize: 10, fill: "#64748b" }}
+                                              domain={[0, 1800]}
+                                              ticks={[0, 450, 900, 1350, 1800]}
+                                            />
+                                            <Tooltip
+                                              cursor={{ fill: "#f8fafc" }}
+                                              contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                              labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                            />
+                                            <Bar
+                                              dataKey="khachMoi"
+                                              name="Khách mới"
+                                              stackId="a"
+                                              fill="#16a34a"
+                                              isAnimationActive={true}
+                                              animationBegin={0}
+                                              animationDuration={450}
+                                              animationEasing="ease-out"
+                                            />
+                                            <Bar
+                                              dataKey="dataMoi"
+                                              name="Data mới"
+                                              stackId="a"
+                                              fill="#2563eb"
+                                              radius={[4, 4, 0, 0]}
+                                              isAnimationActive={true}
+                                              animationBegin={0}
+                                              animationDuration={450}
+                                              animationEasing="ease-out"
+                                            />
+                                          </BarChart>
+                                        ) : expConvIdx === 1 ? (
+                                          /* SLIDE 2: Biểu đồ cột đôi Chi phí - Doanh thu */
+                                          <BarChart key="chart-slide-1" data={convChartSlide2} margin={{ top: 10, right: 10, left: -5, bottom: 35 }}>
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                            <XAxis
+                                              dataKey="name"
+                                              tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                              interval={0}
+                                              angle={-28}
+                                              textAnchor="end"
+                                            />
+                                            <YAxis
+                                              tick={{ fontSize: 10, fill: "#64748b" }}
+                                              domain={[0, 2400]}
+                                              ticks={[0, 600, 1200, 1800, 2400]}
+                                              tickFormatter={(val) => (val === 0 ? "0 đ" : val >= 1200 ? `${(val / 1000).toFixed(1).replace(".", ",")} tỷ` : `${val} tr`)}
+                                            />
+                                            <Tooltip
+                                              cursor={{ fill: "#f8fafc" }}
+                                              contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                              labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                              formatter={(value: any) => [`${value} triệu`, ""]}
+                                            />
+                                            <Bar
+                                              dataKey="chiPhi"
+                                              name="Chi phí"
+                                              fill="#f97316"
+                                              radius={[3, 3, 0, 0]}
+                                              isAnimationActive={true}
+                                              animationBegin={0}
+                                              animationDuration={450}
+                                              animationEasing="ease-out"
+                                            />
+                                            <Bar
+                                              dataKey="doanhThu"
+                                              name="Doanh thu"
+                                              fill="#2563eb"
+                                              radius={[3, 3, 0, 0]}
+                                              isAnimationActive={true}
+                                              animationBegin={0}
+                                              animationDuration={450}
+                                              animationEasing="ease-out"
+                                            />
+                                          </BarChart>
+                                        ) : (
+                                          /* SLIDE 3: Biểu đồ cột đơn Khách mới theo kênh */
+                                          <BarChart key="chart-slide-2" data={convChartSlide3} margin={{ top: 10, right: 10, left: -15, bottom: 35 }}>
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                            <XAxis
+                                              dataKey="name"
+                                              tick={{ fontSize: 9, fill: "#64748b", fontWeight: 600 }}
+                                              interval={0}
+                                              angle={-28}
+                                              textAnchor="end"
+                                            />
+                                            <YAxis
+                                              tick={{ fontSize: 10, fill: "#64748b" }}
+                                              domain={[0, 220]}
+                                              ticks={[0, 55, 110, 165, 220]}
+                                            />
+                                            <Tooltip
+                                              cursor={{ fill: "#f8fafc" }}
+                                              contentStyle={{ backgroundColor: "#18181b", borderRadius: "10px", border: "none", color: "#fff", fontSize: "12px" }}
+                                              labelStyle={{ color: "#a3e635", fontWeight: "bold", marginBottom: "4px" }}
+                                              formatter={(value: any) => [`${value} khách`, "Khách mới"]}
+                                            />
+                                            <Bar
+                                              dataKey="khachMoi"
+                                              name="Khách mới"
+                                              fill="#10b981"
+                                              radius={[4, 4, 0, 0]}
+                                              isAnimationActive={true}
+                                              animationBegin={0}
+                                              animationDuration={450}
+                                              animationEasing="ease-out"
+                                            />
+                                          </BarChart>
+                                        )}
+                                      </ResponsiveContainer>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 )}
