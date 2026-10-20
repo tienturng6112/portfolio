@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { 
   Briefcase, User, Mail, Sparkles, ArrowRight, ArrowUpRight,
   ChevronDown, ChevronUp, Image as ImageIcon, BarChart2, TrendingUp, TrendingDown,
@@ -8,6 +10,14 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import CountUp from 'react-countup';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+
+const ProductCoverflowCarousel = dynamic(
+  () => import("@/components/ProductCoverflowCarousel"),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-72 bg-slate-100 animate-pulse rounded-2xl mt-5"></div>
+  }
+);
 
 function MagnifierImage({
   src,
@@ -40,14 +50,17 @@ function MagnifierImage({
         onMouseMove={handleMouseMove}
         onClick={() => setIsLightboxOpen(true)}
       >
-        <img
+        <Image
           src={src}
           alt={alt}
+          width={1200}
+          height={800}
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="w-full h-auto object-contain rounded-xl block transition-transform duration-300 group-hover:scale-[1.01]"
         />
 
         {/* Nhãn gợi ý nhấn để phóng to trên Mobile */}
-        <div className="md:hidden absolute bottom-2 right-2 bg-zinc-900/75 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 pointer-events-none shadow-sm">
+        <div className="md:hidden absolute bottom-2 right-2 bg-zinc-900/75 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 pointer-events-none shadow-sm z-10">
           <span>🔍 Chạm để phóng to</span>
         </div>
 
@@ -77,6 +90,7 @@ function MagnifierImage({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
+            style={{ willChange: "opacity" }}
             onClick={() => setIsLightboxOpen(false)}
             className="fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-xs flex items-center justify-center p-2 sm:p-6 cursor-zoom-out"
           >
@@ -95,12 +109,15 @@ function MagnifierImage({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
+              style={{ willChange: "transform, opacity" }}
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-6xl max-h-[90vh] overflow-auto rounded-2xl bg-white p-1.5 sm:p-2 shadow-2xl"
             >
-              <img
+              <Image
                 src={src}
                 alt={alt}
+                width={1600}
+                height={1200}
                 className="w-full min-w-[680px] sm:min-w-0 h-auto object-contain rounded-xl block"
               />
             </motion.div>
@@ -123,17 +140,20 @@ function PreviewPopupImage({
   return (
     <>
       <div
-        className="relative w-full overflow-hidden rounded-xl cursor-zoom-in select-none group"
+        className="relative w-full h-full overflow-hidden rounded-xl cursor-zoom-in select-none group"
         onClick={() => setIsOpen(true)}
       >
-        <img
+        <Image
           src={src}
           alt={alt}
+          width={1200}
+          height={800}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="w-full h-auto object-contain rounded-xl block transition-transform duration-300 group-hover:scale-[1.01]"
         />
 
         {/* Nhãn gợi ý nhấn để phóng to (Trên PC hiện khi di chuột vào, trên Mobile hiện sẵn) */}
-        <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 absolute bottom-2.5 right-2.5 bg-zinc-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 pointer-events-none shadow-md">
+        <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 absolute bottom-2.5 right-2.5 bg-zinc-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 pointer-events-none shadow-md z-10">
           <span>🔍 Nhấn để phóng to</span>
         </div>
       </div>
@@ -146,6 +166,7 @@ function PreviewPopupImage({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
+            style={{ willChange: "opacity" }}
             onClick={() => setIsOpen(false)}
             className="fixed inset-0 z-50 bg-zinc-950/85 backdrop-blur-xs flex items-center justify-center p-2 sm:p-6 cursor-zoom-out"
           >
@@ -164,12 +185,15 @@ function PreviewPopupImage({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.94, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
+              style={{ willChange: "transform, opacity" }}
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-[94vw] xl:max-w-7xl max-h-[90vh] overflow-auto rounded-2xl bg-white p-2 shadow-2xl border-2 border-lime-400 cursor-default"
             >
-              <img
+              <Image
                 src={src}
                 alt={alt}
+                width={1600}
+                height={1200}
                 className="w-full min-w-[720px] sm:min-w-0 h-auto object-contain rounded-xl block"
               />
             </motion.div>
@@ -232,77 +256,6 @@ function AnimatedCounter({
     : displayValue.toFixed(numDecimals).replace('.', ',');
 
   return <>{formatted}{suffix}</>;
-}
-
-function ProductCoverflowCarousel({ images }: { images?: { id: number; src: string; alt: string }[] }) {
-  const [activeIndex, setActiveIndex] = useState(2);
-  const items = images && images.length > 0 ? images : [
-    { id: 1, src: "/kenze-sp-1.png", alt: "Sản phẩm 1" },
-    { id: 2, src: "/kenze-sp-2.png", alt: "Sản phẩm 2" },
-    { id: 3, src: "/kenze-sp-3.png", alt: "Sản phẩm 3" },
-    { id: 4, src: "/kenze-sp-4.png", alt: "Sản phẩm 4" },
-    { id: 5, src: "/kenze-sp-5.png", alt: "Sản phẩm 5" },
-  ];
-
-  // Tính toán vòng lặp vô tận (Infinite Loop)
-  const getOffset = (index: number) => {
-    let offset = index - activeIndex;
-    if (offset < -2) offset += items.length;
-    if (offset > 2) offset -= items.length;
-    return offset;
-  };
-
-  // Xác định vị trí, kích thước và độ mờ tương đối
-  const getMotionStyles = (offset: number) => {
-    if (offset === 0) return { x: "0%", scale: 1, zIndex: 50, opacity: 1 };
-    if (offset === 1) return { x: "70%", scale: 0.75, zIndex: 40, opacity: 0.8 };
-    if (offset === -1) return { x: "-70%", scale: 0.75, zIndex: 40, opacity: 0.8 };
-    if (offset === 2) return { x: "120%", scale: 0.55, zIndex: 30, opacity: 0.5 };
-    if (offset === -2) return { x: "-120%", scale: 0.55, zIndex: 30, opacity: 0.5 };
-    return { x: "0%", scale: 0, zIndex: 0, opacity: 0 }; // Dự phòng
-  };
-
-  return (
-    <div className="relative w-full h-48 sm:h-72 lg:h-80 flex items-center justify-center overflow-hidden bg-zinc-950 rounded-2xl mt-5 shadow-inner select-none">
-      {items.map((item, index) => {
-        const offset = getOffset(index);
-        const styles = getMotionStyles(offset);
-
-        return (
-          <motion.div
-            key={item.id}
-            className="absolute w-40 sm:w-64 lg:w-80 aspect-video flex items-center justify-center cursor-pointer"
-            initial={false}
-            animate={styles}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            onClick={() => setActiveIndex(index)}
-          >
-            <img
-              src={item.src}
-              alt={item.alt}
-              className="w-full h-full object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.8)]"
-            />
-          </motion.div>
-        );
-      })}
-
-      {/* Nút điều hướng */}
-      <div className="absolute bottom-3 flex gap-6 z-50">
-        <button
-          onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)}
-          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white flex items-center justify-center transition-colors border border-white/10 cursor-pointer"
-        >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <button
-          onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)}
-          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white flex items-center justify-center transition-colors border border-white/10 cursor-pointer"
-        >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
-    </div>
-  );
 }
 
 export default function PortfolioPage() {
@@ -687,10 +640,13 @@ export default function PortfolioPage() {
 
             {/* Khung ảnh trong suốt (Xoá phông) & Giữ màu gốc */}
             <div className="relative w-64 sm:w-72 md:w-80 aspect-4/5 rounded-b-2xl overflow-hidden z-10 flex items-end justify-center">
-              <img 
+              <Image 
                 src="/maincv-s.png" 
                 alt="Trung Tiến" 
-                className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+                fill
+                sizes="(max-width: 640px) 256px, (max-width: 768px) 288px, 320px"
+                className="object-contain object-bottom drop-shadow-2xl"
+                priority
               />
             </div>
 
@@ -933,7 +889,7 @@ export default function PortfolioPage() {
                     <div className="text-slate-400 text-xs font-medium">Xem thêm</div>
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
-                    <img src="/dn-logo.png" alt="DN Group Logo" className="h-16 md:h-20 object-contain mb-5 group-hover/card:scale-105 transition-transform duration-300" />
+                    <Image src="/dn-logo.png" alt="DN Group Logo" width={160} height={80} className="h-16 md:h-20 w-auto object-contain mb-5 group-hover/card:scale-105 transition-transform duration-300" />
                     <h3 className="text-base md:text-lg font-extrabold text-zinc-900 mb-1">Tập đoàn Điểm Nhấn (DN Group)</h3>
                     <div className="text-xs font-medium text-slate-500">Chuyên viên Marketing Ads</div>
                   </div>
@@ -950,7 +906,7 @@ export default function PortfolioPage() {
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100">
-                      <img src="/logo-kenze.png" alt="KENZE Logo" className="w-full h-full object-cover" />
+                      <Image src="/logo-kenze.png" alt="KENZE Logo" width={96} height={96} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-base md:text-lg font-extrabold text-zinc-900 mb-1 uppercase">NỘI THẤT XUẤT DƯ - KENZE</h3>
                     <div className="text-xs font-medium text-slate-500">Nhân viên kho - Vận hành sàn TMĐT</div>
@@ -968,7 +924,7 @@ export default function PortfolioPage() {
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100">
-                      <img src="/logo-missaodai.png" alt="Miss Áo Dài Logo" className="w-full h-full object-cover" />
+                      <Image src="/logo-missaodai.png" alt="Miss Áo Dài Logo" width={96} height={96} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-base md:text-lg font-extrabold text-zinc-900 mb-1">Miss Áo Dài</h3>
                     <div className="text-xs font-medium text-slate-500">Chuyên viên Marketing Ads</div>
@@ -986,7 +942,7 @@ export default function PortfolioPage() {
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-center text-center my-2">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-5 group-hover/card:scale-105 transition-transform duration-300 shadow-xs border border-slate-100 bg-white p-1.5">
-                      <img src="/logo-phantran.png" alt="Phan Trần Logo" className="w-full h-full object-contain" />
+                      <Image src="/logo-phantran.png" alt="Phan Trần Logo" width={96} height={96} className="w-full h-full object-contain" />
                     </div>
                     <h3 className="text-base md:text-lg font-extrabold text-zinc-900 mb-1 uppercase">PHAN TRAN</h3>
                     <div className="text-xs font-medium text-slate-500">Chuyên viên Marketing Ads</div>
@@ -1014,7 +970,7 @@ export default function PortfolioPage() {
                       <div className="mt-6">
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/logo-sc.png" alt="Seoul Center" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><Image src="/logo-sc.png" alt="Seoul Center" width={40} height={40} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Seoul Center</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -1027,7 +983,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/logo-scclinic.png" alt="Seoul Center Clinic" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><Image src="/logo-scclinic.png" alt="Seoul Center Clinic" width={40} height={40} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Seoul Center Clinic</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -1039,7 +995,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/logo-dnhome.png" alt="DN Home" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><Image src="/logo-dnhome.png" alt="DN Home" width={40} height={40} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg">DN Home</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -1050,7 +1006,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div>
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/logo-sacademy.png" alt="Sacademy" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><Image src="/logo-sacademy.png" alt="Sacademy" width={40} height={40} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg">S Academy</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -2057,7 +2013,7 @@ export default function PortfolioPage() {
                       <div className="mt-6">
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center overflow-hidden shadow-xs shrink-0"><img src="/logo-kenze.png" alt="KENZE Logo" className="h-full w-full object-cover" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center overflow-hidden shadow-xs shrink-0"><Image src="/logo-kenze.png" alt="KENZE Logo" width={40} height={40} className="h-full w-full object-cover" /></div>
                             <span className="font-bold text-zinc-900 text-lg">KENZE</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -2085,7 +2041,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><img src="/logo-yamado.png" alt="Yamado Logo" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 p-1"><Image src="/logo-yamado.png" alt="Yamado Logo" width={40} height={40} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg uppercase">YAMADO</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -2116,7 +2072,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-auto min-w-20 px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 py-1"><img src="/logo-lazybag.png" alt="Lazybag Logo" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-auto min-w-20 px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 py-1"><Image src="/logo-lazybag.png" alt="Lazybag Logo" width={60} height={30} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Lazybag</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -2147,7 +2103,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div>
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-auto min-w-20 px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 py-1"><img src="/logo-kensonic.png" alt="Kensonic Logo" className="h-full w-full object-contain" /></div>
+                            <div className="h-10 w-auto min-w-20 px-2 border border-slate-200 rounded-lg flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0 py-1"><Image src="/logo-kensonic.png" alt="Kensonic Logo" width={60} height={30} className="h-full w-full object-contain" /></div>
                             <span className="font-bold text-zinc-900 text-lg uppercase">KENSONIC</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -2181,6 +2137,7 @@ export default function PortfolioPage() {
                           initial={{ opacity: 0, y: 30 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
+                          style={{ willChange: "transform, opacity" }}
                           transition={{ duration: 0.6, ease: "easeOut" }}
                         >
                           <div className="flex items-center gap-2 mb-4">
@@ -2203,6 +2160,7 @@ export default function PortfolioPage() {
                             initial={{ scale: 0.95, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             viewport={{ once: true }}
+                            style={{ willChange: "transform, opacity" }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                           >
                             <PreviewPopupImage
@@ -2224,14 +2182,13 @@ export default function PortfolioPage() {
                       <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">Dịch vụ chụp ảnh • Áo dài • Gói trải nghiệm 2 in 1</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">Xem thêm</span>
                       </div>
                       <h3 className="text-2xl font-extrabold text-zinc-900 mb-1">Miss Áo Dài</h3>
                       <div className="text-base font-bold text-lime-600 mb-5">Chuyên viên Marketing Ads</div>
                       <div className="mt-6">
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><img src="/logo-missaodai.png" alt="Miss Áo Dài" className="h-full w-full object-cover" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><Image src="/logo-missaodai.png" alt="Miss Áo Dài" width={40} height={40} className="h-full w-full object-cover" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Miss Áo Dài</span>
                             <span className="bg-zinc-900 text-lime-400 px-3 py-1 rounded-full text-xs font-bold">Chính</span>
                           </div>
@@ -2274,6 +2231,7 @@ export default function PortfolioPage() {
                                   initial="hidden"
                                   whileInView="visible"
                                   viewport={{ once: true, margin: "-40px" }}
+                                  style={{ willChange: "transform, opacity" }}
                                   variants={{
                                     hidden: { opacity: 0 },
                                     visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -2421,6 +2379,7 @@ export default function PortfolioPage() {
                                   initial="hidden"
                                   whileInView="visible"
                                   viewport={{ once: true, margin: "-40px" }}
+                                  style={{ willChange: "transform, opacity" }}
                                   variants={{
                                     hidden: { opacity: 0 },
                                     visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -2565,6 +2524,7 @@ export default function PortfolioPage() {
                                   initial="hidden"
                                   whileInView="visible"
                                   viewport={{ once: true, margin: "-40px" }}
+                                  style={{ willChange: "transform, opacity" }}
                                   variants={{
                                     hidden: { opacity: 0 },
                                     visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -2696,7 +2656,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div className="mb-6">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><img src="/logo-mentorclub.png" alt="Mentor Club" className="h-full w-full object-cover" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><Image src="/logo-mentorclub.png" alt="Mentor Club" width={40} height={40} className="h-full w-full object-cover" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Mentor Club</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -2707,7 +2667,7 @@ export default function PortfolioPage() {
                         <hr className="border-slate-200 my-6" />
                         <div>
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><img src="/logo-misspersonal.png" alt="Miss Personal Makeup" className="h-full w-full object-cover" /></div>
+                            <div className="h-10 w-10 border border-slate-200 rounded-full flex items-center justify-center bg-white overflow-hidden shadow-xs shrink-0"><Image src="/logo-misspersonal.png" alt="Miss Personal Makeup" width={40} height={40} className="h-full w-full object-cover" /></div>
                             <span className="font-bold text-zinc-900 text-lg">Miss Personal Makeup</span>
                             <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold border border-slate-200">Phụ</span>
                           </div>
@@ -2728,10 +2688,9 @@ export default function PortfolioPage() {
                       <button onClick={() => { setOpenExp(null); setOpenExpKPI(false); }} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-zinc-900 bg-slate-50 hover:bg-lime-100 rounded-full transition-colors" title="Thu gọn"><ChevronUp size={20} /></button>
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5 pr-10">
                         <span className="inline-flex items-center bg-lime-100 text-lime-800 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">In vải • In ấn &amp; gia công trên vải</span>
-                        <span className="inline-flex items-center bg-zinc-900 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">Xem thêm</span>
                       </div>
                       <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-                        <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden shrink-0 bg-white flex items-center justify-center shadow-xs p-1"><img src="/logo-phantran.png" alt="Phan Trần Logo" className="w-full h-full object-contain" /></div>
+                        <div className="w-16 h-16 rounded-full border border-slate-200 overflow-hidden shrink-0 bg-white flex items-center justify-center shadow-xs p-1"><Image src="/logo-phantran.png" alt="Phan Trần Logo" width={64} height={64} className="w-full h-full object-contain" /></div>
                         <div>
                           <h3 className="text-2xl font-extrabold text-zinc-900">PHAN TRAN</h3>
                           <div className="text-base font-bold text-lime-600">Chuyên viên Marketing Ads</div>
@@ -2767,7 +2726,7 @@ export default function PortfolioPage() {
               {/* Header của Khối DN Group */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-200/70">
                 <div className="flex items-center gap-3">
-                  <img src="/dn-logo.png" alt="DN Group" className="h-6 w-auto object-contain shrink-0" />
+                  <Image src="/dn-logo.png" alt="DN Group" width={100} height={30} className="h-6 w-auto object-contain shrink-0" />
                   <h3 className="text-sm sm:text-base font-extrabold text-zinc-900">Tập đoàn Điểm Nhấn</h3>
                 </div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">4 DỰ ÁN</span>
@@ -2782,9 +2741,12 @@ export default function PortfolioPage() {
                     onClick={() => setOpenGallery(!openGallery)}
                     className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
                   >
-                    <img 
+                    <Image 
                       src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" 
                       alt="Vẽ Lại Thanh Xuân Cover" 
+                      width={800}
+                      height={500}
+                      sizes="(max-width: 768px) 100vw, 40vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                   </div>
@@ -2861,36 +2823,36 @@ export default function PortfolioPage() {
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                         <div className="md:col-span-7 flex flex-col gap-4">
                           <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" alt="Campaign Image 1" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" alt="Campaign Image 1" width={800} height={600} sizes="(max-width: 768px) 100vw, 50vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/VLTX/project-ve-lai-thanh-xuan-2.jpg" alt="Campaign Image 2" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/VLTX/project-ve-lai-thanh-xuan-2.jpg" alt="Campaign Image 2" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                             <div className="flex flex-col gap-4">
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/VLTX/project-ve-lai-thanh-xuan-3.jpg" alt="Campaign Image 3" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/VLTX/project-ve-lai-thanh-xuan-3.jpg" alt="Campaign Image 3" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/VLTX/project-ve-lai-thanh-xuan-4.PNG" alt="Campaign Image 4" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/VLTX/project-ve-lai-thanh-xuan-4.PNG" alt="Campaign Image 4" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                             </div>
                           </div>
                         </div>
                         <div className="md:col-span-5 flex flex-col gap-4">
                           <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VLTX/project-ve-lai-thanh-xuan-5.png" alt="Campaign Image 5" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VLTX/project-ve-lai-thanh-xuan-5.png" alt="Campaign Image 5" width={700} height={900} sizes="(max-width: 768px) 100vw, 40vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
                         <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VLTX/project-ve-lai-thanh-xuan-6.png" alt="Campaign Image 6" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VLTX/project-ve-lai-thanh-xuan-6.png" alt="Campaign Image 6" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VLTX/project-ve-lai-thanh-xuan-7.png" alt="Campaign Image 7" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VLTX/project-ve-lai-thanh-xuan-7.png" alt="Campaign Image 7" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VLTX/project-ve-lai-thanh-xuan-8.png" alt="Campaign Image 8" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VLTX/project-ve-lai-thanh-xuan-8.png" alt="Campaign Image 8" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
                       </div>
@@ -2942,9 +2904,13 @@ export default function PortfolioPage() {
                     onClick={() => setOpenGallery2(!openGallery2)}
                     className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
                   >
-                    <img 
+                    <Image 
                       src="/megalive/project-mega-live-trung-thu-cover.png" 
                       alt="Mega Live Trung Thu Cover" 
+                      width={800}
+                      height={500}
+                      unoptimized
+                      sizes="(max-width: 768px) 100vw, 40vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                   </div>
@@ -3015,40 +2981,40 @@ export default function PortfolioPage() {
                       <div className="flex flex-col gap-4">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-1.png" alt="Mega Live Image 1" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-1.png" alt="Mega Live Image 1" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-2.png" alt="Mega Live Image 2" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-2.png" alt="Mega Live Image 2" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-3.png" alt="Mega Live Image 3" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-3.png" alt="Mega Live Image 3" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-4.png" alt="Mega Live Image 4" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-4.png" alt="Mega Live Image 4" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-5.png" alt="Mega Live Image 5" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-5.png" alt="Mega Live Image 5" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-6.png" alt="Mega Live Image 6" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-6.png" alt="Mega Live Image 6" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-7.png" alt="Mega Live Image 7" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-7.png" alt="Mega Live Image 7" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-8.png" alt="Mega Live Image 8" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-8.png" alt="Mega Live Image 8" width={800} height={600} unoptimized sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-9.png" alt="Mega Live Image 9" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-9.png" alt="Mega Live Image 9" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/megalive/project-mega-live-10.png" alt="Mega Live Image 10" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/megalive/project-mega-live-10.png" alt="Mega Live Image 10" width={800} height={600} unoptimized sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
                       </div>
@@ -3100,9 +3066,12 @@ export default function PortfolioPage() {
                     onClick={() => setOpenGallery3(!openGallery3)}
                     className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
                   >
-                    <img 
+                    <Image 
                       src="/16nam/project-sinh-nhat-16-nam-cover.png" 
                       alt="Sinh Nhật 16 Năm Cover" 
+                      width={800}
+                      height={500}
+                      sizes="(max-width: 768px) 100vw, 40vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                   </div>
@@ -3175,39 +3144,39 @@ export default function PortfolioPage() {
                         {/* Hàng 1: 3 Banner dọc dài (Tall Vertical) */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-1.png" alt="Sinh Nhật 16 Năm 1" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-1.png" alt="Sinh Nhật 16 Năm 1" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-2.jpg" alt="Sinh Nhật 16 Năm 2" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-2.jpg" alt="Sinh Nhật 16 Năm 2" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-3.png" alt="Sinh Nhật 16 Năm 3" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-3.png" alt="Sinh Nhật 16 Năm 3" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
                         {/* Hàng 2: 3 Poster dọc (Portrait 4:5) */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-4.png" alt="Sinh Nhật 16 Năm 4" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-4.png" alt="Sinh Nhật 16 Năm 4" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-5.png" alt="Sinh Nhật 16 Năm 5" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-5.png" alt="Sinh Nhật 16 Năm 5" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-6.png" alt="Sinh Nhật 16 Năm 6" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-6.png" alt="Sinh Nhật 16 Năm 6" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
                         {/* Hàng 3: 3 Poster dọc (Portrait 4:5) */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-7.png" alt="Sinh Nhật 16 Năm 7" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-7.png" alt="Sinh Nhật 16 Năm 7" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-8.png" alt="Sinh Nhật 16 Năm 8" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-8.png" alt="Sinh Nhật 16 Năm 8" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/16nam/project-sinh-nhat-9.png" alt="Sinh Nhật 16 Năm 9" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/16nam/project-sinh-nhat-9.png" alt="Sinh Nhật 16 Năm 9" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
@@ -3220,37 +3189,37 @@ export default function PortfolioPage() {
                             {/* Cặp Poster Dịch vụ công nghệ độc quyền (4:5) */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/16nam/project-sinh-nhat-10.png" alt="Sinh Nhật 16 Năm 10" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/16nam/project-sinh-nhat-10.png" alt="Sinh Nhật 16 Năm 10" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/16nam/project-sinh-nhat-11.png" alt="Sinh Nhật 16 Năm 11" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/16nam/project-sinh-nhat-11.png" alt="Sinh Nhật 16 Năm 11" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                             </div>
 
                             {/* Cặp Ảnh vuông: Thẻ hoàn tiền 500K & Check-in có quà (1:1) */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/16nam/project-sinh-nhat-12.jpeg" alt="Sinh Nhật 16 Năm 12" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/16nam/project-sinh-nhat-12.jpeg" alt="Sinh Nhật 16 Năm 12" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/16nam/project-sinh-nhat-13.jpeg" alt="Sinh Nhật 16 Năm 13" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/16nam/project-sinh-nhat-13.jpeg" alt="Sinh Nhật 16 Năm 13" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                             </div>
 
                             {/* Hàng cuối bên trái: Ảnh vuông Mua 1 Được 3 + Cột 3 Voucher ngang */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                               <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <img src="/16nam/project-sinh-nhat-14.jpeg" alt="Sinh Nhật 16 Năm 14" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                <Image src="/16nam/project-sinh-nhat-14.jpeg" alt="Sinh Nhật 16 Năm 14" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                               </div>
                               <div className="flex flex-col gap-3">
                                 <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <img src="/16nam/project-sinh-nhat-15.png" alt="Sinh Nhật 16 Năm 15" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                  <Image src="/16nam/project-sinh-nhat-15.png" alt="Sinh Nhật 16 Năm 15" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                                 <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <img src="/16nam/project-sinh-nhat-16.png" alt="Sinh Nhật 16 Năm 16" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                  <Image src="/16nam/project-sinh-nhat-16.png" alt="Sinh Nhật 16 Năm 16" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                                 <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <img src="/16nam/project-sinh-nhat-17.png" alt="Sinh Nhật 16 Năm 17" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                                  <Image src="/16nam/project-sinh-nhat-17.png" alt="Sinh Nhật 16 Năm 17" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                               </div>
                             </div>
@@ -3260,13 +3229,13 @@ export default function PortfolioPage() {
                           {/* Khối Phải (Chiếm 1/3): Banner dài 220K + Ảnh vuông Combo + Voucher ngang 700K */}
                           <div className="md:col-span-4 flex flex-col gap-4">
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/16nam/project-sinh-nhat-18.png" alt="Sinh Nhật 16 Năm 18" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/16nam/project-sinh-nhat-18.png" alt="Sinh Nhật 16 Năm 18" width={500} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/16nam/project-sinh-nhat-19.png" alt="Sinh Nhật 16 Năm 19" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/16nam/project-sinh-nhat-19.png" alt="Sinh Nhật 16 Năm 19" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/16nam/project-sinh-nhat-20.png" alt="Sinh Nhật 16 Năm 20" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/16nam/project-sinh-nhat-20.png" alt="Sinh Nhật 16 Năm 20" width={500} height={250} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                           </div>
 
@@ -3321,9 +3290,12 @@ export default function PortfolioPage() {
                     onClick={() => setOpenGallery4(!openGallery4)}
                     className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
                   >
-                    <img 
+                    <Image 
                       src="/VXMM/project-vong-xoay-may-man-cover.png" 
                       alt="Vòng Xoay May Mắn Cover" 
+                      width={800}
+                      height={500}
+                      sizes="(max-width: 768px) 100vw, 40vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                   </div>
@@ -3396,13 +3368,13 @@ export default function PortfolioPage() {
                         {/* Hàng 1: 3 Ảnh vuông (1:1) */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VXMM/project-vong-xoay-1.jpg" alt="Vòng Xoay May Mắn 1" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VXMM/project-vong-xoay-1.jpg" alt="Vòng Xoay May Mắn 1" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VXMM/project-vong-xoay-2.png" alt="Vòng Xoay May Mắn 2" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VXMM/project-vong-xoay-2.png" alt="Vòng Xoay May Mắn 2" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                           <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <img src="/VXMM/project-vong-xoay-3.png" alt="Vòng Xoay May Mắn 3" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VXMM/project-vong-xoay-3.png" alt="Vòng Xoay May Mắn 3" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                           </div>
                         </div>
 
@@ -3411,19 +3383,19 @@ export default function PortfolioPage() {
                           
                           {/* Cột Trái: 1 Poster dọc lớn (Tết Rồi Làm Đẹp Thôi - Đồng Giá 79K) */}
                           <div className="md:col-span-8 rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group flex">
-                            <img src="/VXMM/project-vong-xoay-4.png" alt="Vòng Xoay May Mắn 4" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            <Image src="/VXMM/project-vong-xoay-4.png" alt="Vòng Xoay May Mắn 4" width={800} height={1000} sizes="(max-width: 768px) 100vw, 66vw" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                           </div>
 
                           {/* Cột Phải: 3 Ảnh vuông xếp chồng dọc */}
                           <div className="md:col-span-4 flex flex-col justify-between gap-4">
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/VXMM/project-vong-xoay-5.png" alt="Vòng Xoay May Mắn 5" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/VXMM/project-vong-xoay-5.png" alt="Vòng Xoay May Mắn 5" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/VXMM/project-vong-xoay-6.png" alt="Vòng Xoay May Mắn 6" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/VXMM/project-vong-xoay-6.png" alt="Vòng Xoay May Mắn 6" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                             <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <img src="/VXMM/project-vong-xoay-7.jpeg" alt="Vòng Xoay May Mắn 7" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
+                              <Image src="/VXMM/project-vong-xoay-7.jpeg" alt="Vòng Xoay May Mắn 7" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                             </div>
                           </div>
 
