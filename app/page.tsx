@@ -258,6 +258,110 @@ function AnimatedCounter({
   return <>{formatted}{suffix}</>;
 }
 
+function FloatingBotMenu() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
+
+  const menuItems = [
+    { id: "about", label: "Về bản thân tôi", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /> },
+    { id: "projects", label: "Dự án đã thực hiện", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.118v0H5.622c-1.085-.082-1.872-1.024-1.872-2.118v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" /> },
+    { id: "skills", label: "Năng lực Marketing Ads", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /> },
+    { id: "cv", label: "Xem CV của tôi", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /> },
+    { id: "contact", label: "Liên hệ hợp tác", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /> }
+  ];
+
+  return (
+    <div className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-[100] flex items-center gap-4">
+      {/* Khối Menu trượt ra (Giữ nguyên) */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 50, scale: 0.9, filter: "blur(4px)" }}
+            animate={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, x: 20, scale: 0.95, filter: "blur(2px)" }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="absolute right-[110px] w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden"
+          >
+            <div className="flex justify-end p-2 pb-0">
+              <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-slate-100 rounded-full text-slate-400 hover:text-slate-700 transition-colors">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="flex flex-col px-4 pb-4">
+              {menuItems.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center justify-between py-3.5 text-sm font-semibold text-slate-600 hover:text-lime-600 transition-colors group ${index !== menuItems.length - 1 ? 'border-b border-slate-100' : ''}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <svg className="w-4 h-4 transition-transform group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>{item.icon}</svg>
+                    {item.label}
+                  </div>
+                  <svg className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* LỚP 1: HIỆU ỨNG BAY 1 VÒNG KHI VỪA LOAD TRANG */}
+      <motion.div
+        initial={{ x: "20vw", y: "50vh", scale: 0.2, opacity: 0, rotate: -45 }}
+        animate={{
+          x: ["20vw", "-50vw", "-35vw", "-10vw", "0vw"], 
+          y: ["50vh", "10vh", "-35vh", "-10vh", "0vh"],
+          scale: [0.2, 1.2, 0.8, 1.1, 1],
+          opacity: [0, 1, 1, 1, 1],
+          rotate: [-45, 15, 45, -10, 0] // Nghiêng theo hướng bay
+        }}
+        transition={{
+          duration: 2.2, // Thời gian bay lượn (2.2 giây)
+          ease: "easeInOut",
+          times: [0, 0.4, 0.7, 0.9, 1] // Canh thời điểm tại 5 mốc tọa độ
+        }}
+        className="relative flex items-center justify-center"
+      >
+        {/* Vòng hào quang nhấp nháy */}
+        <motion.div
+          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+          className="absolute w-16 h-16 bg-lime-400 rounded-full blur-xl z-0 pointer-events-none"
+        />
+
+        {/* LỚP 2: HIỆU ỨNG LƠ LỬNG TẠI CHỖ (Hoạt động sau khi hạ cánh) */}
+        <motion.div
+          animate={{ 
+            y: [0, -15, 0], 
+            rotate: [0, -3, 3, 0] // Nghiêng nhẹ qua lại như lơ lửng trên nước
+          }}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 4, 
+            ease: "easeInOut" 
+          }}
+          whileHover={{ scale: 1.1, rotate: 0 }}
+          whileTap={{ scale: 0.9 }}
+          className="relative z-10 cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className="w-20 h-20 sm:w-24 sm:h-24 drop-shadow-[0_15px_20px_rgba(132,204,22,0.4)]">
+            <img src="/bot-mascot.webp" alt="Trung Tiến AI Bot" className="w-full h-full object-contain" />
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function PortfolioPage() {
   // === SPLASH SCREEN STATES ===
   const [isLoading, setIsLoading] = useState(true);
@@ -581,7 +685,7 @@ export default function PortfolioPage() {
       </header>
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 md:pt-10 md:pb-16">
+      <section id="cv" className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 md:pt-10 md:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-center">
           
           {/* CỘT TRÁI: TEXT & INFO PILLS */}
@@ -3500,6 +3604,9 @@ export default function PortfolioPage() {
           </footer>
 
         </div>
+
+        {/* Bot Menu Lơ lửng */}
+        <FloatingBotMenu />
       </main>
 
     </div>
