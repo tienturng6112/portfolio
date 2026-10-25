@@ -31,9 +31,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {/* Bọc toàn bộ trang web bằng SecurityWrapper */}
-         <SecurityWrapper>
+       { /* <SecurityWrapper>
+          </SecurityWrapper>*/}
           {children}
-        </SecurityWrapper>
+        
         <SpeedInsights />
       </body>
     </html>
