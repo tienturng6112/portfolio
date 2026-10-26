@@ -874,7 +874,7 @@ export default function PortfolioPage() {
       <div className="fixed bottom-1/3 left-0 w-96 h-96 bg-lime-300/20 blur-3xl rounded-full pointer-events-none -translate-x-1/3 z-0"></div>
 
       {/* ================= TOP HEADER ================= */}
-      <header className="relative z-20 max-w-5xl mx-auto px-6 pt-8 pb-4 flex items-center justify-between">
+      <header className="relative z-20 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 rounded-md bg-lime-400 text-zinc-950 font-black text-sm flex items-center justify-center shadow-xs">
             T
@@ -891,7 +891,7 @@ export default function PortfolioPage() {
       </header>
 
       {/* ================= HERO SECTION ================= */}
-      <section id="cv" className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 md:pt-10 md:pb-16">
+      <section id="cv" className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 md:pt-10 md:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-center">
           
           {/* CỘT TRÁI: TEXT & INFO PILLS */}
@@ -971,24 +971,24 @@ export default function PortfolioPage() {
 
           {/* CỘT PHẢI: PORTRAIT IMAGE & FLOATING BADGE */}
           <div className="md:col-span-5 relative flex justify-center md:justify-end">
-            {/* Decorative radar circles behind portrait */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 rounded-full border border-lime-500/25 pointer-events-none"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-88 h-88 md:w-96 md:h-96 rounded-full border border-lime-500/15 pointer-events-none"></div>
+            {/* Decorative radar circles behind portrait (Mở rộng tỷ lệ cân đối bề thế) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[420px] sm:h-[420px] md:w-[460px] md:h-[460px] lg:w-[490px] lg:h-[490px] rounded-full border border-lime-500/25 pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] sm:w-[510px] sm:h-[510px] md:w-[560px] md:h-[560px] lg:w-[600px] lg:h-[600px] rounded-full border border-lime-500/15 pointer-events-none"></div>
 
-            {/* Khung ảnh trong suốt (Xoá phông) & Giữ màu gốc */}
-            <div className="relative w-64 sm:w-72 md:w-80 aspect-4/5 rounded-b-2xl overflow-hidden z-10 flex items-end justify-center">
+            {/* Khung ảnh trong suốt (Xoá phông) & Tăng kích thước 20% - 25% */}
+            <div className="relative w-[280px] sm:w-[340px] md:w-[380px] lg:w-[400px] aspect-4/5 rounded-b-2xl overflow-hidden z-10 flex items-end justify-center">
               <Image 
                 src="/maincv-s.png" 
                 alt="Trung Tiến" 
                 fill
-                sizes="(max-width: 640px) 256px, (max-width: 768px) 288px, 320px"
+                sizes="(max-width: 640px) 280px, (max-width: 768px) 340px, (max-width: 1024px) 380px, 400px"
                 className="object-contain object-bottom drop-shadow-2xl"
                 priority
               />
             </div>
 
             {/* Floating Badge: AVAILABLE FOR FREELANCE PROJECTS */}
-            <div className="absolute -bottom-3 left-2 sm:left-0 md:-left-6 bg-white rounded-2xl px-5 py-3.5 shadow-lg border border-slate-100 flex items-center justify-between gap-6 z-20 min-w-48">
+            <div className="absolute -bottom-3 left-1 sm:left-0 md:-left-8 bg-white rounded-2xl px-5 py-3.5 shadow-lg border border-slate-100 flex items-center justify-between gap-6 z-20 min-w-48">
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Chuyên viên MKT ADS</div>
                 <div className="text-sm font-black uppercase leading-tight">
@@ -1041,7 +1041,7 @@ export default function PortfolioPage() {
                   ${index === 2 ? 'sm:border-r lg:border-r' : ''}
                 `}
               >
-                <div className="text-[40px] md:text-[46px] font-black text-[#1b75ff] tracking-tighter mb-3 leading-none">
+                <div className="text-[40px] md:text-[46px] font-black text-emerald-600 tracking-tighter mb-3 leading-none">
                   {stat.val}
                 </div>
                 <div className="text-[13px] md:text-sm text-slate-500 leading-relaxed font-medium">
@@ -1054,8 +1054,8 @@ export default function PortfolioPage() {
       </section>
 
       {/* ================= MAIN WHITE SHEET CONTAINER ================= */}
-      <main className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 pb-16">
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8 md:p-10 space-y-14">
+      <main className="relative z-20 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-5 sm:p-7 md:p-8 lg:p-10 space-y-14">
           
           {/* ================= 1. VỀ BẢN THÂN TÔI ================= */}
           <section id="about">
@@ -1287,7 +1287,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Vùng Hiển thị Nội dung Tab (Giữ nguyên 100% data cũ) */}
-          <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-5 sm:p-8">
+          <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-4 sm:p-6 lg:p-6">
             
             {/* 1. NỘI DUNG: TẬP ĐOÀN ĐIỂM NHẤN */}
             {activeCompany === 'DN_GROUP' && (
@@ -1312,20 +1312,18 @@ export default function PortfolioPage() {
                       <div className="text-base font-bold text-lime-600 mb-5">Chuyên viên Marketing Ads</div>
                       <div className="mt-6">
                 {/* --- 1. SEOUL CENTER (GIAO DIỆN CASE STUDY CHI TIẾT) --- */}
-                <div className="mb-8 bg-[#f8fafc] border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8">
+                <div className="mb-8 bg-[#f8fafc] border border-slate-200/80 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6">
                   {/* Hàng trên: Chia 2 cột */}
                   <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-8">
                     {/* CỘT TRÁI: THÔNG TIN DỰ ÁN */}
                   <div className="flex-1">
                     {/* Badge Case Study */}
-                    <div className="inline-block px-3.5 py-1.5 bg-[#005cff] text-white text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase rounded-md mb-6 shadow-sm">
-                     
-                    </div>
+                    <div className="w-8 h-2 bg-emerald-500 rounded-full mb-6"></div>
 
                     {/* Tiêu đề tách 2 màu ép sát dòng */}
                     <h3 className="text-[64px] md:text-[80px] font-black uppercase tracking-tighter leading-[0.85] mb-5">
                       <span className="text-[#0a1128] block">SEOUL</span>
-                      <span className="text-[#005cff] block">CENTER</span>
+                      <span className="text-emerald-600 block">CENTER</span>
                     </h3>
 
                     {/* Mô tả phụ */}
@@ -1335,7 +1333,7 @@ export default function PortfolioPage() {
 
                     {/* Vai trò */}
                     <div className="text-[14px] md:text-[15px] text-slate-400 font-medium mb-5">
-                      Vai trò: <span className="text-[#005cff] font-bold">Chuyên viên Facebook Ads</span>
+                      Vai trò: <span className="text-emerald-600 font-bold">Chuyên viên Facebook Ads</span>
                     </div>
 
                     {/* Các thẻ Tags */}
@@ -1350,7 +1348,7 @@ export default function PortfolioPage() {
                           key={tag.label}
                           className={`px-4 py-1.5 rounded-full text-[13px] transition-colors ${
                             tag.active
-                              ? 'bg-[#eef4ff] text-[#005cff] font-bold'
+                              ? 'bg-emerald-50 text-emerald-700 font-bold border border-emerald-200/80'
                               : 'bg-white border border-slate-200/80 text-[#334155] font-semibold hover:border-slate-300'
                           }`}
                         >
@@ -1376,8 +1374,8 @@ export default function PortfolioPage() {
                           text: "Data đạt 130–176% KPI trong T3–T5/2026 (theo báo cáo tháng),CIR toàn hệ thống giảm từ 4,2% (T3) xuống 2,2% (T9/2026),Đảm bảo nguồn lead ổn định và chi phí tối ưu theo từng giai đoạn.",
                         },
                       ].map((item) => (
-                        <div key={item.title} className="border-l-2 border-[#1b75ff] pl-4">
-                          <div className="text-[12px] font-black text-[#1b75ff] tracking-wider uppercase mb-1">
+                        <div key={item.title} className="border-l-2 border-emerald-500 pl-4">
+                          <div className="text-[12px] font-black text-emerald-600 tracking-wider uppercase mb-1">
                             {item.title}
                           </div>
                           <p className="text-[13px] sm:text-[14px] text-slate-600 font-medium leading-relaxed">
@@ -1388,92 +1386,184 @@ export default function PortfolioPage() {
                     </div>
                   </div>
 
-                  {/* --- HÀNG DƯỚI: 4 KHỐI SỐ LIỆU CHUẨN KPI DASHBOARD --- */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
-                    {[
-                      {
-                        tag: "TỔNG NGÂN SÁCH",
-                        val: "~10 TỶ",
-                        desc: "Tổng ngân sách Facebook Ads Seoul Center đã nắm)",
-                        highlight: false,
-                      },
-                      {
-                        tag: "CHI NHÁNH",
-                        val: "15+",
-                        desc: "9 chi nhánh ĐNB, 11 chi nhánh Miền Tây, 4 chi nhánh Tây nguyên",
-                        highlight: false,
-                      },
-                      {
-                        tag: "HIỆU SUẤT KPI",
-                        val: "~5,4 tỷ",
-                        desc: "KPI từng đạt được trong năm 2026 chiếm 14% tổng KPI",
-                        highlight: true,
-                      },
-                      {
-                        tag: "DATA KHÁCH HÀNG",
-                        val: "10.000+",
-                        desc: "Data khách hàng tiềm năng từ các dự án đề xuất được chuyển khai",
-                        highlight: true,
-                      },
-                    ].map((item, index) => (
-                      <div
-                        key={index}
-                        className="group relative bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between shadow-xs hover:border-[#1b75ff]/50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-                      >
-                        {/* Thanh chỉ số màu nhỏ trên đầu card */}
+                  {/* --- 4 KHỐI SỐ LIỆU TRỌNG TÂM: BENTO MICRO-VISUAL CARDS --- */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                    
+                    {/* 1. TỔNG NGÂN SÁCH */}
+                    <div className="group relative bg-gradient-to-br from-emerald-600 via-emerald-600 to-teal-700 text-white rounded-2xl p-5 sm:p-6 shadow-[0_10px_25px_-5px_rgba(5,150,105,0.35)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                      <div className="absolute -right-8 -top-8 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+                      
+                      <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase group-hover:text-[#1b75ff] transition-colors">
-                            {item.tag}
+                          <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-100">
+                            TỔNG NGÂN SÁCH
                           </span>
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#1b75ff]/60 group-hover:bg-[#1b75ff] group-hover:scale-125 transition-all" />
+                          <span className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center text-white">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </span>
                         </div>
 
-                        {/* Con số chính: Luôn trên 1 hàng, không bị gãy */}
-                        <div className="text-2xl sm:text-[28px] xl:text-[32px] font-black text-[#1b75ff] tracking-tight leading-none mb-2.5 whitespace-nowrap">
-                          {item.val}
+                        <div className="text-3xl xl:text-[34px] font-black tracking-tight leading-none mb-2.5 whitespace-nowrap">
+                          ~10 Tỷ
                         </div>
 
-                        {/* Mô tả giải thích */}
-                        <div className="text-[12px] text-slate-500 font-medium leading-relaxed">
-                          {item.desc}
+                        <p className="text-[12px] text-emerald-100/90 font-medium leading-relaxed">
+                          Tổng ngân sách Facebook Ads hệ thống Seoul Center đã nắm
+                        </p>
+                      </div>
+
+                      <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-[11px] font-bold text-emerald-100">
+                        <span>Quy mô ngân sách</span>
+                        <span className="px-2 py-0.5 rounded bg-white/20 text-white text-[10px]">
+                          High-Spend
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* 2. CHI NHÁNH PHỤ TRÁCH */}
+                    <div className="group bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-emerald-500/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
+                            CHI NHÁNH
+                          </span>
+                          <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                          </span>
+                        </div>
+
+                        <div className="text-3xl xl:text-[34px] font-black text-emerald-600 tracking-tight leading-none mb-3 whitespace-nowrap">
+                          15+
+                        </div>
+
+                        <p className="text-[12px] text-slate-500 font-medium mb-3">
+                          Phân bổ chiến dịch đa vùng miền:
+                        </p>
+                      </div>
+
+                      {/* Chuyển text dài thành 3 thẻ Khu vực trực quan */}
+                      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100">
+                        <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-[11px] font-bold">
+                          9 ĐNB
+                        </span>
+                        <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-[11px] font-bold">
+                          11 Miền Tây
+                        </span>
+                        <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-[11px] font-bold">
+                          4 Tây Nguyên
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* 3. HIỆU SUẤT KPI */}
+                    <div className="group bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-emerald-500/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
+                            HIỆU SUẤT KPI
+                          </span>
+                          <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                          </span>
+                        </div>
+
+                        <div className="text-3xl xl:text-[34px] font-black text-emerald-600 tracking-tight leading-none mb-2.5 whitespace-nowrap">
+                          ~5,4 Tỷ
+                        </div>
+
+                        <p className="text-[12px] text-slate-500 font-medium leading-relaxed">
+                          KPI từng đạt được trong năm 2026, đóng góp tỷ trọng lớn
+                        </p>
+                      </div>
+
+                      {/* Thanh tỷ trọng 14% Tổng KPI */}
+                      <div className="mt-4 pt-3 border-t border-slate-100">
+                        <div className="flex items-center justify-between text-[11px] font-bold mb-1.5">
+                          <span className="text-slate-500">Tỷ trọng đóng góp</span>
+                          <span className="text-emerald-600">14% tổng KPI</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="h-full w-[65%] bg-gradient-to-r from-emerald-600 to-lime-400 rounded-full" />
                         </div>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* 4. DATA KHÁCH HÀNG */}
+                    <div className="group bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-emerald-500/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
+                            DATA KHÁCH HÀNG
+                          </span>
+                          <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                          </span>
+                        </div>
+
+                        <div className="text-3xl xl:text-[34px] font-black text-emerald-600 tracking-tight leading-none mb-2.5 whitespace-nowrap">
+                          10.000+
+                        </div>
+
+                        <p className="text-[12px] text-slate-500 font-medium leading-relaxed">
+                          Data khách hàng tiềm năng từ các dự án đề xuất được triển khai
+                        </p>
+                      </div>
+
+                      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-semibold">Chất lượng phễu</span>
+                        <span className="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-md">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          Qualified Leads
+                        </span>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
                 {/* ================= CỤM CÁC THƯƠNG HIỆU HỆ SINH THÁI ================= */}
                 <div className="mt-8 space-y-5">
                   
-                  {/* 1. THƯƠNG HIỆU CHÍNH CÓ HÌNH ẢNH MÔ TẢ CHIẾN DỊCH */}
+                  {/* 1. THƯƠNG HIỆU CHÍNH: SEOUL CENTER CLINIC (KÈM BÁO CÁO DỮ LIỆU THEO VÙNG) */}
                   <div className="p-6 sm:p-7 bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl shadow-xs hover:border-slate-300 transition-all">
                     
                     {/* Header Card */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-100">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
                       <div className="flex items-center gap-3.5">
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center font-black text-xs text-[#1b75ff]">
+                        <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center font-black text-xs text-emerald-600">
                           SCC
                         </div>
                         <div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2.5">
                             <h4 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
                               Seoul Center Clinic
                             </h4>
                             
                           </div>
                           <p className="text-xs text-slate-500 font-medium mt-0.5">
-                            Phòng khám chuyên khoa da liễu thẩm mỹ
+                            Phòng khám chuyên khoa da liễu thẩm mỹ • Hệ thống 14 cơ sở toàn quốc
                           </p>
                         </div>
                       </div>
-                      
+                      <span className="text-xs font-bold px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200/80 rounded-full">
+                        Tổng Doanh Thu: 12,22 Tỷ • SL Lịch: 21.62K
+                      </span>
                     </div>
 
-                    {/* Nội dung: Chia 2 cột (Trái: Nhiệm vụ - Phải: Hình ảnh mô tả) */}
+                    {/* Nội dung chính: Chia 2 cột (Trái: Nhiệm vụ - Phải: Bảng Báo Cáo Vùng) */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
                       
-                      {/* Cột trái: 2 Hộp nhiệm vụ (7 phần) */}
-                      <div className="lg:col-span-7 flex flex-col gap-3.5 justify-between">
-                        <div className="p-4 bg-slate-50/80 rounded-xl border border-slate-100 h-full">
+                      {/* CỘT TRÁI (5 PHẦN): 2 HỘP NHIỆM VỤ */}
+                      <div className="lg:col-span-5 flex flex-col gap-4 justify-between">
+                        <div className="p-5 bg-slate-50/80 rounded-2xl border border-slate-100 flex-1 flex flex-col justify-center">
                           <div className="flex items-center gap-2 mb-2 text-xs font-extrabold uppercase tracking-wide text-slate-800">
                             <span className="w-2 h-2 rounded-full bg-lime-500 shrink-0"></span>
                             Triển khai & Chuyển đổi đặt lịch
@@ -1483,7 +1573,7 @@ export default function PortfolioPage() {
                           </p>
                         </div>
 
-                        <div className="p-4 bg-slate-50/80 rounded-xl border border-slate-100 h-full">
+                        <div className="p-5 bg-slate-50/80 rounded-2xl border border-slate-100 flex-1 flex flex-col justify-center">
                           <div className="flex items-center gap-2 mb-2 text-xs font-extrabold uppercase tracking-wide text-slate-800">
                             <span className="w-2 h-2 rounded-full bg-lime-500 shrink-0"></span>
                             Kế hoạch phễu & Đo lường KPI
@@ -1494,34 +1584,106 @@ export default function PortfolioPage() {
                         </div>
                       </div>
 
-                      {/* Cột phải: KHUNG HÌNH ẢNH MÔ TẢ CHIẾN DỊCH (5 phần) */}
-                      <div className="lg:col-span-5 relative group overflow-hidden rounded-xl border border-slate-200 bg-slate-100 min-h-[180px] flex items-center justify-center">
-                        {/* Nhãn tag nổi trên ảnh */}
-                        <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold rounded-md">
-                          Báo cáo / Creative Ads
+                      {/* CỘT PHẢI (7 PHẦN): BÁO CÁO DỮ LIỆU THEO VÙNG CHUẨN THỨ TỰ CỘT */}
+                      <div className="lg:col-span-7 bg-[#f8fafc] border border-slate-200/90 rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
+                        
+                        {/* Top Bar của Báo cáo + 4 KPI Tổng */}
+                        <div>
+                          <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                            <div className="flex items-center gap-2">
+                              <span className="px-2.5 py-0.5 bg-slate-900 text-white text-[10px] font-extrabold uppercase tracking-wider rounded-md">
+                                Báo cáo theo vùng
+                              </span>
+                              <span className="text-xs font-bold text-slate-700">
+                                Hiệu suất 5 cụm Phòng khám (PK)
+                              </span>
+                            </div>
+                            <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-md">
+                              TB CR % Lịch-KM LM: 72,3%
+                            </span>
+                          </div>
+
+                          {/* 4 Ô Tổng hợp nhanh trên đầu báo cáo */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+                            {[
+                              { label: "TỔNG CHI PHÍ", val: "2,02 tỷ", sub: "CP/DT: 16,5%" },
+                              { label: "TỔNG DATA MỚI", val: "3.77K", sub: "Giá ĐT: 535.4K" },
+                              { label: "TỔNG SL LỊCH", val: "21.62K", sub: "CR Lịch-KM: 72,3%" },
+                              { label: "TỔNG DOANH THU", val: "12,22 tỷ", sub: "ROAS Mới: 2.17x" },
+                            ].map((stat, i) => (
+                              <div key={i} className="bg-white border border-slate-200/70 rounded-xl p-2.5 shadow-2xs">
+                                <div className="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">
+                                  {stat.label}
+                                </div>
+                                <div className="text-sm sm:text-base font-black text-emerald-600 tracking-tight mt-0.5">
+                                  {stat.val}
+                                </div>
+                                <div className="text-[10px] font-semibold text-slate-500 mt-0.5">
+                                  {stat.sub}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
 
-                        {/* Thẻ hình ảnh: Anh thay src="/anh-chien-dich.png" vào đây */}
-                        <img 
-                          src="/anh-chien-dich-sc.webp" 
-                          alt="Chiến dịch Seoul Center Clinic"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            // Tự động hiện khung placeholder nếu anh chưa kịp bỏ file ảnh
-                            e.currentTarget.style.display = 'none';
-                            const fallback = e.currentTarget.nextElementSibling;
-                            if (fallback) fallback.classList.remove('hidden');
-                          }}
-                        />
-
-                        {/* Khung dự phòng (Placeholder) khi chưa có file ảnh thật */}
-                        <div className="hidden absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-slate-50 border-2 border-dashed border-slate-200">
-                          <svg className="w-8 h-8 text-slate-300 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <span className="text-xs font-bold text-slate-400">Hình ảnh mô tả chiến dịch</span>
-                          <span className="text-[10px] text-slate-400 mt-0.5">(Thả ảnh vào /public/anh-chien-dich-sc.webp)</span>
+                        {/* Bảng chi tiết theo đúng thứ tự: Chi phí -> Data mới -> CR % Lịch-KM LM -> SL Lịch -> Doanh thu */}
+                        <div className="bg-white border border-slate-200/80 rounded-xl overflow-x-auto">
+                          <table className="w-full text-left border-collapse min-w-[520px]">
+                            <thead>
+                              <tr className="border-b border-slate-100 bg-slate-50/70 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
+                                <th className="py-2.5 px-3">Khu vực / Chi nhánh</th>
+                                <th className="py-2.5 px-2.5 text-right">Chi phí</th>
+                                <th className="py-2.5 px-2.5 text-right">Data mới</th>
+                                <th className="py-2.5 px-2.5 text-right">CR % Lịch-KM LM</th>
+                                <th className="py-2.5 px-2.5 text-right">SL Lịch</th>
+                                <th className="py-2.5 px-3 text-right">Doanh thu</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 text-[12px] font-semibold text-slate-700">
+                              {[
+                                { region: "PK Tây Nguyên (2)", cost: "243,6 tr", data: "967", crLichKm: "61,3%", slLich: "2.88K", rev: "1,22 tỷ" },
+                                { region: "PK Bắc Trung Bộ (2)", cost: "400,2 tr", data: "922", crLichKm: "81,8%", slLich: "4.21K", rev: "2,36 tỷ" },
+                                { region: "PK Đông Nam Bộ (2)", cost: "267,0 tr", data: "712", crLichKm: "67,5%", slLich: "2.65K", rev: "1,67 tỷ" },
+                                { region: "PK Hồ Chí Minh (4)", cost: "512,3 tr", data: "516", crLichKm: "65,7%", slLich: "4.95K", rev: "2,38 tỷ" },
+                                { region: "PK Miền Tây (4)", cost: "596,5 tr", data: "655", crLichKm: "77,7%", slLich: "6.92K", rev: "4,60 tỷ" },
+                              ].map((row, idx) => (
+                                <tr key={idx} className="hover:bg-emerald-50/30 transition-colors">
+                                  <td className="py-2.5 px-3 font-bold text-slate-900 whitespace-nowrap">
+                                    {row.region}
+                                  </td>
+                                  <td className="py-2.5 px-2.5 text-right text-slate-600 whitespace-nowrap">
+                                    {row.cost}
+                                  </td>
+                                  <td className="py-2.5 px-2.5 text-right text-slate-600 whitespace-nowrap">
+                                    {row.data}
+                                  </td>
+                                  <td className="py-2.5 px-2.5 text-right whitespace-nowrap">
+                                    <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600 font-bold text-[11px]">
+                                      {row.crLichKm}
+                                    </span>
+                                  </td>
+                                  <td className="py-2.5 px-2.5 text-right font-bold text-slate-700 whitespace-nowrap">
+                                    {row.slLich}
+                                  </td>
+                                  <td className="py-2.5 px-3 text-right font-black text-emerald-600 whitespace-nowrap">
+                                    {row.rev}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                            <tfoot>
+                              <tr className="border-t-2 border-slate-200 bg-slate-900 text-white text-[12px] font-black">
+                                <td className="py-2.5 px-3 rounded-bl-xl">Tổng cộng</td>
+                                <td className="py-2.5 px-2.5 text-right">2,02 tỷ</td>
+                                <td className="py-2.5 px-2.5 text-right">3.77K</td>
+                                <td className="py-2.5 px-2.5 text-right text-lime-400">72,3%</td>
+                                <td className="py-2.5 px-2.5 text-right">21.62K</td>
+                                <td className="py-2.5 px-3 text-right text-lime-400 rounded-br-xl">12,22 tỷ</td>
+                              </tr>
+                            </tfoot>
+                          </table>
                         </div>
+
                       </div>
 
                     </div>
@@ -1580,7 +1742,7 @@ export default function PortfolioPage() {
                 <div className="mt-8 space-y-6">
 
                   {/* 1. SỐ LIỆU FACEBOOK ADS (MỞ SẴN TOÀN BỘ) */}
-                  <div ref={fbSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs">
+                  <div ref={fbSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs">
                     {/* Header Facebook */}
                     <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
                       <div className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center font-black text-sm shrink-0">
@@ -1754,7 +1916,7 @@ export default function PortfolioPage() {
                               return (
                                 <div key={idx} className="h-full flex flex-col justify-end items-center group">
                                   {/* Khu vực Cột + Số liệu nổi trên đỉnh cột */}
-                                  <div className="w-full max-w-[68px] h-full flex items-end justify-center relative">
+                                  <div className="w-full max-w-[68px] sm:max-w-[80px] h-full flex items-end justify-center relative">
                                     
                                     {/* Cột nền xám mờ dẫn hướng */}
                                     <div className="absolute inset-0 bg-slate-50/70 rounded-t-2xl border-x border-t border-slate-100/80 pointer-events-none" />
@@ -1964,11 +2126,13 @@ export default function PortfolioPage() {
                   </div>
 
                   {/* 2. SỐ LIỆU TIKTOK ADS (MỞ SẴN TOÀN BỘ) */}
-                  <div ref={tiktokSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs">
+                  <div ref={tiktokSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs">
                     {/* Header TikTok */}
                     <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
-                      <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-black text-sm shrink-0">
-                        d
+                      <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                        </svg>
                       </div>
                       <h4 className="text-base sm:text-lg font-black uppercase text-slate-900 tracking-wide border-b-2 border-lime-400 pb-0.5">
                         SỐ LIỆU TIKTOK ADS
@@ -2073,7 +2237,7 @@ export default function PortfolioPage() {
 
                                 return (
                                   <div key={idx} className="h-full flex flex-col justify-end items-center group">
-                                    <div className="w-full max-w-[72px] h-full flex items-end justify-center relative">
+                                    <div className="w-full max-w-[72px] sm:max-w-[80px] h-full flex items-end justify-center relative">
                                       {/* Khung nền mờ dẫn hướng */}
                                       <div className="absolute inset-0 bg-slate-50/70 rounded-t-2xl border-x border-t border-slate-100/80 pointer-events-none" />
 
@@ -2206,82 +2370,201 @@ export default function PortfolioPage() {
                     />
                   </div>
 
-                  {/* THÊM MỚI: Khối Đánh giá Toàn cảnh Khu vực (Thiết kế Điểm nhấn) */}
-                  <div className="mt-8">
-                    {/* Header: Đánh giá toàn cảnh */}
-                    <div className="flex items-center gap-2 mb-3 px-1">
-                      <span className="text-cyan-600 bg-cyan-50 p-1.5 rounded-full border border-cyan-100 shadow-2xs">
-                        <svg className="w-4 h-4 stroke-current stroke-[2.5]" fill="none" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                      </span>
-                      <h3 className="text-sm sm:text-base font-black text-slate-800 tracking-tight">
-                        Đánh giá Toàn cảnh 6 Khu Vực & Các Mạng Phễu Dịch Vụ Hệ Thống
-                      </h3>
-                    </div>
+{/* ================= TOP 3 KHU VỰC HOẠT ĐỘNG TỐT NHẤT (BENTO LEADERBOARD) ================= */}
+                  <div className="mt-8 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden">
+                    
+                    {/* Thanh viền nhấn trên đỉnh Card */}
+                    <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-lime-400" />
 
-                    {/* Khung nội dung chính (Border top xanh lá dày) */}
-                    <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs overflow-hidden">
-                      {/* Viền xanh lá trên cùng */}
-                      <div className="h-1.5 w-full bg-emerald-600"></div>
-
-                      <div className="p-4 sm:p-5">
-                        {/* Subtitle */}
-                        <div className="flex items-center gap-2 mb-4">
-                          <span className="text-base drop-shadow-sm">🏆</span>
-                          <span className="text-[13px] font-extrabold text-emerald-700 uppercase tracking-wider">
-                            Top Khu Vực Hoạt Động Tốt Nhất
-                          </span>
+                    {/* Header Khu vực */}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                      <div className="flex items-start gap-3.5">
+                        <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                          </svg>
                         </div>
-
-                        {/* Danh sách các khu vực */}
-                        <div className="flex flex-col gap-3.5">
-                          {[
-                            { name: "HỒ CHÍ MINH", roas: "1,2", cp: "420.000.000 đ", data: "962", lich: "421", km: "256", dt: "504.000.000 đ", barWidth: "w-48 sm:w-64" },
-                            { name: "ĐÔNG NAM BỘ", roas: "1,13", cp: "360.000.000 đ", data: "512", lich: "265", km: "166", dt: "406.800.000 đ", barWidth: "w-40 sm:w-56" },
-                            { name: "MIỀN TÂY", roas: "0,89", cp: "280.000.000 đ", data: "345", lich: "175", km: "95", dt: "249.200.000 đ", barWidth: "w-32 sm:w-48" },
-                          ].map((item, idx) => (
-                            <div key={idx} className="border border-slate-200/80 rounded-xl p-4 sm:p-5 bg-slate-50/40 hover:bg-slate-50 hover:border-blue-200/60 transition-colors shadow-2xs">
-                              {/* Dòng 1: Tên khu vực & ROAS */}
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="text-sm sm:text-base font-black text-slate-800 uppercase flex items-center gap-1.5 tracking-tight">
-                                  <span className="text-red-500 drop-shadow-sm text-lg">📍</span> {item.name}
-                                </div>
-                                <div className="text-sm sm:text-base font-black text-slate-900 tracking-tight">ROAS {item.roas}</div>
-                              </div>
-
-                              {/* Dòng 2: Chỉ số chi tiết */}
-                              <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-[11px] sm:text-xs text-slate-500 mb-3">
-                                <span>CP: <strong className="text-slate-800 font-bold">{item.cp}</strong></span>
-                                <span>Data: <strong className="text-slate-800 font-bold">{item.data}</strong></span>
-                                <span>Lịch: <strong className="text-blue-600 font-bold">{item.lich}</strong></span>
-                                <span>KM: <strong className="text-slate-800 font-bold">{item.km}</strong></span>
-                                <span>DT: <strong className="text-slate-800 font-bold">{item.dt}</strong></span>
-                              </div>
-
-                              {/* Dòng 3: Khối xám che mờ */}
-                              <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-3">
-                                <span className="font-medium">Khu vực dẫn đầu doanh thu,</span>
-                                <div className={`h-3.5 ${item.barWidth} bg-slate-200/80 rounded-sm`}></div>
-                                <span>.</span>
-                              </div>
-
-                              {/* Dòng 4: Link action */}
-                              <button type="button" className="text-[11px] sm:text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 cursor-pointer transition-colors">
-                                <span className="text-sm">👉</span> Click để đi sâu vào các chi nhánh thuộc {item.name}
-                              </button>
-                            </div>
-                          ))}
+                        <div>
+                          <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 mb-1">
+                            <span>TOP KHU VỰC HOẠT ĐỘNG TỐT NHẤT</span>
+                            <span className="text-slate-300">•</span>
+                            <span className="text-slate-500">T3 – T7/2026</span>
+                          </div>
+                          <h4 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                            Top 3 khu vực dẫn đầu ROAS nhờ chiến dịch phễu, sự kiện quý & livestream bùng nổ
+                          </h4>
                         </div>
                       </div>
+
+                      <div className="shrink-0 flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                        <span className="text-[11px] font-bold text-slate-500">Tổng DT 3 vùng:</span>
+                        <span className="text-sm font-black text-emerald-600">2,73 Tỷ đ</span>
+                      </div>
                     </div>
+
+                    {/* Grid 3 Cột: Hồ Chí Minh - Đông Nam Bộ - Miền Tây */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                      {[
+                        {
+                          rank: "TOP 1",
+                          name: "HỒ CHÍ MINH",
+                          roas: "3,5",
+                          cpShort: "420 Triệu",
+                          cpFull: "420.000.000 đ",
+                          dtShort: "1,47 Tỷ",
+                          dtFull: "1.470.000.000 đ",
+                          data: "962",
+                          lich: "421",
+                          km: "256",
+                          crLich: "43,8%",
+                          note: "Khu vực dẫn đầu toàn hệ thống về doanh thu & hiệu suất ROAS chiến dịch phễu.",
+                          isTop1: true,
+                        },
+                        {
+                          rank: "TOP 2",
+                          name: "ĐÔNG NAM BỘ",
+                          roas: "2,4",
+                          cpShort: "360 Triệu",
+                          cpFull: "360.000.000 đ",
+                          dtShort: "864,8 Triệu",
+                          dtFull: "864.800.000 đ",
+                          data: "512",
+                          lich: "265",
+                          km: "166",
+                          crLich: "51,8%",
+                          note: "Tỷ lệ chuyển đổi từ Data sang Lịch hẹn đạt mức cao vượt trội (>51%).",
+                          isTop1: false,
+                        },
+                        {
+                          rank: "TOP 3",
+                          name: "MIỀN TÂY",
+                          roas: "1,42",
+                          cpShort: "280 Triệu",
+                          cpFull: "280.000.000 đ",
+                          dtShort: "397,6 Triệu",
+                          dtFull: "397.600.000 đ",
+                          data: "345",
+                          lich: "175",
+                          km: "95",
+                          crLich: "50,7%",
+                          note: "Duy trì chi phí thu thập Data ổn định, tối ưu tốt tệp khách sự kiện quý.",
+                          isTop1: false,
+                        },
+                      ].map((region, idx) => (
+                        <div
+                          key={region.name}
+                          onClick={() => {
+                            // Nếu anh có hàm mở chi tiết chi nhánh thì gọi ở đây, ví dụ: handleSelectRegion(region.name)
+                          }}
+                          className={`group cursor-pointer rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+                            region.isTop1
+                              ? "bg-gradient-to-b from-emerald-50/50 via-white to-white border-2 border-emerald-500/30 shadow-[0_10px_25px_-5px_rgba(16,185,129,0.08)] hover:border-emerald-500"
+                              : "bg-slate-50/60 border border-slate-200/90 hover:bg-white hover:border-slate-300 hover:shadow-md"
+                          }`}
+                        >
+                          <div>
+                            {/* Hàng 1: Thứ hạng + Tên Khu Vực + Badge ROAS */}
+                            <div className="flex items-start justify-between gap-2 mb-4">
+                              <div>
+                                <span
+                                  className={`inline-block text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md mb-1.5 ${
+                                    region.isTop1
+                                      ? "bg-emerald-600 text-white"
+                                      : "bg-slate-200/80 text-slate-600"
+                                  }`}
+                                >
+                                  {region.rank}
+                                </span>
+                                <h5 className="text-lg font-black text-slate-900 tracking-tight flex items-center gap-1.5">
+                                  {region.name}
+                                </h5>
+                              </div>
+
+                              {/* Cụm ROAS nổi bật */}
+                              <div
+                                className={`px-3 py-1.5 rounded-xl border text-right shrink-0 ${
+                                  region.isTop1
+                                    ? "bg-emerald-500 text-white border-emerald-500 shadow-xs"
+                                    : "bg-emerald-50 text-emerald-700 border-emerald-200/80"
+                                }`}
+                              >
+                                <div className="text-[9px] font-extrabold uppercase tracking-wider opacity-85">
+                                  ROAS
+                                </div>
+                                <div className="text-base font-black leading-none mt-0.5">
+                                  {region.roas}x
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Hàng 2: So sánh Chi phí & Doanh thu */}
+                            <div className="grid grid-cols-2 gap-2.5 p-3 bg-white rounded-xl border border-slate-200/70 mb-3.5 shadow-2xs">
+                              <div>
+                                <div className="text-[10px] font-bold text-slate-400 uppercase">
+                                  Chi phí (CP)
+                                </div>
+                                <div className="text-sm font-extrabold text-slate-800 mt-0.5">
+                                  {region.cpShort}
+                                </div>
+                                <div className="text-[10px] text-slate-400 font-medium truncate">
+                                  {region.cpFull}
+                                </div>
+                              </div>
+
+                              <div className="border-l border-slate-100 pl-2.5">
+                                <div className="text-[10px] font-bold text-slate-400 uppercase">
+                                  Doanh thu (DT)
+                                </div>
+                                <div className="text-sm font-black text-emerald-600 mt-0.5">
+                                  {region.dtShort}
+                                </div>
+                                <div className="text-[10px] text-slate-400 font-medium truncate">
+                                  {region.dtFull}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Hàng 3: Phễu chuyển đổi (Data -> Lịch -> Khách mới) */}
+                            <div className="bg-white/90 border border-slate-200/60 rounded-xl p-2.5 mb-3.5">
+                              <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase mb-1.5 px-1">
+                                <span>Phễu chuyển đổi</span>
+                                <span className="text-emerald-600">Tỷ lệ Lịch: {region.crLich}</span>
+                              </div>
+                              <div className="grid grid-cols-3 gap-1.5 text-center">
+                                <div className="bg-slate-50 rounded-lg py-1.5 px-1">
+                                  <div className="text-xs font-black text-slate-800">{region.data}</div>
+                                  <div className="text-[9px] font-bold text-slate-400 uppercase">Data</div>
+                                </div>
+                                <div className="bg-teal-50/70 rounded-lg py-1.5 px-1 border border-teal-100/80">
+                                  <div className="text-xs font-black text-teal-700">{region.lich}</div>
+                                  <div className="text-[9px] font-bold text-teal-600/80 uppercase">Lịch hẹn</div>
+                                </div>
+                                <div className="bg-emerald-50/70 rounded-lg py-1.5 px-1 border border-emerald-100/80">
+                                  <div className="text-xs font-black text-emerald-700">{region.km}</div>
+                                  <div className="text-[9px] font-bold text-emerald-600/80 uppercase">Khách mới</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Ghi chú điểm mạnh từng vùng (Thay cho thanh xám bị lỗi) */}
+                            <p className="text-[12px] text-slate-500 font-medium leading-relaxed mb-4">
+                              {region.note}
+                            </p>
+                          </div>
+
+                          {/* Footer Button: Xem chi tiết chi nhánh */}
+                          
+                        </div>
+                      ))}
+                    </div>
+
                   </div>
                 </div>
                     </div>
                   </div>
 
                   {/* 3. SỐ LIỆU GOOGLE ADS (MỞ SẴN TOÀN BỘ) */}
-                  <div ref={googleSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs">
+                  <div ref={googleSectionRef} className="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs">
                     {/* Header Google */}
                     <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
                       <div className="w-8 h-8 rounded-full bg-[#1b75ff] text-white flex items-center justify-center font-black text-sm shrink-0">
@@ -2712,44 +2995,358 @@ export default function PortfolioPage() {
                             </div>
                           </div>
   
-                          {/* ================= THÀNH TỰU CHỈ SỐ ROAS ================= */}
-                          <hr className="border-slate-100 my-8" />
+                          {/* ================= THÀNH TỰU CHỈ SỐ ROAS (BENTO SHOWCASE & LIVE METRICS) ================= */}
                           <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             style={{ willChange: "transform, opacity" }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="mt-8 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden"
                           >
-                            <div className="flex items-center gap-2 mb-4">
-                              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
-                              <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-zinc-900">
-                                THÀNH TỰU CHỈ SỐ ROAS
+                            {/* Viền nhấn Gradient Cam - Đỏ đặc trưng của sàn TMĐT / Shopee Ads */}
+                            <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-emerald-500" />
+
+                            {/* Header: Tiêu đề + Badge ROAS nổi bật */}
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                              <div className="flex items-start gap-3.5">
+                                <div className="w-11 h-11 rounded-2xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.3}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-tight">
+                                      THÀNH TỰU CHỈ SỐ ROAS
+                                    </h4>
+                                    <span className="px-2.5 py-0.5 rounded-full bg-orange-500 text-white text-[11px] font-black tracking-wide shadow-2xs">
+                                      ROAS 16,11x
+                                    </span>
+                                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-[11px] font-bold">
+                                      CIR chỉ ~6,16%
+                                    </span>
+                                  </div>
+                                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed">
+                                    Tối ưu hiệu suất quảng cáo vượt trội với tỷ lệ lợi nhuận trên chi phí (ROAS) đạt 16,11 — kiểm soát ngân sách tối ưu, tỷ lệ chuyển đổi đơn hàng và doanh thu ổn định.
+                                  </p>
+                                </div>
                               </div>
-                              <span className="bg-orange-50 text-orange-700 border border-orange-200 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full ml-2 shadow-xs">
-                                ROAS <AnimatedCounter value={16.11} suffix="" />
-                              </span>
+
+                              <div className="shrink-0 hidden sm:flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider">
+                                  High-ROI Campaign
+                                </span>
+                              </div>
                             </div>
-                            
-                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                              Tối ưu hiệu suất quảng cáo vượt trội với tỷ lệ lợi nhuận trên chi phí (ROAS) đạt 16,11. Chi phí tối ưu, tỷ lệ chuyển đổi đơn hàng và doanh thu ổn định.
-                            </p>
-  
-                            {/* Khối bọc sơ đồ có hiệu ứng zoom mượt */}
-                            <motion.div 
-                              className="w-full bg-slate-50/70 border border-slate-200/90 hover:border-orange-300 rounded-2xl p-2 sm:p-3 flex items-center justify-center overflow-hidden shadow-2xs transition-colors"
-                              initial={{ scale: 0.95, opacity: 0 }}
-                              whileInView={{ scale: 1, opacity: 1 }}
-                              viewport={{ once: true }}
-                              style={{ willChange: "transform, opacity" }}
-                              transition={{ duration: 0.5, delay: 0.2 }}
-                            >
-                              <PreviewPopupImage
-                                src="/kenze-roas.png"
-                                alt="Thành tựu chỉ số ROAS Kenze"
-                              />
-                            </motion.div>
+
+                            {/* Hàng 1: 4 Thẻ Bóc Tách Số Liệu Trọng Tâm Từ Ảnh Báo Cáo */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mb-6">
+                              
+                              {/* Card 1: ROAS (Anchor Card nổi bật) */}
+                              <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl p-4 sm:p-5 shadow-[0_8px_20px_-4px_rgba(249,115,22,0.35)] flex flex-col justify-between relative overflow-hidden">
+                                <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/15 rounded-full blur-lg pointer-events-none" />
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-orange-100">
+                                    HIỆU SUẤT ROAS
+                                  </span>
+                                  <span className="px-2 py-0.5 rounded bg-white/20 text-white text-[10px] font-bold">
+                                    Đỉnh cao
+                                  </span>
+                                </div>
+                                <div className="text-3xl font-black tracking-tight leading-none my-1">
+                                  16,11x
+                                </div>
+                                <div className="text-[11px] font-semibold text-orange-50 mt-2 pt-2 border-t border-white/15">
+                                  1 đồng chi phí → 16,11 đồng doanh thu
+                                </div>
+                              </div>
+
+                              {/* Card 2: Doanh thu */}
+                              <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white hover:border-slate-300 transition-all">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                                    DOANH THU GHI NHẬN
+                                  </span>
+                                  <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                                    +26 Sản phẩm
+                                  </span>
+                                </div>
+                                <div className="text-2xl xl:text-[26px] font-black text-slate-900 tracking-tight leading-none my-1 whitespace-nowrap">
+                                  58.400.000 đ
+                                </div>
+                                <div className="text-[11px] font-medium text-slate-500 mt-2 pt-2 border-t border-slate-200/60">
+                                  Giá trị trung bình: ~2,24 triệu / SP
+                                </div>
+                              </div>
+
+                              {/* Card 3: Chi phí quảng cáo */}
+                              <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white hover:border-slate-300 transition-all">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                                    CHI PHÍ QUẢNG CÁO
+                                  </span>
+                                  <span className="text-[10px] font-bold text-[#005cff] bg-blue-50 px-2 py-0.5 rounded">
+                                    CIR: 6,16%
+                                  </span>
+                                </div>
+                                <div className="text-2xl xl:text-[26px] font-black text-[#005cff] tracking-tight leading-none my-1 whitespace-nowrap">
+                                  3.600.000 đ
+                                </div>
+                                <div className="text-[11px] font-medium text-slate-500 mt-2 pt-2 border-t border-slate-200/60">
+                                  Tối ưu chi phí: ~138.4K / sản phẩm bán
+                                </div>
+                              </div>
+
+                              {/* Card 4: Lượt xem & Click */}
+                              <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white hover:border-slate-300 transition-all">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                                    LƯU LƯỢNG & TƯƠNG TÁC
+                                  </span>
+                                  <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                                    CTR: 1,38%
+                                  </span>
+                                </div>
+                                <div className="flex items-baseline gap-2 my-1">
+                                  <span className="text-2xl xl:text-[26px] font-black text-slate-900 tracking-tight leading-none">
+                                    44.1K
+                                  </span>
+                                  <span className="text-xs font-bold text-slate-400">lượt xem</span>
+                                </div>
+                                <div className="text-[11px] font-medium text-slate-500 mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between">
+                                  <span>Lượt click: <strong className="text-slate-700">610</strong></span>
+                                  <span>CPC: <strong className="text-slate-700">~5,9K</strong></span>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            {/* Hàng 2: Khung Trình Duyệt Bọc Ảnh Bằng Chứng Thực Tế */}
+                            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl overflow-hidden shadow-2xs">
+                              {/* Thanh Top Bar kiểu cửa sổ Dashboard */}
+                              <div className="px-4 py-2.5 bg-white border-b border-slate-200/80 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <div className="flex items-center gap-1.5 mr-2">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                                  </div>
+                                  <span className="text-[11px] font-bold text-slate-600">
+                                    Báo cáo Hiệu quả Quảng cáo Thực tế (Dashboard Screenshot)
+                                  </span>
+                                </div>
+                                <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-md">
+                                  ✓ Verified Data
+                                </span>
+                              </div>
+
+                              {/* Ảnh gốc (Giữ nguyên src /kenze-roas.png với popup zoom) */}
+                              <div className="p-2 sm:p-4 bg-white">
+                                <PreviewPopupImage
+                                  src="/kenze-roas.png" 
+                                  alt="Thành tựu chỉ số ROAS 16,11 Kenze"
+                                />
+                              </div>
+                            </div>
+
                           </motion.div>
+
+                          {/* ================= THÀNH QUẢ ĐẠT ĐƯỢC: CHUYỂN ĐỔI MÔ HÌNH & ĐA KÊNH (KENZE) ================= */}
+                          <div className="mt-8 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden">
+                            
+                            {/* Thanh viền nhấn chuyển sắc Cam TMĐT - Xanh Dương - Xanh Ngọc */}
+                            <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-orange-500 via-[#005cff] to-emerald-500" />
+
+                            {/* Header Khu vực */}
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                              <div className="flex items-start gap-3.5">
+                                <div className="w-11 h-11 rounded-2xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.3}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-tight">
+                                      THÀNH QUẢ ĐẠT ĐƯỢC • CHUYỂN ĐỔI BÁN LẺ & NHÂN BẢN ĐA KÊNH
+                                    </h4>
+                                    <span className="px-2.5 py-0.5 rounded-full bg-orange-500 text-white text-[11px] font-black tracking-wide">
+                                      Sau 3 – 6 tháng tiếp nhận
+                                    </span>
+                                  </div>
+                                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed">
+                                    Chuyển dịch từ mô hình phụ thuộc khách sỉ/khách cũ sang hệ thống shop vệ tinh đa kênh, chuẩn hóa dữ liệu tồn kho – công nợ và đẩy sản phẩm phễu bình ổn dòng tiền.
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="shrink-0 flex items-center gap-2 bg-emerald-50/80 border border-emerald-200/60 px-3.5 py-2 rounded-xl">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider">
+                                  E-Commerce & Cashflow Impact
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* PHẦN 1: SO SÁNH ĐỐI XỨNG MÔ HÌNH VẬN HÀNH (TRƯỚC VS SAU) */}
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+                              
+                              {/* CỘT TRÁI: TRƯỚC KHI TIẾP NHẬN */}
+                              <div className="bg-rose-50/35 border border-rose-200/70 rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                                <div>
+                                  <div className="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-rose-200/60">
+                                    <div className="flex items-center gap-2">
+                                      <span className="w-6 h-6 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-black text-xs">
+                                        ✕
+                                      </span>
+                                      <h5 className="text-sm font-black uppercase tracking-wider text-rose-950">
+                                        Trước khi tiếp nhận
+                                      </h5>
+                                    </div>
+                                    <span className="px-2.5 py-0.5 rounded-md bg-rose-100/80 text-rose-700 text-[10px] font-extrabold uppercase">
+                                      Phụ thuộc & Thụ động
+                                    </span>
+                                  </div>
+
+                                  <ul className="space-y-3 text-[13px] text-slate-700 font-medium">
+                                    <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Phụ thuộc tệp khách cũ:</strong> Doanh nghiệp dựa vào <span className="text-rose-600 font-bold">60% khách hàng sỉ lẻ và khách hàng cũ</span>, thiếu nguồn khách mới chủ động và tiềm ẩn rủi ro đứt gãy dòng tiền.
+                                      </div>
+                                    </li>
+                                    <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Chưa có hệ sinh thái Digital:</strong> Hoàn toàn chưa phát triển hệ thống <span className="text-slate-900 font-bold">Fanpage, Website, SEO và chiến dịch Ads</span> bài bản.
+                                      </div>
+                                    </li>
+                                    <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Thiếu kiểm soát tồn kho & dư nợ:</strong> Chưa chuẩn hóa báo cáo theo dõi lượng hàng tồn đọng, dư nợ sỉ lẻ dẫn đến ứ đọng vốn lưu động.
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+
+                              {/* CỘT PHẢI: SAU 3 – 6 THÁNG LÀM VIỆC */}
+                              <div className="bg-gradient-to-br from-emerald-50/50 via-orange-50/25 to-white border-2 border-emerald-500/30 rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden shadow-[0_8px_25px_-6px_rgba(16,185,129,0.12)]">
+                                <div>
+                                  <div className="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-emerald-200/60">
+                                    <div className="flex items-center gap-2">
+                                      <span className="w-6 h-6 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-black text-xs shadow-2xs">
+                                        ✓
+                                      </span>
+                                      <h5 className="text-sm font-black uppercase tracking-wider text-slate-900">
+                                        Sau 3 – 6 tháng triển khai
+                                      </h5>
+                                    </div>
+                                    <span className="px-2.5 py-0.5 rounded-md bg-emerald-500 text-white text-[10px] font-extrabold uppercase shadow-2xs">
+                                      Đa kênh & Bình ổn dòng tiền
+                                    </span>
+                                  </div>
+
+                                  <ul className="space-y-3 text-[13px] text-slate-700 font-medium">
+                                    <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Chuẩn hóa dữ liệu vận hành:</strong> Hoàn thiện hệ thống báo cáo số liệu <span className="text-[#005cff] font-bold">tồn kho, dư nợ, tồn hàng trên Google Sheet</span> rõ ràng, minh bạch.
+                                      </div>
+                                    </li>
+                                    <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Nhân bản hệ thống Shop vệ tinh:</strong> Quản trị đa tài khoản Shopee trên <span className="text-orange-600 font-bold">Shopeelike</span>, xây dựng mạng lưới kênh bán vệ tinh đi trước giai đoạn siết chính sách sàn (đầu năm 2025).
+                                      </div>
+                                    </li>
+                                    <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                      <div>
+                                        <strong className="text-slate-900 font-bold">Chiến lược Sản phẩm phễu bán lẻ:</strong> Đề xuất đẩy mạnh bán lẻ sản phẩm phễu giúp <span className="text-emerald-600 font-bold">bình ổn dòng tiền</span>, tối ưu <span className="text-emerald-600 font-bold">20% – 30% chi phí</span> và tăng <span className="text-emerald-600 font-bold">+100% – 200% khách mới</span>.
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* PHẦN 2: 4 THẺ CHỈ SỐ CHUYỂN ĐỔI TRỰC QUAN (IMPACT METRICS) */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+                              {[
+                                {
+                                  label: "TĂNG TRƯỞNG %KM",
+                                  before: "60% phụ thuộc khách cũ/sỉ",
+                                  after: "+100% – 200%",
+                                  sub: "Lượng khách mới từ bán lẻ & phễu",
+                                  badge: "BP tệp mới",
+                                  accent: "text-emerald-600",
+                                  bgBadge: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
+                                },
+                                {
+                                  label: "T.ƯU CHI PHÍ VH",
+                                  before: "Ứ đọng hàng tồn & dư nợ",
+                                  after: "-20% – 30%",
+                                  sub: "Bình ổn dòng tiền cho chủ DN",
+                                  badge: "Cashflow ổn định",
+                                  accent: "text-[#005cff]",
+                                  bgBadge: "bg-blue-50 text-[#005cff] border-blue-200/60",
+                                },
+                                {
+                                  label: "MỞ RỘNG KÊNH BÁN",
+                                  before: "Chưa có Web, Page, SEO, Ads",
+                                  after: "Đa Shop Vệ Tinh",
+                                  sub: "Quản trị đa tài khoản trước 2025",
+                                  badge: "Shopeelike",
+                                  accent: "text-orange-600",
+                                  bgBadge: "bg-orange-50 text-orange-700 border-orange-200/60",
+                                },
+                                {
+                                  label: "QT TỒN KHO & NỢ",
+                                  before: "Rời rạc, thiếu số liệu",
+                                  after: "Chuẩn hóa 100%",
+                                  sub: "Kiểm soát tồn hàng, dư nợ",
+                                  badge: "Google Sheet",
+                                  accent: "text-slate-900",
+                                  bgBadge: "bg-slate-100 text-slate-700 border-slate-200/80",
+                                },
+                              ].map((metric, i) => (
+                                <div
+                                  key={i}
+                                  className="bg-[#f8fafc] border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all"
+                                >
+                                  <div>
+                                    <div className="flex items-center justify-between gap-2 mb-2.5">
+                                      <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
+                                        {metric.label}
+                                      </span>
+                                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${metric.bgBadge}`}>
+                                        {metric.badge}
+                                      </span>
+                                    </div>
+
+                                    {/* Mốc Trước (Gạch ngang đỏ nhạt) */}
+                                    <div className="text-[11px] font-semibold text-rose-500/90 line-through mb-1">
+                                      Trước: {metric.before}
+                                    </div>
+
+                                    {/* Mốc Sau (Số lớn nổi bật) */}
+                                    <div className={`text-2xl xl:text-[25px] font-black tracking-tight leading-none mb-2 whitespace-nowrap ${metric.accent}`}>
+                                      {metric.after}
+                                    </div>
+                                  </div>
+
+                                  <div className="text-[11px] font-semibold text-slate-500 pt-2.5 border-t border-slate-200/60">
+                                    {metric.sub}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+
+                          </div>
                         </div>
               </motion.div>
             )}
@@ -2790,457 +3387,395 @@ export default function PortfolioPage() {
   
                             <hr className="border-slate-100 my-6" />
   
-                            {/* === KHỐI CON: ĐỀ XUẤT CONCEPT - ĐẨY PERFORMANCE === */}
-                            <div className="mt-2">
-                              {/* Header mục */}
-                              <div className="flex items-center gap-2 mb-2.5">
-                                <div className="w-1.5 h-4 bg-pink-500 rounded-full"></div>
-                                <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-zinc-900">
-                                  ĐỀ XUẤT CONCEPT - ĐẨY PERFORMANCE
+                            {/* ================= ĐỀ XUẤT CONCEPT - ĐẨY PERFORMANCE (BENTO CREATIVE SHOWCASE) ================= */}
+                            <div className="mt-8 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden">
+                              
+                              {/* Thanh viền nhấn Gradient Hồng Đỏ - Xanh đặc trưng của Creative & Performance */}
+                              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-rose-500 via-[#005cff] to-emerald-500" />
+
+                              {/* Header Khu vực */}
+                              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                                <div className="flex items-start gap-3.5">
+                                  <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center shrink-0 mt-0.5">
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                  </div>
+                                  <div>
+                                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                                      <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-tight">
+                                        ĐỀ XUẤT CONCEPT – ĐẨY PERFORMANCE
+                                      </h4>
+                                      <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200/60 text-[11px] font-extrabold">
+                                        Creative-Driven Ads
+                                      </span>
+                                    </div>
+                                    <p className="text-[13px] text-slate-500 font-medium leading-relaxed">
+                                      Chủ động đề xuất các concept hình ảnh và chương trình trải nghiệm mới, liên tục test góc tiếp cận nhằm giảm chi phí CPL/Mess và gia tăng ROAS thực tế.
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="shrink-0 flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                                  <span className="w-2 h-2 rounded-full bg-rose-500" />
+                                  <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider">
+                                    3 Concept Chủ Lực
+                                  </span>
                                 </div>
                               </div>
-  
-                              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                                Trong quá trình làm việc, tôi chủ động đề xuất thêm các giải pháp và chương trình mới, tối ưu liên tục nhằm giảm chi phí quảng cáo và gia tăng ROAS cho doanh nghiệp
-                              </p>
-  
-                              {/* KHỐI BANNER 2 CỘT "CỬA THIỀN" (Chuẩn thiết kế Hình 1) */}
-                              <div className="w-full rounded-2xl overflow-hidden border border-stone-200/90 shadow-xs bg-[#FAF4EB]">
-                                <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
-                                  
-                                  {/* Cột trái: Hình ảnh cô gái áo dài */}
-                                  <div className="w-full h-full min-h-[300px] sm:min-h-[380px] bg-stone-200 overflow-hidden relative flex items-center justify-center [&>div]:w-full [&>div]:h-full [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
-                                    <PreviewPopupImage
-                                      src="/miss-ao-dai-concept.jpg"
-                                      alt="Concept Miss Áo Dài - Cửa Thiền"
-                                    />
-                                  </div>
-  
-                                  {/* Cột phải: Nền kem #FAF4EB + Typography nghệ thuật có hiệu ứng text */}
-                                  <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true, margin: "-40px" }}
-                                    style={{ willChange: "transform, opacity" }}
-                                    variants={{
-                                      hidden: { opacity: 0 },
-                                      visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-                                    }}
-                                    className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF4EB] text-left"
+
+                              {/* Grid 3 Cột: 3 Concept (Đã chuẩn hóa Unicode chống lỗi gãy dấu 100%) */}
+                              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                {[
+                                  {
+                                    id: "cua-thien",
+                                    badge: "CONCEPT 01 • TÂM LINH & BỀ THẾ",
+                                    title: "Cửa Thiền",
+                                    poemLine1: "Mái chùa cong bóng chiều rơi",
+                                    poemLine2: "Sen tay ai giữ, một thời an nhiên",
+                                    location: "Chụp ảnh áo dài tại Tu viện Vĩnh Nghiêm",
+                                    desc: "Điện gỗ lớn với hoành phi chữ vàng, lan can đá chạm rồng và mái ngói đỏ — bối cảnh trang nghiêm, bề thế bậc nhất trong các concept chùa.",
+                                    coverImg: "/miss-ao-dai-concept.jpg",
+                                    adsImg: "/fb-ads-cua-thien.png",
+                                    highlightMetric: "Winning Concept • Tỷ lệ Mess cao",
+                                    isGalleryOpen: showCuaThienGallery,
+                                    toggleGallery: () => setShowCuaThienGallery(!showCuaThienGallery),
+                                    galleryPrefix: "miss-ao-dai-cua-thien",
+                                  },
+                                  {
+                                    id: "tet-xua",
+                                    badge: "CONCEPT 02 • MÙA LỄ HỘI",
+                                    title: "Tết Xưa Gọi Về",
+                                    poemLine1: "Đèn lồng đỏ, pháo đào phai",
+                                    poemLine2: "Xuân về trong áo, ai hoài cố hương",
+                                    location: "Chụp ảnh áo dài tại phim trường Anna",
+                                    desc: "Bối cảnh Tết dựng sẵn: đèn lồng đỏ, nón lá treo tường, hoa đỏ rực, rèm nhung xanh thẫm và đồ gốm cổ — không khí Tết trọn vẹn ngay giữa mùa nào trong năm.",
+                                    coverImg: "/miss-ao-dai-tet-xua.png",
+                                    adsImg: "/fb-ads-tet-xua.png",
+                                    highlightMetric: "High CTR • Tối ưu chi phí chuyển đổi",
+                                    isGalleryOpen: showTetXuaGallery,
+                                    toggleGallery: () => setShowTetXuaGallery(!showTetXuaGallery),
+                                    galleryPrefix: "miss-ao-dai-tet-xua",
+                                  },
+                                  {
+                                    id: "san-dinh",
+                                    badge: "CONCEPT 03 • HOÀI CỔ & DỊU DÀNG",
+                                    title: "Sân Đình Xưa",
+                                    poemLine1: "Nắng chiều rơi xuống sân đình",
+                                    poemLine2: "Áo dài ngồi đó, lặng nhìn thời gian",
+                                    location: "Chụp ảnh áo dài tại Đình Thông Tây Hội",
+                                    desc: "Mái ngói rêu phong, ghế đá cổ và nắng xiên qua tán cây — ngôi đình cổ mộc mạc cho những khung hình dịu dàng, gần gũi.",
+                                    coverImg: "/miss-ao-dai-san-dinh.jpg",
+                                    adsImg: "/fb-ads-san-dinh.png",
+                                    highlightMetric: "Evergreen Ads • Duy trì Lead đều",
+                                    isGalleryOpen: showSanDinhGallery,
+                                    toggleGallery: () => setShowSanDinhGallery(!showSanDinhGallery),
+                                    galleryPrefix: "miss-ao-dai-san-dinh",
+                                  },
+                                ].map((concept) => (
+                                  <div
+                                    key={concept.id}
+                                    className="group bg-[#f8fafc] border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col justify-between hover:bg-white hover:border-slate-300 hover:shadow-lg transition-all duration-300"
                                   >
-                                    {/* Tiêu đề lớn: Cửa thiền */}
-                                    <motion.h3
-                                      variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic font-bold text-4xl sm:text-5xl text-[#6E1423] tracking-tight leading-tight mb-3"
-                                    >
-                                      Cửa thiền
-                                    </motion.h3>
-  
-                                    {/* 2 câu thơ nghiêng */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic text-base sm:text-lg text-[#7A5C3E] leading-relaxed mb-5"
-                                    >
-                                      <p>Mái chùa cong bóng chiều rơi</p>
-                                      <p>Sen tay ai giữ, một thời an nhiên</p>
-                                    </motion.div>
-  
-                                    {/* Đường kẻ trang trí có hình thoi ở giữa */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, scaleX: 0.8 }, visible: { opacity: 1, scaleX: 1 } }}
-                                      className="flex items-center w-44 mb-5 origin-left"
-                                    >
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                      <div className="w-2 h-2 rotate-45 bg-[#B69874] mx-1.5 shrink-0"></div>
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                    </motion.div>
-  
-                                    {/* Tiêu đề phụ in đậm */}
-                                    <motion.h4
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-sm sm:text-base font-extrabold text-[#2B2623] mb-2.5"
-                                    >
-                                      Chụp ảnh áo dài tại Tu viện Vĩnh Nghiêm
-                                    </motion.h4>
-  
-                                    {/* Đoạn văn mô tả bối cảnh */}
-                                    <motion.p
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-xs sm:text-[13px] text-[#5C5349] leading-relaxed mb-6"
-                                    >
-                                      Điện gỗ lớn với hoành phi chữ vàng, lan can đá chạm rồng và mái ngói đỏ — bối cảnh trang nghiêm, bề thế bậc nhất trong các concept chùa.
-                                    </motion.p>
-  
-                                    {/* CỤM NÚT BẤM VÀ ẢNH FB ADS */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="flex flex-col items-start gap-3"
-                                    >
-                                      {/* Nút 1: Xem bộ ảnh */}
+                                    <div>
+                                      {/* Khung Ảnh Bìa Concept (Tỷ lệ 4:3 sắc nét + Badge nổi) */}
+                                      <div className="relative h-64 w-full overflow-hidden bg-slate-200">
+                                        <img
+                                          src={concept.coverImg}
+                                          alt={concept.title}
+                                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/15 to-transparent" />
+
+                                        {/* Tag Thứ tự Concept */}
+                                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-extrabold uppercase tracking-wider">
+                                          {concept.badge}
+                                        </div>
+
+                                        {/* Tiêu đề & Câu thơ đặt trực tiếp trên nền Gradient chân ảnh (Chuẩn Font Tiếng Việt) */}
+                                        <div className="absolute bottom-3.5 left-4 right-4 text-white">
+                                          <h5 className="text-2xl font-black tracking-tight mb-1 drop-shadow-xs">
+                                            {concept.title}
+                                          </h5>
+                                          <p className="text-xs text-slate-200 italic font-medium leading-snug">
+                                            “{concept.poemLine1} / {concept.poemLine2}”
+                                          </p>
+                                        </div>
+                                      </div>
+
+                                      {/* Nội dung chi tiết Concept */}
+                                      <div className="p-5">
+                                        <div className="flex items-center gap-1.5 text-xs font-extrabold text-[#005cff] mb-2">
+                                          <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                          </svg>
+                                          <span>{concept.location}</span>
+                                        </div>
+
+                                        <p className="text-[12.5px] text-slate-600 font-medium leading-relaxed mb-4">
+                                          {concept.desc}
+                                        </p>
+
+                                        {/* Khung Bằng Chứng Số Liệu FB Ads (Luôn hiển thị rõ ràng, dễ nhìn) */}
+                                        <div className="bg-white border border-slate-200/80 rounded-xl p-2.5 shadow-2xs">
+                                          <div className="flex items-center justify-between mb-2 px-1">
+                                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                                              Số liệu thực tế FB Ads
+                                            </span>
+                                            <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                                              {concept.highlightMetric}
+                                            </span>
+                                          </div>
+                                          <div className="rounded-lg overflow-hidden border border-slate-100 bg-slate-50">
+                                            <PreviewPopupImage
+                                              src={concept.adsImg}
+                                              alt={`Số liệu FB Ads ${concept.title}`}
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* Footer: Nút mở xem trọn bộ 8 ảnh Concept (Giữ nguyên logic mở gallery) */}
+                                    <div className="px-5 pb-5 pt-1">
                                       <button
                                         type="button"
-                                        onClick={() => setShowCuaThienGallery(!showCuaThienGallery)}
-                                        className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-xs cursor-pointer select-none"
+                                        onClick={concept.toggleGallery}
+                                        className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-[#005cff] text-white text-xs font-extrabold tracking-wide flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
                                       >
-                                        <span>{showCuaThienGallery ? "Thu gọn bộ ảnh Concept" : "Xem trọn bộ 8 ảnh Concept Cửa Thiền"}</span>
-                                        <svg className={`w-4 h-4 transition-transform duration-300 ${showCuaThienGallery ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                        </svg>
+                                        <span>{concept.isGalleryOpen ? `Thu gọn bộ ảnh Concept ${concept.title}` : `Xem trọn bộ 8 ảnh Concept ${concept.title}`}</span>
+                                        <span className={`inline-block transition-transform duration-300 ${concept.isGalleryOpen ? "rotate-90" : ""}`}>&rarr;</span>
                                       </button>
-  
-                                      {/* Nút 2: Xem số liệu FB Ads */}
-                                      <button
-                                        type="button"
-                                        onClick={() => setShowFbAdsCuaThien(!showFbAdsCuaThien)}
-                                        className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border-[2.5px] border-[#2B2623] bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-sm cursor-pointer select-none"
-                                      >
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-                                        </svg>
-                                        <span>{showFbAdsCuaThien ? "Thu gọn số liệu FB Ads" : "Xem số liệu FB Ads"}</span>
-                                      </button>
-  
-                                      {/* Khối trượt hiển thị ảnh FB Ads */}
+
+                                      {/* DANH SÁCH 8 HÌNH ẢNH MỞ RỘNG KHI CLICK */}
                                       <AnimatePresence initial={false}>
-                                        {showFbAdsCuaThien && (
+                                        {concept.isGalleryOpen && (
                                           <motion.div
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                                            className="overflow-hidden w-full mt-2"
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                                            className="overflow-hidden mt-3 pt-3 border-t border-slate-200"
                                           >
-                                            <div className="w-full bg-white border border-[#E6DBC8] rounded-xl p-1.5 shadow-sm">
-                                              <PreviewPopupImage
-                                                src="/fb-ads-cua-thien.png"
-                                                alt="Số liệu FB Ads Cửa Thiền"
-                                              />
+                                            <div className="grid grid-cols-2 gap-2">
+                                              {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                                                <div
+                                                  key={num}
+                                                  className="w-full bg-white border border-slate-200/80 hover:border-rose-400 rounded-lg p-1 shadow-2xs overflow-hidden flex items-center justify-center transition-colors"
+                                                >
+                                                  <PreviewPopupImage
+                                                    src={`/${concept.galleryPrefix}-${num}.jpg`}
+                                                    alt={`Concept ${concept.title} ${num}`}
+                                                  />
+                                                </div>
+                                              ))}
                                             </div>
                                           </motion.div>
                                         )}
                                       </AnimatePresence>
-                                    </motion.div>
-                                  </motion.div>
-  
-                                </div>
-  
-                                {/* DANH SÁCH 8 HÌNH ẢNH BỐ CỤC 2-2-2-2 XẾP DỌC KHI BẤM MỞ */}
-                                <AnimatePresence initial={false}>
-                                  {showCuaThienGallery && (
-                                    <motion.div
-                                      initial={{ height: 0, opacity: 0 }}
-                                      animate={{ height: "auto", opacity: 1 }}
-                                      exit={{ height: 0, opacity: 0 }}
-                                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                                      className="overflow-hidden border-t border-[#E6DBC8] bg-[#FAF4EB]/60"
-                                    >
-                                      <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                                          <div
-                                            key={num}
-                                            className="w-full bg-white border border-stone-200/80 hover:border-[#6E1423]/40 rounded-xl p-1.5 shadow-2xs overflow-hidden flex items-center justify-center transition-colors"
-                                          >
-                                            <PreviewPopupImage
-                                              src={`/miss-ao-dai-cua-thien-${num}.jpg`}
-                                              alt={`Concept Cửa Thiền ${num}`}
-                                            />
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
-                              </div>
-  
-                              {/* KHỐI BANNER 2 CỘT THỨ 2: "TẾT XƯA GỌI VỀ" */}
-                              <div className="w-full rounded-2xl overflow-hidden border border-stone-200/90 shadow-xs bg-[#FAF4EB] mt-5">
-                                <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
-                                  
-                                  {/* Cột trái: Hình ảnh áo dài Tết xưa */}
-                                  <div className="w-full h-full min-h-[300px] sm:min-h-[380px] bg-stone-200 overflow-hidden relative flex items-center justify-center [&>div]:w-full [&>div]:h-full [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
-                                    <PreviewPopupImage
-                                      src="/miss-ao-dai-tet-xua.png"
-                                      alt="Concept Miss Áo Dài - Tết xưa gọi về"
-                                    />
+                                    </div>
                                   </div>
-  
-                                  {/* Cột phải: Nền kem #FAF4EB + Typography nghệ thuật có hiệu ứng text */}
-                                  <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true, margin: "-40px" }}
-                                    style={{ willChange: "transform, opacity" }}
-                                    variants={{
-                                      hidden: { opacity: 0 },
-                                      visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-                                    }}
-                                    className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF4EB] text-left"
-                                  >
-                                    {/* Tiêu đề lớn: Tết xưa gọi về */}
-                                    <motion.h3
-                                      variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic font-bold text-4xl sm:text-5xl text-[#6E1423] tracking-tight leading-tight mb-3"
-                                    >
-                                      Tết xưa gọi về
-                                    </motion.h3>
-  
-                                    {/* 2 câu thơ nghiêng */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic text-base sm:text-lg text-[#7A5C3E] leading-relaxed mb-5"
-                                    >
-                                      <p>Đèn lồng đỏ, pháo đào phai</p>
-                                      <p>Xuân về trong áo, ai hoài cố hương</p>
-                                    </motion.div>
-  
-                                    {/* Đường kẻ trang trí có hình thoi ở giữa */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, scaleX: 0.8 }, visible: { opacity: 1, scaleX: 1 } }}
-                                      className="flex items-center w-44 mb-5 origin-left"
-                                    >
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                      <div className="w-2 h-2 rotate-45 bg-[#B69874] mx-1.5 shrink-0"></div>
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                    </motion.div>
-  
-                                    {/* Tiêu đề phụ in đậm */}
-                                    <motion.h4
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-sm sm:text-base font-extrabold text-[#2B2623] mb-2.5"
-                                    >
-                                      Chụp ảnh áo dài Tết tại phim trường Anna
-                                    </motion.h4>
-  
-                                    {/* Đoạn văn mô tả bối cảnh */}
-                                    <motion.p
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-xs sm:text-[13px] text-[#5C5349] leading-relaxed mb-6"
-                                    >
-                                      Bối cảnh Tết dựng sẵn: đèn lồng đỏ, nón lá treo tường, hoa đỏ rực, rèm nhung xanh thẫm và đồ gốm cổ — không khí Tết trọn vẹn ngay giữa mùa nào trong năm.
-                                    </motion.p>
-  
-                                    {/* CỤM NÚT BẤM VÀ ẢNH FB ADS */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="flex flex-col items-start gap-3"
-                                    >
-                                      <button
-                                        type="button"
-                                        onClick={() => setShowTetXuaGallery(!showTetXuaGallery)}
-                                        className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-xs cursor-pointer select-none"
-                                      >
-                                        <span>{showTetXuaGallery ? "Thu gọn bộ ảnh Concept" : "Xem trọn bộ 8 ảnh Concept Tết Xưa"}</span>
-                                        <svg className={`w-4 h-4 transition-transform duration-300 ${showTetXuaGallery ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                      </button>
-  
-                                      <button
-                                        type="button"
-                                        onClick={() => setShowFbAdsTetXua(!showFbAdsTetXua)}
-                                        className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border-[2.5px] border-[#2B2623] bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-sm cursor-pointer select-none"
-                                      >
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-                                        </svg>
-                                        <span>{showFbAdsTetXua ? "Thu gọn số liệu FB Ads" : "Xem số liệu FB Ads"}</span>
-                                      </button>
-  
-                                      <AnimatePresence initial={false}>
-                                        {showFbAdsTetXua && (
-                                          <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                                            className="overflow-hidden w-full mt-2"
-                                          >
-                                            <div className="w-full bg-white border border-[#E6DBC8] rounded-xl p-1.5 shadow-sm">
-                                              <PreviewPopupImage
-                                                src="/fb-ads-tet-xua.png"
-                                                alt="Số liệu FB Ads Tết Xưa"
-                                              />
-                                            </div>
-                                          </motion.div>
-                                        )}
-                                      </AnimatePresence>
-                                    </motion.div>
-                                  </motion.div>
-  
-                                </div>
-  
-                                {/* DANH SÁCH 8 HÌNH ẢNH BỐ CỤC 2-2-2-2 XẾP DỌC KHI BẤM MỞ */}
-                                <AnimatePresence initial={false}>
-                                  {showTetXuaGallery && (
-                                    <motion.div
-                                      initial={{ height: 0, opacity: 0 }}
-                                      animate={{ height: "auto", opacity: 1 }}
-                                      exit={{ height: 0, opacity: 0 }}
-                                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                                      className="overflow-hidden border-t border-[#E6DBC8] bg-[#FAF4EB]/60"
-                                    >
-                                      <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                                          <div
-                                            key={num}
-                                            className="w-full bg-white border border-stone-200/80 hover:border-[#6E1423]/40 rounded-xl p-1.5 shadow-2xs overflow-hidden flex items-center justify-center transition-colors"
-                                          >
-                                            <PreviewPopupImage
-                                              src={`/miss-ao-dai-tet-xua-${num}.jpg`}
-                                              alt={`Concept Tết xưa gọi về ${num}`}
-                                            />
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
+                                ))}
                               </div>
-  
-                              {/* KHỐI BANNER 2 CỘT THỨ 3: "SÂN ĐÌNH XƯA" */}
-                              <div className="w-full rounded-2xl overflow-hidden border border-stone-200/90 shadow-xs bg-[#FAF4EB] mt-5">
-                                <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
-                                  
-                                  {/* Cột trái: Hình ảnh áo dài Sân đình xưa */}
-                                  <div className="w-full h-full min-h-[300px] sm:min-h-[380px] bg-stone-200 overflow-hidden relative flex items-center justify-center [&>div]:w-full [&>div]:h-full [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
-                                    <PreviewPopupImage
-                                      src="/miss-ao-dai-san-dinh.jpg"
-                                      alt="Concept Miss Áo Dài - Sân đình xưa"
-                                    />
+
+                            </div>
+
+                            {/* ================= THÀNH QUẢ ĐẠT ĐƯỢC: TRƯỚC & SAU KHI TIẾP NHẬN (MISS ÁO DÀI) ================= */}
+                            <div className="mt-8 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden">
+                              
+                              {/* Thanh viền nhấn chuyển sắc từ Đỏ (Trước) sang Xanh Dương & Xanh Ngọc (Sau) */}
+                              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-rose-500 via-[#005cff] to-emerald-500" />
+
+                              {/* Header Khu vực */}
+                              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                                <div className="flex items-start gap-3.5">
+                                  <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.3}>
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
                                   </div>
-  
-                                  {/* Cột phải: Nền kem #FAF4EB + Typography nghệ thuật có hiệu ứng text */}
-                                  <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true, margin: "-40px" }}
-                                    style={{ willChange: "transform, opacity" }}
-                                    variants={{
-                                      hidden: { opacity: 0 },
-                                      visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-                                    }}
-                                    className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-[#FAF4EB] text-left"
-                                  >
-                                    {/* Tiêu đề lớn: Sân đình xưa */}
-                                    <motion.h3
-                                      variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic font-bold text-4xl sm:text-5xl text-[#6E1423] tracking-tight leading-tight mb-3"
-                                    >
-                                      Sân đình xưa
-                                    </motion.h3>
-  
-                                    {/* 2 câu thơ nghiêng */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-                                      className="font-serif italic text-base sm:text-lg text-[#7A5C3E] leading-relaxed mb-5"
-                                    >
-                                      <p>Nắng chiều rơi xuống sân đình</p>
-                                      <p>Áo dài ngồi đó, lặng nhìn thời gian</p>
-                                    </motion.div>
-  
-                                    {/* Đường kẻ trang trí có hình thoi ở giữa */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, scaleX: 0.8 }, visible: { opacity: 1, scaleX: 1 } }}
-                                      className="flex items-center w-44 mb-5 origin-left"
-                                    >
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                      <div className="w-2 h-2 rotate-45 bg-[#B69874] mx-1.5 shrink-0"></div>
-                                      <div className="flex-1 h-[1px] bg-[#B69874]"></div>
-                                    </motion.div>
-  
-                                    {/* Tiêu đề phụ in đậm */}
-                                    <motion.h4
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-sm sm:text-base font-extrabold text-[#2B2623] mb-2.5"
-                                    >
-                                      Chụp ảnh áo dài tại Đình Thông Tây Hội
-                                    </motion.h4>
-  
-                                    {/* Đoạn văn mô tả bối cảnh */}
-                                    <motion.p
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="text-xs sm:text-[13px] text-[#5C5349] leading-relaxed mb-6"
-                                    >
-                                      Mái ngói rêu phong, ghế đá cũ và nắng xiên qua tán cây — ngôi đình cổ mộc mạc cho những khung hình dịu dàng, gần gũi.
-                                    </motion.p>
-  
-                                    {/* CỤM NÚT BẤM VÀ ẢNH FB ADS */}
-                                    <motion.div
-                                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                                      className="flex flex-col items-start gap-3"
-                                    >
-                                      <button
-                                        type="button"
-                                        onClick={() => setShowSanDinhGallery(!showSanDinhGallery)}
-                                        className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-xs cursor-pointer select-none"
-                                      >
-                                        <span>{showSanDinhGallery ? "Thu gọn bộ ảnh Concept" : "Xem trọn bộ 8 ảnh Concept Sân Đình Xưa"}</span>
-                                        <svg className={`w-4 h-4 transition-transform duration-300 ${showSanDinhGallery ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                      </button>
-  
-                                      <button
-                                        type="button"
-                                        onClick={() => setShowFbAdsSanDinh(!showFbAdsSanDinh)}
-                                        className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border-[2.5px] border-[#2B2623] bg-[#6E1423] hover:bg-[#540F1B] text-[#FAF4EB] text-[13px] font-bold tracking-wide transition-all shadow-sm cursor-pointer select-none"
-                                      >
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-                                        </svg>
-                                        <span>{showFbAdsSanDinh ? "Thu gọn số liệu FB Ads" : "Xem số liệu FB Ads"}</span>
-                                      </button>
-  
-                                      <AnimatePresence initial={false}>
-                                        {showFbAdsSanDinh && (
-                                          <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                                            className="overflow-hidden w-full mt-2"
-                                          >
-                                            <div className="w-full bg-white border border-[#E6DBC8] rounded-xl p-1.5 shadow-sm">
-                                              <PreviewPopupImage
-                                                src="/fb-ads-san-dinh.jpg"
-                                                alt="Số liệu FB Ads Sân Đình"
-                                              />
-                                            </div>
-                                          </motion.div>
-                                        )}
-                                      </AnimatePresence>
-                                    </motion.div>
-                                  </motion.div>
-  
+                                  <div>
+                                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                                      <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-tight">
+                                        THÀNH QUẢ ĐẠT ĐƯỢC • TÁI CẤU TRÚC & ĐẨY SỐ
+                                      </h4>
+                                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-500 text-white text-[11px] font-black tracking-wide">
+                                        Sau 3 tháng tiếp nhận
+                                      </span>
+                                    </div>
+                                    <p className="text-[13px] text-slate-500 font-medium leading-relaxed">
+                                      Chuyển đổi toàn diện từ quy trình vận hành thủ công sang hệ thống quản trị dữ liệu tự động, tối ưu sâu chi phí Ads và bứt phá doanh thu vượt KPI.
+                                    </p>
+                                  </div>
                                 </div>
-  
-                                {/* DANH SÁCH 8 HÌNH ẢNH BỐ CỤC 2-2-2-2 XẾP DỌC KHI BẤM MỞ */}
-                                <AnimatePresence initial={false}>
-                                  {showSanDinhGallery && (
-                                    <motion.div
-                                      initial={{ height: 0, opacity: 0 }}
-                                      animate={{ height: "auto", opacity: 1 }}
-                                      exit={{ height: 0, opacity: 0 }}
-                                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                                      className="overflow-hidden border-t border-[#E6DBC8] bg-[#FAF4EB]/60"
-                                    >
-                                      <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                                          <div
-                                            key={num}
-                                            className="w-full bg-white border border-stone-200/80 hover:border-[#6E1423]/40 rounded-xl p-1.5 shadow-2xs overflow-hidden flex items-center justify-center transition-colors"
-                                          >
-                                            <PreviewPopupImage
-                                              src={`/miss-ao-dai-san-dinh-${num}.jpg`}
-                                              alt={`Concept Sân đình xưa ${num}`}
-                                            />
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
+
+                                <div className="shrink-0 flex items-center gap-2 bg-blue-50/80 border border-blue-200/60 px-3.5 py-2 rounded-xl">
+                                  <span className="w-2 h-2 rounded-full bg-[#005cff] animate-pulse" />
+                                  <span className="text-[11px] font-extrabold text-[#005cff] uppercase tracking-wider">
+                                    Before & After Impact
+                                  </span>
+                                </div>
                               </div>
+
+                              {/* PHẦN 1: SO SÁNH ĐỐI XỨNG QUY TRÌNH & VẬN HÀNH (TRƯỚC VS SAU) */}
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+                                
+                                {/* CỘT TRÁI: TRƯỚC KHI VÀO CÔNG TY */}
+                                <div className="bg-rose-50/35 border border-rose-200/70 rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                                  <div>
+                                    <div className="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-rose-200/60">
+                                      <div className="flex items-center gap-2">
+                                        <span className="w-6 h-6 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-black text-xs">
+                                          ✕
+                                        </span>
+                                        <h5 className="text-sm font-black uppercase tracking-wider text-rose-950">
+                                          Trước khi vào công ty
+                                        </h5>
+                                      </div>
+                                      <span className="px-2.5 py-0.5 rounded-md bg-rose-100/80 text-rose-700 text-[10px] font-extrabold uppercase">
+                                        Điểm nghẽn hệ thống
+                                      </span>
+                                    </div>
+
+                                    <ul className="space-y-3 text-[13px] text-slate-700 font-medium">
+                                      <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Báo cáo thủ công:</strong> Nhập liệu hoàn toàn bằng file Google Sheet rời rạc, dễ sai số và thiếu tính tức thời.
+                                        </div>
+                                      </li>
+                                      <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Đứt gãy quy trình:</strong> Đội ngũ Ads và Media chưa phối hợp được với nhau, không rõ luồng làm việc chung.
+                                        </div>
+                                      </li>
+                                      <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-rose-100">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Chi phí đội cao & ROAS thấp:</strong> Chi phí vượt KPI <span className="text-rose-600 font-bold">&gt;30% – 35%</span>, giá Mess cao hơn KPI <span className="text-rose-600 font-bold">45% – 50%</span>, ROAS chỉ đạt <span className="text-rose-600 font-bold">1,2 – 1,7</span>, doanh thu chững ở mức <span className="text-slate-900 font-bold">400 – 500 triệu</span>.
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                                {/* CỘT PHẢI: SAU KHI VÀO LÀM VIỆC */}
+                                <div className="bg-gradient-to-br from-emerald-50/50 via-blue-50/30 to-white border-2 border-emerald-500/30 rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden shadow-[0_8px_25px_-6px_rgba(16,185,129,0.12)]">
+                                  <div>
+                                    <div className="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-emerald-200/60">
+                                      <div className="flex items-center gap-2">
+                                        <span className="w-6 h-6 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-black text-xs shadow-2xs">
+                                          ✓
+                                        </span>
+                                        <h5 className="text-sm font-black uppercase tracking-wider text-slate-900">
+                                          Sau khi vào làm việc
+                                        </h5>
+                                      </div>
+                                      <span className="px-2.5 py-0.5 rounded-md bg-emerald-500 text-white text-[10px] font-extrabold uppercase shadow-2xs">
+                                        Tối ưu & Bứt phá
+                                      </span>
+                                    </div>
+
+                                    <ul className="space-y-3 text-[13px] text-slate-700 font-medium">
+                                      <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Chuẩn hóa dữ liệu đa nền tảng:</strong> Chuyển đổi hệ thống báo cáo lên <span className="text-[#005cff] font-bold">Lark</span>; giao KPI và đối soát số liệu trực tiếp trên <span className="text-[#005cff] font-bold">Pancake</span> & <span className="text-[#005cff] font-bold">CRM Getfly</span>.
+                                        </div>
+                                      </li>
+                                      <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Đồng bộ luồng vận hành:</strong> Tối ưu hóa quy trình phối hợp xuyên suốt giữa 3 bộ phận <span className="text-slate-900 font-bold">Ads – Media – Sale</span>.
+                                        </div>
+                                      </li>
+                                      <li className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                        <div>
+                                          <strong className="text-slate-900 font-bold">Tối ưu ngân sách & Đẩy ROAS:</strong> Đề xuất phân bổ ngân sách hợp lý, kéo giá Mess về ngưỡng KPI chỉ còn <span className="text-emerald-600 font-bold">5% – 15%</span>, ROAS tăng vọt lên <span className="text-emerald-600 font-bold">3,7</span> và doanh thu vượt <span className="text-emerald-600 font-bold">+45% – 60%</span>.
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              {/* PHẦN 2: 4 THẺ CHỈ SỐ CHUYỂN ĐỔI TRỰC QUAN (BEFORE -> AFTER METRICS) */}
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+                                {[
+                                  {
+                                    label: "TỐI ƯU GIÁ MESS",
+                                    before: "Vượt KPI 45–50%",
+                                    after: "5% – 15%",
+                                    sub: "Đưa về ngưỡng KPI chuẩn",
+                                    badge: "Giảm sâu CPL",
+                                    accent: "text-emerald-600",
+                                    bgBadge: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
+                                  },
+                                  {
+                                    label: "TĂNG TRƯỞNG ROAS",
+                                    before: "1,2 – 1,7",
+                                    after: "1,2 → 3,7",
+                                    sub: "Bứt phá sau 3 tháng làm việc",
+                                    badge: "x3 Hiệu suất",
+                                    accent: "text-[#005cff]",
+                                    bgBadge: "bg-blue-50 text-[#005cff] border-blue-200/60",
+                                  },
+                                  {
+                                    label: "BỨT PHÁ DT",
+                                    before: "KPI cũ: 400–500tr",
+                                    after: "+45% – 60%",
+                                    sub: "Tỷ lệ doanh thu vượt KPI cũ",
+                                    badge: "~725–800 Tr",
+                                    accent: "text-[#005cff]",
+                                    bgBadge: "bg-blue-50 text-[#005cff] border-blue-200/60",
+                                  },
+                                  {
+                                    label: "KIỂM SOÁT CP ADS",
+                                    before: "Vượt KPI >30–35%",
+                                    after: "Tối ưu chuẩn",
+                                    sub: "Phân bổ ngân sách hợp lý",
+                                    badge: "Lark • Getfly",
+                                    accent: "text-emerald-600",
+                                    bgBadge: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
+                                  },
+                                ].map((metric, i) => (
+                                  <div
+                                    key={i}
+                                    className="bg-[#f8fafc] border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all"
+                                  >
+                                    <div>
+                                      <div className="flex items-center justify-between gap-2 mb-2.5">
+                                        <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
+                                          {metric.label}
+                                        </span>
+                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${metric.bgBadge}`}>
+                                          {metric.badge}
+                                        </span>
+                                      </div>
+
+                                      {/* Mốc Trước (Gạch ngang đỏ nhạt) */}
+                                      <div className="text-[11px] font-semibold text-rose-500/90 line-through mb-1">
+                                        Trước: {metric.before}
+                                      </div>
+
+                                      {/* Mốc Sau (Số lớn nổi bật) */}
+                                      <div className={`text-2xl xl:text-[26px] font-black tracking-tight leading-none mb-2 whitespace-nowrap ${metric.accent}`}>
+                                        {metric.after}
+                                      </div>
+                                    </div>
+
+                                    <div className="text-[11px] font-semibold text-slate-500 pt-2.5 border-t border-slate-200/60">
+                                      {metric.sub}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+
                             </div>
                           </div>
                           <hr className="border-slate-200 my-6" />
