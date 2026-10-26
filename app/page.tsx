@@ -476,6 +476,13 @@ function FloatingBotMenu() {
   }, []);
 
   const scrollToSection = (id: string) => {
+    setEmotion("happy");
+    setAction("nod");
+    if (id === "top" || id === "hero" || id === "cv") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsOpen(false);
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -484,11 +491,11 @@ function FloatingBotMenu() {
   };
 
   const menuItems = [
-    { id: "about", label: "Về bản thân tôi" },
-    { id: "projects", label: "Dự án đã thực hiện" },
-    { id: "skills", label: "Năng lực Marketing Ads" },
-    { id: "cv", label: "Xem CV của tôi" },
-    { id: "contact", label: "Liên hệ hợp tác" },
+    { id: "top", label: "Khởi đầu" },
+    { id: "about", label: "Về bản thân" },
+    { id: "experience", label: "Kinh nghiệm làm việc" },
+    { id: "projects", label: "Dự án đề xuất" },
+    { id: "contact", label: "Liên hệ" },
   ];
 
   return (
@@ -500,11 +507,11 @@ function FloatingBotMenu() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 25, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 380, damping: 25 }}
-            // ĐÃ FIX: Cho menu nhỏ gọn lại trên Mobile (w-52)
-            className="mr-1 sm:mr-2 w-52 sm:w-60 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_15px_45px_-10px_rgba(0,0,0,0.18)] border border-slate-100 overflow-hidden"
+            className="mr-1 sm:mr-2 w-64 sm:w-72 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_15px_45px_-10px_rgba(0,0,0,0.18)] border border-slate-100 overflow-hidden"
           >
-            <div className="flex items-center justify-between px-4 pt-3 pb-1">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-lime-600">
+            <div className="flex items-center justify-between px-4 pt-3 pb-1 border-b border-slate-100/80">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-lime-600 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
                 Trợ lý AI Trung Tiến
               </span>
               <button
@@ -514,17 +521,17 @@ function FloatingBotMenu() {
                 ✕
               </button>
             </div>
-            <div className="flex flex-col px-4 pb-3">
+            <div className="flex flex-col px-3 py-2">
               {menuItems.map((item, idx) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center justify-between py-3 text-xs sm:text-sm font-bold text-slate-700 hover:text-lime-600 transition-colors cursor-pointer ${
+                  className={`flex items-center justify-between py-2.5 px-2 text-left text-xs sm:text-[13px] font-bold text-slate-700 hover:text-lime-600 hover:bg-lime-50/50 rounded-xl transition-all cursor-pointer group ${
                     idx !== menuItems.length - 1 ? "border-b border-slate-100" : ""
                   }`}
                 >
-                  <span>{item.label}</span>
-                  <span>›</span>
+                  <span className="leading-snug pr-2">{item.label}</span>
+                  <span className="shrink-0 text-slate-400 group-hover:text-lime-600 group-hover:translate-x-0.5 transition-all font-bold">›</span>
                 </button>
               ))}
             </div>
@@ -874,7 +881,7 @@ export default function PortfolioPage() {
       <div className="fixed bottom-1/3 left-0 w-96 h-96 bg-lime-300/20 blur-3xl rounded-full pointer-events-none -translate-x-1/3 z-0"></div>
 
       {/* ================= TOP HEADER ================= */}
-      <header className="relative z-20 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 flex items-center justify-between">
+      <header id="top" className="relative z-20 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 rounded-md bg-lime-400 text-zinc-950 font-black text-sm flex items-center justify-center shadow-xs">
             T
@@ -1058,7 +1065,7 @@ export default function PortfolioPage() {
         <div className="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-5 sm:p-7 md:p-8 lg:p-10 space-y-14">
           
           {/* ================= 1. VỀ BẢN THÂN TÔI ================= */}
-          <section id="about">
+          <section id="about" className="scroll-mt-24">
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2.5">
                 <span className="w-2.5 h-2.5 bg-lime-400 rounded-xs shrink-0"></span>
@@ -3836,11 +3843,11 @@ export default function PortfolioPage() {
         </div>
 
           {/* ================= 4. DỰ ÁN TIÊU BIỂU ================= */}
-          <section id="projects" className="border-b border-slate-100 pb-10">
+          <section id="projects" className="border-b border-slate-100 pb-10 scroll-mt-24">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2.5">
                 <span className="w-2.5 h-2.5 bg-lime-400 rounded-xs shrink-0"></span>
-                <h2 className="text-xs sm:text-sm font-black uppercase tracking-wider text-zinc-900">DỰ ÁN TIÊU BIỂU</h2>
+                <h2 className="text-xs sm:text-sm font-black uppercase tracking-wider text-zinc-900">DỰ ÁN ĐỀ XUẤT VÀ PHÁT TRIỂN CÙNG TEAM</h2>
               </div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                 KHỐI DN GROUP <ArrowRight size={12} className="text-lime-600" />
@@ -3926,7 +3933,7 @@ export default function PortfolioPage() {
                     id: "mega-live-trung-thu",
                     tag: "SEOUL CENTER • SỰ KIỆN MEGA LIVE",
                     title: "Mega Live Trung Thu",
-                    desc: "Tham gia đề xuất và truyền thông cho sự kiện Mega Live — Đêm Trăng Ngọt Sắc qua MXH.",
+                    desc: "Tham gia đề xuất và truyền thông cho sự kiện Mega Live.",
                     cover: "/megalive/project-mega-live-trung-thu-cover.png",
                     galleryLabel: "Xem 10 ảnh • Lưới mới",
                     isOpen: openGallery2,
@@ -4144,7 +4151,7 @@ export default function PortfolioPage() {
           </section>
 
           {/* ================= 5. LIÊN HỆ ================= */}
-          <section id="contact" className="pb-4">
+          <section id="contact" className="pb-4 scroll-mt-24">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2.5">
                 <span className="w-2.5 h-2.5 bg-lime-400 rounded-xs shrink-0"></span>
