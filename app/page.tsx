@@ -724,6 +724,17 @@ export default function PortfolioPage() {
   const [showFbAdsCuaThien, setShowFbAdsCuaThien] = useState(false);
   const [showFbAdsTetXua, setShowFbAdsTetXua] = useState(false);
   const [showFbAdsSanDinh, setShowFbAdsSanDinh] = useState(false);
+  const [copiedType, setCopiedType] = useState<"email" | "phone" | null>(null);
+
+  const handleCopy = (text: string, type: "email" | "phone") => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedType(type);
+      setTimeout(() => {
+        setCopiedType(null);
+      }, 2000);
+    }
+  };
 
   useEffect(() => {
     let currentIndex = 0;
@@ -922,7 +933,7 @@ export default function PortfolioPage() {
             </h1>
 
             <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wide text-zinc-800 max-w-md leading-relaxed mb-8">
-              TÔI LÀ TRUNG TIẾN — CHUYÊN VIÊN MARKETING ADS, GIÚP DOANH NGHIỆP RA CHUYỂN ĐỔI &amp; DOANH THU THẬT.
+              TÔI LÀ TRUNG TIẾN — CHUYÊN VIÊN MARKETING ADS, GIÚP DOANH NGHIỆP TẠO RA CHUYỂN ĐỔI &amp; DOANH THU THẬT.
             </p>
 
             {/* 2 Info Pills */}
@@ -4172,7 +4183,7 @@ export default function PortfolioPage() {
                 </h3>
 
                 <a 
-                  href="mailto:contact@example.com" 
+                  href="mailto:tientrung6112@gmail.com" 
                   className="inline-flex items-center gap-3 group"
                 >
                   <span className="w-10 h-10 rounded-full bg-lime-400 group-hover:bg-lime-500 text-zinc-950 flex items-center justify-center transition-transform group-hover:scale-105 shadow-xs">
@@ -4184,15 +4195,86 @@ export default function PortfolioPage() {
                 </a>
               </div>
 
-              {/* Cột Phải: 3 Thẻ Thông tin liên hệ */}
+              {/* Cột Phải: 2 Thẻ Thông tin liên hệ có nút Sao Chép */}
               <div className="md:col-span-7 space-y-3">
-                <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl px-5 py-3.5 flex flex-col justify-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">EMAIL</span>
-                  <span className="text-xs sm:text-sm font-extrabold text-zinc-900">tientrung6112@gmail.com</span>
+                {/* Khối EMAIL */}
+                <div className="bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 rounded-xl px-5 py-3.5 flex items-center justify-between gap-4 transition-all shadow-2xs group/card">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">EMAIL</span>
+                    <a 
+                      href="mailto:tientrung6112@gmail.com"
+                      className="text-xs sm:text-sm font-extrabold text-zinc-900 hover:text-lime-600 transition-colors truncate block"
+                    >
+                      tientrung6112@gmail.com
+                    </a>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleCopy("tientrung6112@gmail.com", "email")}
+                    className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer shadow-2xs ${
+                      copiedType === "email"
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-300"
+                        : "bg-white hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200/90 hover:border-slate-900"
+                    }`}
+                    title="Sao chép Email"
+                  >
+                    {copiedType === "email" ? (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Đã chép</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-slate-400 group-hover/card:text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>Sao chép</span>
+                      </>
+                    )}
+                  </button>
                 </div>
-                            <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl px-5 py-3.5 flex flex-col justify-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">PHONE</span>
-                  <span className="text-xs sm:text-sm font-extrabold text-zinc-900">0347330641</span>
+
+                {/* Khối PHONE */}
+                <div className="bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 rounded-xl px-5 py-3.5 flex items-center justify-between gap-4 transition-all shadow-2xs group/card">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">PHONE</span>
+                    <a 
+                      href="tel:0347330641"
+                      className="text-xs sm:text-sm font-extrabold text-zinc-900 hover:text-lime-600 transition-colors tracking-tight truncate block"
+                    >
+                      0347330641
+                    </a>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleCopy("0347330641", "phone")}
+                    className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer shadow-2xs ${
+                      copiedType === "phone"
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-300"
+                        : "bg-white hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200/90 hover:border-slate-900"
+                    }`}
+                    title="Sao chép Số điện thoại"
+                  >
+                    {copiedType === "phone" ? (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Đã chép</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-slate-400 group-hover/card:text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>Sao chép</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
 
