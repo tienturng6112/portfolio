@@ -3847,727 +3847,299 @@ export default function PortfolioPage() {
               </span>
             </div>
 
-            {/* Khối Tập đoàn Điểm Nhấn (Chứa 4 dự án) */}
-            <div className="bg-slate-50/60 border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-5">
+            {/* ================= KHỐI TẬP ĐOÀN ĐIỂM NHẤN: BENTO GRID 2x2 ================= */}
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
               
-              {/* Header của Khối DN Group */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200/70">
+              {/* Header Tập đoàn Điểm Nhấn */}
+              <div className="flex items-center justify-between pb-5 mb-6 border-b border-slate-100">
                 <div className="flex items-center gap-3">
-                  <Image src="/dn-logo.png" alt="DN Group" width={100} height={30} className="h-6 w-auto object-contain shrink-0" />
-                  <h3 className="text-sm sm:text-base font-extrabold text-zinc-900">Tập đoàn Điểm Nhấn</h3>
+                  <div className="w-9 h-9 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center font-black text-xs text-orange-600">
+                    DN
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+                      Tập đoàn Điểm Nhấn
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium">
+                      Chuỗi chiến dịch truyền thông & thu thập Data khách hàng quy mô lớn
+                    </p>
+                  </div>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">4 DỰ ÁN</span>
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-extrabold uppercase tracking-wider">
+                  4 Dự án
+                </span>
               </div>
 
-              {/* ================= DỰ ÁN 1: VẼ LẠI THANH XUÂN ================= */}
-              <div className="bg-white border border-slate-200/90 hover:border-lime-500 rounded-2xl p-4 sm:p-5 transition-all shadow-2xs">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                  
-                  {/* Thumbnail Trái */}
-                  <div 
-                    onClick={() => setOpenGallery(!openGallery)}
-                    className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
-                  >
-                    <Image 
-                      src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" 
-                      alt="Vẽ Lại Thanh Xuân Cover" 
-                      width={800}
-                      height={500}
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                  </div>
-
-                  {/* Nội dung Phải */}
-                  <div className="md:col-span-7 flex flex-col justify-between">
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-lime-600 mb-1">
-                        SEOUL CENTER • CHIẾN DỊCH TRUYỀN THÔNG
+              {/* Lưới 2x2 cho 4 Chiến dịch */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                {[
+                  {
+                    id: "ve-lai-thanh-xuan",
+                    tag: "SEOUL CENTER • CHIẾN DỊCH TRUYỀN THÔNG",
+                    title: "Vẽ Lại Thanh Xuân",
+                    desc: "Tham gia đề xuất và nhận nhiệm vụ truyền thông qua MXH.",
+                    cover: "/VLTX/project-ve-lai-thanh-xuan-cover.jpg",
+                    galleryLabel: "Xem 8 ảnh • Collage dọc",
+                    isOpen: openGallery,
+                    toggleGallery: () => setOpenGallery(!openGallery),
+                    metrics: [
+                      { val: "900+", label: "Data khách mới", highlight: false },
+                      { val: "48%", label: "Lịch khách mới", highlight: false },
+                      { val: "78%", label: "Khách mới", highlight: true },
+                    ],
+                    galleryContent: (
+                      <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" alt="Vẽ Lại Thanh Xuân 1" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-5.png" alt="Vẽ Lại Thanh Xuân 5" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-2.jpg" alt="Vẽ Lại Thanh Xuân 2" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-3.jpg" alt="Vẽ Lại Thanh Xuân 3" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-4.PNG" alt="Vẽ Lại Thanh Xuân 4" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-6.png" alt="Vẽ Lại Thanh Xuân 6" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-7.png" alt="Vẽ Lại Thanh Xuân 7" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VLTX/project-ve-lai-thanh-xuan-8.png" alt="Vẽ Lại Thanh Xuân 8" />
+                          </div>
+                        </div>
                       </div>
-                      <h4 className="text-lg sm:text-xl font-black text-zinc-900 mb-1">Vẽ Lại Thanh Xuân</h4>
-                      <p className="text-xs text-slate-500 mb-4">
-                        Tham gia đề xuất và nhận nhiệm vụ truyền thông qua MXH.
+                    ),
+                  },
+                  {
+                    id: "mega-live-trung-thu",
+                    tag: "SEOUL CENTER • SỰ KIỆN MEGA LIVE",
+                    title: "Mega Live Trung Thu",
+                    desc: "Tham gia đề xuất và truyền thông cho sự kiện Mega Live — Đêm Trăng Ngọt Sắc qua MXH.",
+                    cover: "/megalive/project-mega-live-trung-thu-cover.png",
+                    galleryLabel: "Xem 10 ảnh • Lưới mới",
+                    isOpen: openGallery2,
+                    toggleGallery: () => setOpenGallery2(!openGallery2),
+                    metrics: [
+                      { val: "900+", label: "Data khách mới", highlight: false },
+                      { val: "52%", label: "Lịch khách mới", highlight: false },
+                      { val: "62%", label: "Khách mới", highlight: true },
+                    ],
+                    galleryContent: (
+                      <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-3 gap-2">
+                          {[1, 2, 3].map((num) => (
+                            <div key={num} className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                              <PreviewPopupImage src={`/megalive/project-mega-live-${num}.png`} alt={`Mega Live ${num}`} />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          {[4, 5, 6, 7].map((num) => (
+                            <div key={num} className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                              <PreviewPopupImage src={`/megalive/project-mega-live-${num}.png`} alt={`Mega Live ${num}`} />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">
+                          {[8, 9, 10].map((num) => (
+                            <div key={num} className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                              <PreviewPopupImage src={`/megalive/project-mega-live-${num}.png`} alt={`Mega Live ${num}`} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: "sinh-nhat-16-nam",
+                    tag: "SEOUL CENTER • SỰ KIỆN SINH NHẬT",
+                    title: "Sinh Nhật 16 Năm",
+                    desc: "Tham gia đề xuất và truyền thông cho sự kiện Sinh Nhật 16 Năm — Hành Trình Tỏa Sắc của Seoul Center qua MXH.",
+                    cover: "/16nam/project-sinh-nhat-16-nam-cover.png",
+                    galleryLabel: "Xem 20 ảnh • Lưới mới",
+                    isOpen: openGallery3,
+                    toggleGallery: () => setOpenGallery3(!openGallery3),
+                    metrics: [
+                      { val: "2000+", label: "Data khách mới", highlight: false },
+                      { val: "37%", label: "Lịch khách mới", highlight: false },
+                      { val: "49%", label: "Khách mới", highlight: true },
+                    ],
+                    galleryContent: (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {[
+                          { src: "/16nam/project-sinh-nhat-1.png", alt: "Sinh Nhật 16 Năm 1" },
+                          { src: "/16nam/project-sinh-nhat-2.jpg", alt: "Sinh Nhật 16 Năm 2" },
+                          { src: "/16nam/project-sinh-nhat-3.png", alt: "Sinh Nhật 16 Năm 3" },
+                          { src: "/16nam/project-sinh-nhat-4.png", alt: "Sinh Nhật 16 Năm 4" },
+                          { src: "/16nam/project-sinh-nhat-5.png", alt: "Sinh Nhật 16 Năm 5" },
+                          { src: "/16nam/project-sinh-nhat-6.png", alt: "Sinh Nhật 16 Năm 6" },
+                          { src: "/16nam/project-sinh-nhat-7.png", alt: "Sinh Nhật 16 Năm 7" },
+                          { src: "/16nam/project-sinh-nhat-8.png", alt: "Sinh Nhật 16 Năm 8" },
+                          { src: "/16nam/project-sinh-nhat-9.png", alt: "Sinh Nhật 16 Năm 9" },
+                          { src: "/16nam/project-sinh-nhat-10.png", alt: "Sinh Nhật 16 Năm 10" },
+                          { src: "/16nam/project-sinh-nhat-11.png", alt: "Sinh Nhật 16 Năm 11" },
+                          { src: "/16nam/project-sinh-nhat-12.jpeg", alt: "Sinh Nhật 16 Năm 12" },
+                          { src: "/16nam/project-sinh-nhat-13.jpeg", alt: "Sinh Nhật 16 Năm 13" },
+                          { src: "/16nam/project-sinh-nhat-14.jpeg", alt: "Sinh Nhật 16 Năm 14" },
+                          { src: "/16nam/project-sinh-nhat-15.png", alt: "Sinh Nhật 16 Năm 15" },
+                          { src: "/16nam/project-sinh-nhat-16.png", alt: "Sinh Nhật 16 Năm 16" },
+                          { src: "/16nam/project-sinh-nhat-17.png", alt: "Sinh Nhật 16 Năm 17" },
+                          { src: "/16nam/project-sinh-nhat-18.png", alt: "Sinh Nhật 16 Năm 18" },
+                          { src: "/16nam/project-sinh-nhat-19.jpeg", alt: "Sinh Nhật 16 Năm 19" },
+                          { src: "/16nam/project-sinh-nhat-20.png", alt: "Sinh Nhật 16 Năm 20" },
+                        ].map((item, idx) => (
+                          <div key={idx} className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src={item.src} alt={item.alt} />
+                          </div>
+                        ))}
+                      </div>
+                    ),
+                  },
+                  {
+                    id: "vong-xoay-may-man",
+                    tag: "SEOUL CENTER • CHIẾN DỊCH GAMIFICATION",
+                    title: "Vòng Xoay May Mắn",
+                    desc: "Tham gia đề xuất và triển khai chuỗi ấn phẩm truyền thông Minigame Vòng Xoay May Mắn thu hút khách hàng tương tác & nhận ưu đãi qua MXH.",
+                    cover: "/VXMM/project-vong-xoay-may-man-cover.png",
+                    galleryLabel: "Xem 7 ảnh • Lưới mới",
+                    isOpen: openGallery4,
+                    toggleGallery: () => setOpenGallery4(!openGallery4),
+                    metrics: [
+                      { val: "5000+", label: "Data", highlight: false },
+                      { val: "12%", label: "Lịch khách mới", highlight: false },
+                      { val: "34%", label: "Khách mới", highlight: true },
+                    ],
+                    galleryContent: (
+                      <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-1.jpg" alt="Vòng Xoay 1" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-2.png" alt="Vòng Xoay 2" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-3.png" alt="Vòng Xoay 3" />
+                          </div>
+                        </div>
+                        <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                          <PreviewPopupImage src="/VXMM/project-vong-xoay-4.png" alt="Vòng Xoay 4" />
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-5.png" alt="Vòng Xoay 5" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-6.png" alt="Vòng Xoay 6" />
+                          </div>
+                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50">
+                            <PreviewPopupImage src="/VXMM/project-vong-xoay-7.jpeg" alt="Vòng Xoay 7" />
+                          </div>
+                        </div>
+                      </div>
+                    ),
+                  },
+                ].map((project) => (
+                  <div
+                    key={project.id}
+                    className="group bg-[#f8fafc] border border-slate-200/90 hover:border-lime-500/60 hover:bg-white rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:shadow-md flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* 1. Khung Ảnh Bìa Chuẩn Tỷ Lệ 16:9 Đồng Nhất */}
+                      <div 
+                        onClick={project.toggleGallery}
+                        className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-200 border border-slate-200/60 mb-4 cursor-pointer"
+                      >
+                        <img
+                          src={project.cover}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* 2. Tag & Tiêu đề Chiến dịch */}
+                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-lime-600 mb-1">
+                        {project.tag}
+                      </div>
+                      <h4 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight mb-1.5">
+                        {project.title}
+                      </h4>
+                      <p className="text-xs sm:text-[13px] text-slate-500 font-medium leading-relaxed mb-4 line-clamp-2">
+                        {project.desc}
                       </p>
 
-                      {/* Inline KPI Row */}
-                      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 pb-4 mb-3 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">
-                            <CountUp end={900} duration={2} enableScrollSpy scrollSpyOnce />+
-                          </span>
-                          <span className="text-[11px] text-slate-400 font-medium">Data khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">
-                            <CountUp end={48} duration={2} enableScrollSpy scrollSpyOnce />%
-                          </span>
-                          <span className="text-[11px] text-slate-400 font-medium">Lịch khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">
-                            <CountUp end={78} duration={2} enableScrollSpy scrollSpyOnce />%
-                          </span>
-                          <span className="text-[11px] text-slate-400 font-medium">Khách mới</span>
-                        </div>
+                      {/* 3. Phễu 3 Chỉ Số KPI Hiển Thị Trực Tiếp (Không cần bấm mở lần 2) */}
+                      <div className="grid grid-cols-3 gap-2.5 mb-4">
+                        {project.metrics.map((m, idx) => (
+                          <div
+                            key={idx}
+                            className={`rounded-xl p-2.5 border text-center ${
+                              m.highlight
+                                ? "bg-lime-50/70 border-lime-200/80"
+                                : "bg-white border-slate-200/70"
+                            }`}
+                          >
+                            <div
+                              className={`text-base sm:text-lg font-black tracking-tight leading-none mb-1 ${
+                                m.highlight ? "text-lime-700" : "text-slate-900"
+                              }`}
+                            >
+                              {m.val}
+                            </div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                              {m.label}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
-                    {/* Footer Row: Click để Đóng/Mở Bộ ảnh & KPI chi tiết */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <button 
-                        type="button"
-                        onClick={() => setOpenGallery(!openGallery)}
-                        className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <ImageIcon size={13} className="text-lime-600" />
-                        <span>8 ẢNH • COLLAGE DỌC</span>
-                        {openGallery ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-                      </button>
-
-                      <button 
-                        type="button"
-                        onClick={() => setOpenKPI(!openKPI)}
-                        className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <BarChart2 size={12} className="text-lime-600" />
-                        <span>CHI TIẾT KPI</span>
-                        {openKPI ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bộ hình ảnh chiến dịch 1 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openGallery && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 20 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                        <div className="md:col-span-7 flex flex-col gap-4">
-                          <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VLTX/project-ve-lai-thanh-xuan-cover.jpg" alt="Campaign Image 1" width={800} height={600} sizes="(max-width: 768px) 100vw, 50vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/VLTX/project-ve-lai-thanh-xuan-2.jpg" alt="Campaign Image 2" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                            <div className="flex flex-col gap-4">
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/VLTX/project-ve-lai-thanh-xuan-3.jpg" alt="Campaign Image 3" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/VLTX/project-ve-lai-thanh-xuan-4.PNG" alt="Campaign Image 4" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="md:col-span-5 flex flex-col gap-4">
-                          <div className="w-full rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VLTX/project-ve-lai-thanh-xuan-5.png" alt="Campaign Image 5" width={700} height={900} sizes="(max-width: 768px) 100vw, 40vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-                        <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VLTX/project-ve-lai-thanh-xuan-6.png" alt="Campaign Image 6" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VLTX/project-ve-lai-thanh-xuan-7.png" alt="Campaign Image 7" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VLTX/project-ve-lai-thanh-xuan-8.png" alt="Campaign Image 8" width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Khối KPI Thực Đạt Dự án 1 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openKPI && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center group/item relative overflow-hidden">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={900} duration={2.5} />+
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Data khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center group/item relative overflow-hidden">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={48} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Lịch khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center group/item relative overflow-hidden">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={78} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Khách mới</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* ================= DỰ ÁN 2: MEGA LIVE TRUNG THU ================= */}
-              <div className="bg-white border border-slate-200/90 hover:border-lime-500 rounded-2xl p-4 sm:p-5 transition-all shadow-2xs">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                  
-                  {/* Thumbnail Trái */}
-                  <div 
-                    onClick={() => setOpenGallery2(!openGallery2)}
-                    className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
-                  >
-                    <Image 
-                      src="/megalive/project-mega-live-trung-thu-cover.png" 
-                      alt="Mega Live Trung Thu Cover" 
-                      width={800}
-                      height={500}
-                      unoptimized
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                  </div>
-
-                  {/* Nội dung Phải */}
-                  <div className="md:col-span-7 flex flex-col justify-between">
+                    {/* 4. Nút Bấm Xem Bộ Sưu Tập Ảnh Rõ Ràng & Drawer Gallery */}
                     <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-lime-600 mb-1">
-                        SEOUL CENTER • SỰ KIỆN MEGA LIVE
-                      </div>
-                      <h4 className="text-lg sm:text-xl font-black text-zinc-900 mb-1">Mega Live Trung Thu</h4>
-                      <p className="text-xs text-slate-500 mb-4">
-                        Tham gia đề xuất và truyền thông cho sự kiện Mega Live — Đêm Trăng Ngọt Sắc qua MXH.
-                      </p>
-
-                      {/* Inline KPI Row */}
-                      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 pb-4 mb-3 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">900+</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Data khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">52%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Lịch khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">62%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Khách mới</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer Row: Click để Đóng/Mở Bộ ảnh & KPI chi tiết */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <button 
+                      <button
                         type="button"
-                        onClick={() => setOpenGallery2(!openGallery2)}
-                        className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-lime-600 transition-colors cursor-pointer"
+                        onClick={project.toggleGallery}
+                        className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-slate-900 text-slate-800 hover:text-white border border-slate-200/90 hover:border-slate-900 text-xs font-extrabold uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer shadow-2xs"
                       >
-                        <ImageIcon size={13} className="text-lime-600" />
-                        <span>10 ẢNH • LƯỚI MỚI</span>
-                        {openGallery2 ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                        <span className="flex items-center gap-2">
+                          <svg className="w-4 h-4 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          {project.isOpen ? `Thu gọn • ${project.galleryLabel.replace("Xem ", "")}` : project.galleryLabel}
+                        </span>
+                        <span className={`inline-block transition-transform duration-300 font-bold ${project.isOpen ? "rotate-180" : ""}`}>↓</span>
                       </button>
 
-                      <button 
-                        type="button"
-                        onClick={() => setOpenKPI2(!openKPI2)}
-                        className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <BarChart2 size={12} className="text-lime-600" />
-                        <span>CHI TIẾT KPI</span>
-                        {openKPI2 ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-                      </button>
+                      {/* Bộ sưu tập ảnh mở rộng */}
+                      <AnimatePresence initial={false}>
+                        {project.isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="overflow-hidden border-t border-slate-200/80 pt-4"
+                          >
+                            {project.galleryContent}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
-                </div>
-
-                {/* Bộ hình ảnh chiến dịch 2 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openGallery2 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 20 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="flex flex-col gap-4">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-1.png" alt="Mega Live Image 1" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-2.png" alt="Mega Live Image 2" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-3.png" alt="Mega Live Image 3" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-4.png" alt="Mega Live Image 4" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-5.png" alt="Mega Live Image 5" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-6.png" alt="Mega Live Image 6" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-7.png" alt="Mega Live Image 7" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-8.png" alt="Mega Live Image 8" width={800} height={600} unoptimized sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-9.png" alt="Mega Live Image 9" width={800} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/megalive/project-mega-live-10.png" alt="Mega Live Image 10" width={800} height={600} unoptimized sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Khối KPI Thực Đạt Dự án 2 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openKPI2 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={900} duration={2.5} />+
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Data khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={52} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Lịch khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={62} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Khách mới</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                ))}
               </div>
-
-              {/* ================= DỰ ÁN 3: SINH NHẬT 16 NĂM ================= */}
-              <div className="bg-white border border-slate-200/90 hover:border-lime-500 rounded-2xl p-4 sm:p-5 transition-all shadow-2xs">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                  
-                  {/* Thumbnail Trái */}
-                  <div 
-                    onClick={() => setOpenGallery3(!openGallery3)}
-                    className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
-                  >
-                    <Image 
-                      src="/16nam/project-sinh-nhat-16-nam-cover.png" 
-                      alt="Sinh Nhật 16 Năm Cover" 
-                      width={800}
-                      height={500}
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                  </div>
-
-                  {/* Nội dung Phải */}
-                  <div className="md:col-span-7 flex flex-col justify-between">
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-lime-600 mb-1">
-                        SEOUL CENTER • SỰ KIỆN SINH NHẬT
-                      </div>
-                      <h4 className="text-lg sm:text-xl font-black text-zinc-900 mb-1">Sinh Nhật 16 Năm</h4>
-                      <p className="text-xs text-slate-500 mb-4">
-                        Tham gia đề xuất và truyền thông cho sự kiện Sinh Nhật 16 Năm — Hành Trình Tỏa Sắc của Seoul Center qua MXH.
-                      </p>
-
-                      {/* Inline KPI Row */}
-                      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 pb-4 mb-3 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">2000+</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Data khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">37%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Lịch khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">49%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Khách mới</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer Row: Click để Đóng/Mở Bộ ảnh & KPI chi tiết */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <button 
-                        type="button"
-                        onClick={() => setOpenGallery3(!openGallery3)}
-                        className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <ImageIcon size={13} className="text-lime-600" />
-                        <span>20 ẢNH • LƯỚI MỚI</span>
-                        {openGallery3 ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-                      </button>
-
-                      <button 
-                        type="button"
-                        onClick={() => setOpenKPI3(!openKPI3)}
-                        className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <BarChart2 size={12} className="text-lime-600" />
-                        <span>CHI TIẾT KPI</span>
-                        {openKPI3 ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bộ hình ảnh chiến dịch Sinh Nhật 16 Năm (20 ảnh - Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openGallery3 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 20 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="flex flex-col gap-4">
-                        
-                        {/* Hàng 1: 3 Banner dọc dài (Tall Vertical) */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-1.png" alt="Sinh Nhật 16 Năm 1" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-2.jpg" alt="Sinh Nhật 16 Năm 2" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-3.png" alt="Sinh Nhật 16 Năm 3" width={600} height={900} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        {/* Hàng 2: 3 Poster dọc (Portrait 4:5) */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-4.png" alt="Sinh Nhật 16 Năm 4" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-5.png" alt="Sinh Nhật 16 Năm 5" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-6.png" alt="Sinh Nhật 16 Năm 6" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        {/* Hàng 3: 3 Poster dọc (Portrait 4:5) */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-7.png" alt="Sinh Nhật 16 Năm 7" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-8.png" alt="Sinh Nhật 16 Năm 8" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/16nam/project-sinh-nhat-9.png" alt="Sinh Nhật 16 Năm 9" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        {/* Khu vực dưới: Chia 2 khối (Cột Trái 8 phần - Cột Phải 4 phần) để khớp bố cục bất đối xứng */}
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
-                          
-                          {/* Khối Trái (Chiếm 2/3): 2 Poster 4:5 + 2 Ảnh vuông + (1 Ảnh vuông & 3 Voucher ngang xếp chồng) */}
-                          <div className="md:col-span-8 flex flex-col gap-4">
-                            
-                            {/* Cặp Poster Dịch vụ công nghệ độc quyền (4:5) */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/16nam/project-sinh-nhat-10.png" alt="Sinh Nhật 16 Năm 10" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/16nam/project-sinh-nhat-11.png" alt="Sinh Nhật 16 Năm 11" width={600} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                            </div>
-
-                            {/* Cặp Ảnh vuông: Thẻ hoàn tiền 500K & Check-in có quà (1:1) */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/16nam/project-sinh-nhat-12.jpeg" alt="Sinh Nhật 16 Năm 12" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/16nam/project-sinh-nhat-13.jpeg" alt="Sinh Nhật 16 Năm 13" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                            </div>
-
-                            {/* Hàng cuối bên trái: Ảnh vuông Mua 1 Được 3 + Cột 3 Voucher ngang */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                              <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                <Image src="/16nam/project-sinh-nhat-14.jpeg" alt="Sinh Nhật 16 Năm 14" width={500} height={500} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                              </div>
-                              <div className="flex flex-col gap-3">
-                                <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <Image src="/16nam/project-sinh-nhat-15.png" alt="Sinh Nhật 16 Năm 15" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <Image src="/16nam/project-sinh-nhat-16.png" alt="Sinh Nhật 16 Năm 16" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                                  <Image src="/16nam/project-sinh-nhat-17.png" alt="Sinh Nhật 16 Năm 17" width={500} height={250} sizes="(max-width: 768px) 50vw, 25vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
-
-                          {/* Khối Phải (Chiếm 1/3): Banner dài 220K + Ảnh vuông Combo + Voucher ngang 700K */}
-                          <div className="md:col-span-4 flex flex-col gap-4">
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/16nam/project-sinh-nhat-18.png" alt="Sinh Nhật 16 Năm 18" width={500} height={750} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/16nam/project-sinh-nhat-19.png" alt="Sinh Nhật 16 Năm 19" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/16nam/project-sinh-nhat-20.png" alt="Sinh Nhật 16 Năm 20" width={500} height={250} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                          </div>
-
-                        </div>
-
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Khối KPI Thực Đạt Dự án 3 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openKPI3 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={2000} duration={2.5} />+
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Data</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={37} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Lịch khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={49} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Khách mới</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* ================= DỰ ÁN 4: VÒNG XOAY MAY MẮN ================= */}
-              <div className="bg-white border border-slate-200/90 hover:border-lime-500 rounded-2xl p-4 sm:p-5 transition-all shadow-2xs">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                  
-                  {/* Thumbnail Trái */}
-                  <div 
-                    onClick={() => setOpenGallery4(!openGallery4)}
-                    className="md:col-span-5 rounded-xl overflow-hidden border border-slate-100 bg-slate-100 cursor-pointer group relative"
-                  >
-                    <Image 
-                      src="/VXMM/project-vong-xoay-may-man-cover.png" 
-                      alt="Vòng Xoay May Mắn Cover" 
-                      width={800}
-                      height={500}
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                  </div>
-
-                  {/* Nội dung Phải */}
-                  <div className="md:col-span-7 flex flex-col justify-between">
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-wider text-lime-600 mb-1">
-                        SEOUL CENTER • CHIẾN DỊCH GAMIFICATION
-                      </div>
-                      <h4 className="text-lg sm:text-xl font-black text-zinc-900 mb-1">Vòng Xoay May Mắn</h4>
-                      <p className="text-xs text-slate-500 mb-4">
-                        Tham gia đề xuất và triển khai chuỗi ấn phẩm truyền thông Minigame Vòng Xoay May Mắn thu hút khách hàng tương tác &amp; nhận ưu đãi qua MXH.
-                      </p>
-
-                      {/* Inline KPI Row */}
-                      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 pb-4 mb-3 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">5000+</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Data</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">12%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Lịch khách mới</span>
-                        </div>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-black text-zinc-900">34%</span>
-                          <span className="text-[11px] text-slate-400 font-medium">Khách mới</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer Row: Click để Đóng/Mở Bộ ảnh & KPI chi tiết */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <button 
-                        type="button"
-                        onClick={() => setOpenGallery4(!openGallery4)}
-                        className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <ImageIcon size={13} className="text-lime-600" />
-                        <span>7 ẢNH • LƯỚI MỚI</span>
-                        {openGallery4 ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-                      </button>
-
-                      <button 
-                        type="button"
-                        onClick={() => setOpenKPI4(!openKPI4)}
-                        className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-lime-600 transition-colors cursor-pointer"
-                      >
-                        <BarChart2 size={12} className="text-lime-600" />
-                        <span>CHI TIẾT KPI</span>
-                        {openKPI4 ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bộ hình ảnh chiến dịch Vòng Xoay May Mắn (7 ảnh - Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openGallery4 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 20 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="flex flex-col gap-4">
-                        
-                        {/* Hàng 1: 3 Ảnh vuông (1:1) */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VXMM/project-vong-xoay-1.jpg" alt="Vòng Xoay May Mắn 1" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VXMM/project-vong-xoay-2.png" alt="Vòng Xoay May Mắn 2" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                          <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                            <Image src="/VXMM/project-vong-xoay-3.png" alt="Vòng Xoay May Mắn 3" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-                        </div>
-
-                        {/* Hàng 2: Cột Trái (Chiếm 8/12 = 2/3) chứa Poster dọc lớn + Cột Phải (Chiếm 4/12 = 1/3) chứa 3 ảnh vuông xếp chồng */}
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
-                          
-                          {/* Cột Trái: 1 Poster dọc lớn (Tết Rồi Làm Đẹp Thôi - Đồng Giá 79K) */}
-                          <div className="md:col-span-8 rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group flex">
-                            <Image src="/VXMM/project-vong-xoay-4.png" alt="Vòng Xoay May Mắn 4" width={800} height={1000} sizes="(max-width: 768px) 100vw, 66vw" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                          </div>
-
-                          {/* Cột Phải: 3 Ảnh vuông xếp chồng dọc */}
-                          <div className="md:col-span-4 flex flex-col justify-between gap-4">
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/VXMM/project-vong-xoay-5.png" alt="Vòng Xoay May Mắn 5" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/VXMM/project-vong-xoay-6.png" alt="Vòng Xoay May Mắn 6" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                            <div className="rounded-xl overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 relative group">
-                              <Image src="/VXMM/project-vong-xoay-7.jpeg" alt="Vòng Xoay May Mắn 7" width={500} height={500} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                          </div>
-
-                        </div>
-
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Khối KPI Thực Đạt Dự án 4 (Đóng/Mở với Framer Motion) */}
-                <AnimatePresence initial={false}>
-                  {openKPI4 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden border-t border-slate-100 pt-4"
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={5000} duration={2.5} />+
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Data</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={12} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Lịch khách mới</div>
-                        </div>
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-lime-500 transition-all flex flex-col justify-center">
-                          <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-lime-600 to-emerald-600 mb-1">
-                            <CountUp end={34} duration={2.5} />%
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Khách mới</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
             </div>
           </section>
 
